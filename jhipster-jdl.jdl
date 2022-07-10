@@ -1,0 +1,112 @@
+entity Company {
+	name String
+    description Long
+}
+
+entity Member {
+	name String
+	lastname String
+	typeDocument String
+	document String
+	lastname String
+	indicative String
+	phone String
+	status String
+}
+
+entity Permit {
+	name String
+	description String
+    permits Long
+}
+
+entity Location {
+	streetAddress String
+	latitude Double
+	longitude Double
+	accuracy Double
+	altitudeAccuracy Double
+	altitude Double
+	speed Double
+	heading Double
+}
+
+entity Order {
+	numberOrder String
+    descriptionOrder Long
+    dateRegister Instant
+    dateSend Instant
+    dateResponse Instant
+    status Integer
+    type Integer
+}
+
+entity OrderDetail {
+    description Long
+	status Integer
+}
+
+entity Item {
+	name String
+	amount Integer
+    description Long
+}
+
+entity ItemGroup {
+	name String
+    description Long
+}
+
+entity Track {
+	streetAddress String
+    latitude Double
+	longitude Double
+	accuracy Double
+	altitudeAccuracy Double
+	altitude Double
+	speed Double
+	heading Double
+}
+
+entity Message {
+	title String
+	observation Long
+	response Boolean
+	observationResponse Long
+}
+
+relationship OneToOne {
+      Location{nameMember} to Member
+}
+
+relationship OneToMany {
+      Member{permit} to Permit
+
+      OrderDetail{order} to Order
+      
+      Member{companie} to Company
+      Permit{companie} to Company
+      Location{companie} to Company
+      Order{companie} to Company
+      OrderDetail{companie} to Company
+      Item{companie} to Company
+      ItemGroup{companie} to Company
+      Track{companie} to Company
+      Message{companie} to Company
+}
+
+relationship ManyToMany {
+      Order{namePatient} to Member
+      Order{nameDelivery} to Member
+      Order{nameLogistics} to Member
+      
+      OrderDetail{item} to Item
+      
+      Message{memberSend} to Member
+      Message{memberReceived} to Member
+      
+      Track{memberDelivery} to Member
+      Track{order} to Order
+      
+      ItemGroup{item} to Item
+}
