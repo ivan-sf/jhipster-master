@@ -57,6 +57,7 @@ export class UsuarioUpdateComponent implements OnInit {
     sucursals: [],
     empresaIds: [],
   });
+  return: any | null;
 
   constructor(
     protected dataUtils: DataUtils,
@@ -71,6 +72,8 @@ export class UsuarioUpdateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.return = this.activatedRoute.snapshot.paramMap.get('return');
+
     this.activatedRoute.data.subscribe(({ usuario }) => {
       if (usuario.id === undefined) {
         const today = dayjs().startOf('day');

@@ -76,7 +76,6 @@ export class WelcomeComponent implements OnInit {
   }
 
   createEmpresa(): void {
-    console.error('this.empresathis.empresathis.empresathis.empresathis.empresa', this.empresa);
     this.router.navigate(['empresa', 'new', { return: 'welcome' }]);
   }
 
@@ -86,7 +85,9 @@ export class WelcomeComponent implements OnInit {
   }
 
   createUsuario(): void {
+    console.error('this.usuario', this.usuario);
+    console.error('this.idUser', this.idUser);
     WelcomeComponent.auxRepresentante = true;
-    this.router.navigate(['usuario', 'new']);
+    this.router.navigate(['usuario', 'new', { return: 'welcome', user: this.idUser }]);
   }
 }

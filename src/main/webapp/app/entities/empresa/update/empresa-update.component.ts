@@ -140,8 +140,7 @@ export class EmpresaUpdateComponent implements OnInit {
   protected onSaveSuccess(empresa: any): void {
     if (this.return === 'welcome') {
       this.router.navigate(['rol', 'new', { return: 'welcome' }]);
-    }
-    if (this.return === 'sucursal') {
+    } else if (this.return === 'sucursal') {
       this.router.navigate(['inventario', 'new', { return: 'sucursal' }]);
     } else {
       this.previousState();
@@ -211,9 +210,9 @@ export class EmpresaUpdateComponent implements OnInit {
         ? dayjs(this.editForm.get(['fechaRegistro'])!.value, DATE_TIME_FORMAT)
         : undefined,
       user: this.editForm.get(['user'])!.value,
-      // sucursalIds: [],
+      sucursalIds: [],
       // sucursalIds: this.editForm.get(['sucursalIds'])!.value,
-      sucursalIds: this.sucursales,
+      // sucursalIds: this.sucursales,
     };
   }
 }
