@@ -12,6 +12,7 @@ import com.mycompany.myapp.domain.Empresa;
 import com.mycompany.myapp.domain.InfoLegal;
 import com.mycompany.myapp.domain.Rol;
 import com.mycompany.myapp.domain.Sucursal;
+import com.mycompany.myapp.domain.User;
 import com.mycompany.myapp.domain.Usuario;
 import com.mycompany.myapp.repository.EmpresaRepository;
 import com.mycompany.myapp.service.EmpresaService;
@@ -884,6 +885,32 @@ class EmpresaResourceIT {
 
     @Test
     @Transactional
+    void getAllEmpresasByUserIsEqualToSomething() throws Exception {
+        // Initialize the database
+        empresaRepository.saveAndFlush(empresa);
+        User user;
+        if (TestUtil.findAll(em, User.class).isEmpty()) {
+            user = UserResourceIT.createEntity(em);
+            em.persist(user);
+            em.flush();
+        } else {
+            user = TestUtil.findAll(em, User.class).get(0);
+        }
+        em.persist(user);
+        em.flush();
+        empresa.setUser(user);
+        empresaRepository.saveAndFlush(empresa);
+        Long userId = user.getId();
+
+        // Get all the empresaList where user equals to userId
+        defaultEmpresaShouldBeFound("userId.equals=" + userId);
+
+        // Get all the empresaList where user equals to (userId + 1)
+        defaultEmpresaShouldNotBeFound("userId.equals=" + (userId + 1));
+    }
+
+    @Test
+    @Transactional
     void getAllEmpresasByComponenteIsEqualToSomething() throws Exception {
         // Initialize the database
         empresaRepository.saveAndFlush(empresa);
@@ -932,32 +959,6 @@ class EmpresaResourceIT {
 
         // Get all the empresaList where rol equals to (rolId + 1)
         defaultEmpresaShouldNotBeFound("rolId.equals=" + (rolId + 1));
-    }
-
-    @Test
-    @Transactional
-    void getAllEmpresasByUsuarioIsEqualToSomething() throws Exception {
-        // Initialize the database
-        empresaRepository.saveAndFlush(empresa);
-        Usuario usuario;
-        if (TestUtil.findAll(em, Usuario.class).isEmpty()) {
-            usuario = UsuarioResourceIT.createEntity(em);
-            em.persist(usuario);
-            em.flush();
-        } else {
-            usuario = TestUtil.findAll(em, Usuario.class).get(0);
-        }
-        em.persist(usuario);
-        em.flush();
-        empresa.addUsuario(usuario);
-        empresaRepository.saveAndFlush(empresa);
-        Long usuarioId = usuario.getId();
-
-        // Get all the empresaList where usuario equals to usuarioId
-        defaultEmpresaShouldBeFound("usuarioId.equals=" + usuarioId);
-
-        // Get all the empresaList where usuario equals to (usuarioId + 1)
-        defaultEmpresaShouldNotBeFound("usuarioId.equals=" + (usuarioId + 1));
     }
 
     @Test

@@ -149,16 +149,13 @@ public class UsuarioQueryService extends QueryService<Usuario> {
                         buildSpecification(criteria.getSucursalId(), root -> root.join(Usuario_.sucursals, JoinType.LEFT).get(Sucursal_.id))
                     );
             }
-            if (criteria.getEmpresaId() != null) {
-                specification =
-                    specification.and(
-                        buildSpecification(criteria.getEmpresaId(), root -> root.join(Usuario_.empresas, JoinType.LEFT).get(Empresa_.id))
-                    );
-            }
             if (criteria.getEmpresaIdId() != null) {
                 specification =
                     specification.and(
-                        buildSpecification(criteria.getEmpresaIdId(), root -> root.join(Usuario_.empresaId, JoinType.LEFT).get(Empresa_.id))
+                        buildSpecification(
+                            criteria.getEmpresaIdId(),
+                            root -> root.join(Usuario_.empresaIds, JoinType.LEFT).get(Empresa_.id)
+                        )
                     );
             }
             if (criteria.getBodegaId() != null) {

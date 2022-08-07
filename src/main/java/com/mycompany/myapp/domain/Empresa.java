@@ -46,6 +46,10 @@ public class Empresa implements Serializable {
     @Column(name = "fecha_registro")
     private Instant fechaRegistro;
 
+    @OneToOne
+    @JoinColumn(unique = true)
+    private User user;
+
     @OneToMany(mappedBy = "empresa")
     @JsonIgnoreProperties(value = { "empresa" }, allowSetters = true)
     private Set<Componente> componentes = new HashSet<>();
@@ -53,13 +57,6 @@ public class Empresa implements Serializable {
     @OneToMany(mappedBy = "empresa")
     @JsonIgnoreProperties(value = { "empresa" }, allowSetters = true)
     private Set<Rol> rols = new HashSet<>();
-
-    @OneToMany(mappedBy = "empresaId")
-    @JsonIgnoreProperties(
-        value = { "user", "rol", "infoLegals", "sucursals", "empresas", "empresaId", "bodegas", "oficinas" },
-        allowSetters = true
-    )
-    private Set<Usuario> usuarios = new HashSet<>();
 
     @OneToMany(mappedBy = "empresa")
     @JsonIgnoreProperties(value = { "oficinas", "inventarios", "empresa", "infoLegals", "usuarios", "empresaIds" }, allowSetters = true)
@@ -78,11 +75,8 @@ public class Empresa implements Serializable {
     @JsonIgnoreProperties(value = { "empresaIds", "sucursals", "usuario" }, allowSetters = true)
     private Set<InfoLegal> infoLegalIds = new HashSet<>();
 
-    @ManyToMany(mappedBy = "empresas")
-    @JsonIgnoreProperties(
-        value = { "user", "rol", "infoLegals", "sucursals", "empresas", "empresaId", "bodegas", "oficinas" },
-        allowSetters = true
-    )
+    @ManyToMany(mappedBy = "empresaIds")
+    @JsonIgnoreProperties(value = { "user", "rol", "infoLegals", "sucursals", "empresaIds", "bodegas", "oficinas" }, allowSetters = true)
     private Set<Usuario> usuarioIds = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -204,6 +198,19 @@ public class Empresa implements Serializable {
         this.fechaRegistro = fechaRegistro;
     }
 
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Empresa user(User user) {
+        this.setUser(user);
+        return this;
+    }
+
     public Set<Componente> getComponentes() {
         return this.componentes;
     }
@@ -263,37 +270,6 @@ public class Empresa implements Serializable {
     public Empresa removeRol(Rol rol) {
         this.rols.remove(rol);
         rol.setEmpresa(null);
-        return this;
-    }
-
-    public Set<Usuario> getUsuarios() {
-        return this.usuarios;
-    }
-
-    public void setUsuarios(Set<Usuario> usuarios) {
-        if (this.usuarios != null) {
-            this.usuarios.forEach(i -> i.setEmpresaId(null));
-        }
-        if (usuarios != null) {
-            usuarios.forEach(i -> i.setEmpresaId(this));
-        }
-        this.usuarios = usuarios;
-    }
-
-    public Empresa usuarios(Set<Usuario> usuarios) {
-        this.setUsuarios(usuarios);
-        return this;
-    }
-
-    public Empresa addUsuario(Usuario usuario) {
-        this.usuarios.add(usuario);
-        usuario.setEmpresaId(this);
-        return this;
-    }
-
-    public Empresa removeUsuario(Usuario usuario) {
-        this.usuarios.remove(usuario);
-        usuario.setEmpresaId(null);
         return this;
     }
 
@@ -390,10 +366,10 @@ public class Empresa implements Serializable {
 
     public void setUsuarioIds(Set<Usuario> usuarios) {
         if (this.usuarioIds != null) {
-            this.usuarioIds.forEach(i -> i.removeEmpresa(this));
+            this.usuarioIds.forEach(i -> i.removeEmpresaId(this));
         }
         if (usuarios != null) {
-            usuarios.forEach(i -> i.addEmpresa(this));
+            usuarios.forEach(i -> i.addEmpresaId(this));
         }
         this.usuarioIds = usuarios;
     }
@@ -405,13 +381,13 @@ public class Empresa implements Serializable {
 
     public Empresa addUsuarioId(Usuario usuario) {
         this.usuarioIds.add(usuario);
-        usuario.getEmpresas().add(this);
+        usuario.getEmpresaIds().add(this);
         return this;
     }
 
     public Empresa removeUsuarioId(Usuario usuario) {
         this.usuarioIds.remove(usuario);
-        usuario.getEmpresas().remove(this);
+        usuario.getEmpresaIds().remove(this);
         return this;
     }
 

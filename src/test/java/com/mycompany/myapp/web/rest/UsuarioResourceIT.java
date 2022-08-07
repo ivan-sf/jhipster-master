@@ -1383,32 +1383,6 @@ class UsuarioResourceIT {
 
     @Test
     @Transactional
-    void getAllUsuariosByEmpresaIsEqualToSomething() throws Exception {
-        // Initialize the database
-        usuarioRepository.saveAndFlush(usuario);
-        Empresa empresa;
-        if (TestUtil.findAll(em, Empresa.class).isEmpty()) {
-            empresa = EmpresaResourceIT.createEntity(em);
-            em.persist(empresa);
-            em.flush();
-        } else {
-            empresa = TestUtil.findAll(em, Empresa.class).get(0);
-        }
-        em.persist(empresa);
-        em.flush();
-        usuario.addEmpresa(empresa);
-        usuarioRepository.saveAndFlush(usuario);
-        Long empresaId = empresa.getId();
-
-        // Get all the usuarioList where empresa equals to empresaId
-        defaultUsuarioShouldBeFound("empresaId.equals=" + empresaId);
-
-        // Get all the usuarioList where empresa equals to (empresaId + 1)
-        defaultUsuarioShouldNotBeFound("empresaId.equals=" + (empresaId + 1));
-    }
-
-    @Test
-    @Transactional
     void getAllUsuariosByEmpresaIdIsEqualToSomething() throws Exception {
         // Initialize the database
         usuarioRepository.saveAndFlush(usuario);
@@ -1422,7 +1396,7 @@ class UsuarioResourceIT {
         }
         em.persist(empresaId);
         em.flush();
-        usuario.setEmpresaId(empresaId);
+        usuario.addEmpresaId(empresaId);
         usuarioRepository.saveAndFlush(usuario);
         Long empresaIdId = empresaId.getId();
 

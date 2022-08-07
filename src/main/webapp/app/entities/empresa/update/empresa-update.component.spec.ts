@@ -8,6 +8,9 @@ import { of, Subject, from } from 'rxjs';
 
 import { EmpresaService } from '../service/empresa.service';
 import { IEmpresa, Empresa } from '../empresa.model';
+
+import { IUser } from 'app/entities/user/user.model';
+import { UserService } from 'app/entities/user/user.service';
 import { ISucursal } from 'app/entities/sucursal/sucursal.model';
 import { SucursalService } from 'app/entities/sucursal/service/sucursal.service';
 
@@ -18,6 +21,7 @@ describe('Empresa Management Update Component', () => {
   let fixture: ComponentFixture<EmpresaUpdateComponent>;
   let activatedRoute: ActivatedRoute;
   let empresaService: EmpresaService;
+  let userService: UserService;
   let sucursalService: SucursalService;
 
   beforeEach(() => {
@@ -40,12 +44,32 @@ describe('Empresa Management Update Component', () => {
     fixture = TestBed.createComponent(EmpresaUpdateComponent);
     activatedRoute = TestBed.inject(ActivatedRoute);
     empresaService = TestBed.inject(EmpresaService);
+    userService = TestBed.inject(UserService);
     sucursalService = TestBed.inject(SucursalService);
 
     comp = fixture.componentInstance;
   });
 
   describe('ngOnInit', () => {
+    it('Should call User query and add missing value', () => {
+      const empresa: IEmpresa = { id: 456 };
+      const user: IUser = { id: 49524 };
+      empresa.user = user;
+
+      const userCollection: IUser[] = [{ id: 24856 }];
+      jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
+      const additionalUsers = [user];
+      const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
+      jest.spyOn(userService, 'addUserToCollectionIfMissing').mockReturnValue(expectedCollection);
+
+      activatedRoute.data = of({ empresa });
+      comp.ngOnInit();
+
+      expect(userService.query).toHaveBeenCalled();
+      expect(userService.addUserToCollectionIfMissing).toHaveBeenCalledWith(userCollection, ...additionalUsers);
+      expect(comp.usersSharedCollection).toEqual(expectedCollection);
+    });
+
     it('Should call Sucursal query and add missing value', () => {
       const empresa: IEmpresa = { id: 456 };
       const sucursalIds: ISucursal[] = [{ id: 18512 }];
@@ -67,6 +91,8 @@ describe('Empresa Management Update Component', () => {
 
     it('Should update editForm', () => {
       const empresa: IEmpresa = { id: 456 };
+      const user: IUser = { id: 54859 };
+      empresa.user = user;
       const sucursalIds: ISucursal = { id: 74611 };
       empresa.sucursalIds = [sucursalIds];
 
@@ -74,6 +100,7 @@ describe('Empresa Management Update Component', () => {
       comp.ngOnInit();
 
       expect(comp.editForm.value).toEqual(expect.objectContaining(empresa));
+      expect(comp.usersSharedCollection).toContain(user);
       expect(comp.sucursalsSharedCollection).toContain(sucursalIds);
     });
   });
@@ -143,6 +170,14 @@ describe('Empresa Management Update Component', () => {
   });
 
   describe('Tracking relationships identifiers', () => {
+    describe('trackUserById', () => {
+      it('Should return tracked User primary key', () => {
+        const entity = { id: 123 };
+        const trackResult = comp.trackUserById(0, entity);
+        expect(trackResult).toEqual(entity.id);
+      });
+    });
+
     describe('trackSucursalById', () => {
       it('Should return tracked Sucursal primary key', () => {
         const entity = { id: 123 };

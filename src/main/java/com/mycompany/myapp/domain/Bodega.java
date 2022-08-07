@@ -43,10 +43,7 @@ public class Bodega implements Serializable {
         joinColumns = @JoinColumn(name = "bodega_id"),
         inverseJoinColumns = @JoinColumn(name = "usuario_id")
     )
-    @JsonIgnoreProperties(
-        value = { "user", "rol", "infoLegals", "sucursals", "empresas", "empresaId", "bodegas", "oficinas" },
-        allowSetters = true
-    )
+    @JsonIgnoreProperties(value = { "user", "rol", "infoLegals", "sucursals", "empresaIds", "bodegas", "oficinas" }, allowSetters = true)
     private Set<Usuario> usuarios = new HashSet<>();
 
     @ManyToOne

@@ -37,7 +37,7 @@ public class Componente implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties(
-        value = { "componentes", "rols", "usuarios", "sucursals", "sucursalIds", "infoLegalIds", "usuarioIds" },
+        value = { "user", "componentes", "rols", "sucursals", "sucursalIds", "infoLegalIds", "usuarioIds" },
         allowSetters = true
     )
     private Empresa empresa;

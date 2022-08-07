@@ -90,18 +90,12 @@
             >{{ last ? '' : ', ' }}
           </span>
         </dd>
-        <dt><span>Empresa</span></dt>
-        <dd>
-          <span *ngFor="let empresa of usuario.empresas; let last = last">
-            <a [routerLink]="['/empresa', empresa?.id, 'view']">{{ empresa.id }}</a
-            >{{ last ? '' : ', ' }}
-          </span>
-        </dd>
         <dt><span>Empresa Id</span></dt>
         <dd>
-          <div *ngIf="usuario.empresaId">
-            <a [routerLink]="['/empresa', usuario.empresaId?.id, 'view']">{{ usuario.empresaId?.id }}</a>
-          </div>
+          <span *ngFor="let empresaId of usuario.empresaIds; let last = last">
+            <a [routerLink]="['/empresa', empresaId?.id, 'view']">{{ empresaId.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
         </dd>
       </dl>
 

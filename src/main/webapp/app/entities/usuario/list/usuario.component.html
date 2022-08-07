@@ -49,7 +49,6 @@
           <th scope="col" jhiSortBy="fechaRegistro"><span>Fecha Registro</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="user.login"><span>User</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="rol.id"><span>Rol</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="empresaId.id"><span>Empresa Id</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -81,11 +80,6 @@
           <td>
             <div *ngIf="usuario.rol">
               <a [routerLink]="['/rol', usuario.rol?.id, 'view']">{{ usuario.rol?.id }}</a>
-            </div>
-          </td>
-          <td>
-            <div *ngIf="usuario.empresaId">
-              <a [routerLink]="['/empresa', usuario.empresaId?.id, 'view']">{{ usuario.empresaId?.id }}</a>
             </div>
           </td>
           <td class="text-end">

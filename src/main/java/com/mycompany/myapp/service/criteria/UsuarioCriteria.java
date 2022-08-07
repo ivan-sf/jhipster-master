@@ -63,8 +63,6 @@ public class UsuarioCriteria implements Serializable, Criteria {
 
     private LongFilter sucursalId;
 
-    private LongFilter empresaId;
-
     private LongFilter empresaIdId;
 
     private LongFilter bodegaId;
@@ -94,7 +92,6 @@ public class UsuarioCriteria implements Serializable, Criteria {
         this.rolId = other.rolId == null ? null : other.rolId.copy();
         this.infoLegalId = other.infoLegalId == null ? null : other.infoLegalId.copy();
         this.sucursalId = other.sucursalId == null ? null : other.sucursalId.copy();
-        this.empresaId = other.empresaId == null ? null : other.empresaId.copy();
         this.empresaIdId = other.empresaIdId == null ? null : other.empresaIdId.copy();
         this.bodegaId = other.bodegaId == null ? null : other.bodegaId.copy();
         this.oficinaId = other.oficinaId == null ? null : other.oficinaId.copy();
@@ -376,21 +373,6 @@ public class UsuarioCriteria implements Serializable, Criteria {
         this.sucursalId = sucursalId;
     }
 
-    public LongFilter getEmpresaId() {
-        return empresaId;
-    }
-
-    public LongFilter empresaId() {
-        if (empresaId == null) {
-            empresaId = new LongFilter();
-        }
-        return empresaId;
-    }
-
-    public void setEmpresaId(LongFilter empresaId) {
-        this.empresaId = empresaId;
-    }
-
     public LongFilter getEmpresaIdId() {
         return empresaIdId;
     }
@@ -472,7 +454,6 @@ public class UsuarioCriteria implements Serializable, Criteria {
             Objects.equals(rolId, that.rolId) &&
             Objects.equals(infoLegalId, that.infoLegalId) &&
             Objects.equals(sucursalId, that.sucursalId) &&
-            Objects.equals(empresaId, that.empresaId) &&
             Objects.equals(empresaIdId, that.empresaIdId) &&
             Objects.equals(bodegaId, that.bodegaId) &&
             Objects.equals(oficinaId, that.oficinaId) &&
@@ -501,7 +482,6 @@ public class UsuarioCriteria implements Serializable, Criteria {
             rolId,
             infoLegalId,
             sucursalId,
-            empresaId,
             empresaIdId,
             bodegaId,
             oficinaId,
@@ -531,7 +511,6 @@ public class UsuarioCriteria implements Serializable, Criteria {
             (rolId != null ? "rolId=" + rolId + ", " : "") +
             (infoLegalId != null ? "infoLegalId=" + infoLegalId + ", " : "") +
             (sucursalId != null ? "sucursalId=" + sucursalId + ", " : "") +
-            (empresaId != null ? "empresaId=" + empresaId + ", " : "") +
             (empresaIdId != null ? "empresaIdId=" + empresaIdId + ", " : "") +
             (bodegaId != null ? "bodegaId=" + bodegaId + ", " : "") +
             (oficinaId != null ? "oficinaId=" + oficinaId + ", " : "") +

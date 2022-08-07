@@ -92,22 +92,15 @@ public class Usuario implements Serializable {
 
     @ManyToMany
     @JoinTable(
-        name = "rel_usuario__empresa",
+        name = "rel_usuario__empresa_id",
         joinColumns = @JoinColumn(name = "usuario_id"),
-        inverseJoinColumns = @JoinColumn(name = "empresa_id")
+        inverseJoinColumns = @JoinColumn(name = "empresa_id_id")
     )
     @JsonIgnoreProperties(
-        value = { "componentes", "rols", "usuarios", "sucursals", "sucursalIds", "infoLegalIds", "usuarioIds" },
+        value = { "user", "componentes", "rols", "sucursals", "sucursalIds", "infoLegalIds", "usuarioIds" },
         allowSetters = true
     )
-    private Set<Empresa> empresas = new HashSet<>();
-
-    @ManyToOne
-    @JsonIgnoreProperties(
-        value = { "componentes", "rols", "usuarios", "sucursals", "sucursalIds", "infoLegalIds", "usuarioIds" },
-        allowSetters = true
-    )
-    private Empresa empresaId;
+    private Set<Empresa> empresaIds = new HashSet<>();
 
     @ManyToMany(mappedBy = "usuarios")
     @JsonIgnoreProperties(value = { "productos", "usuarios", "inventario" }, allowSetters = true)
@@ -409,41 +402,28 @@ public class Usuario implements Serializable {
         return this;
     }
 
-    public Set<Empresa> getEmpresas() {
-        return this.empresas;
+    public Set<Empresa> getEmpresaIds() {
+        return this.empresaIds;
     }
 
-    public void setEmpresas(Set<Empresa> empresas) {
-        this.empresas = empresas;
+    public void setEmpresaIds(Set<Empresa> empresas) {
+        this.empresaIds = empresas;
     }
 
-    public Usuario empresas(Set<Empresa> empresas) {
-        this.setEmpresas(empresas);
+    public Usuario empresaIds(Set<Empresa> empresas) {
+        this.setEmpresaIds(empresas);
         return this;
     }
 
-    public Usuario addEmpresa(Empresa empresa) {
-        this.empresas.add(empresa);
+    public Usuario addEmpresaId(Empresa empresa) {
+        this.empresaIds.add(empresa);
         empresa.getUsuarioIds().add(this);
         return this;
     }
 
-    public Usuario removeEmpresa(Empresa empresa) {
-        this.empresas.remove(empresa);
+    public Usuario removeEmpresaId(Empresa empresa) {
+        this.empresaIds.remove(empresa);
         empresa.getUsuarioIds().remove(this);
-        return this;
-    }
-
-    public Empresa getEmpresaId() {
-        return this.empresaId;
-    }
-
-    public void setEmpresaId(Empresa empresa) {
-        this.empresaId = empresa;
-    }
-
-    public Usuario empresaId(Empresa empresa) {
-        this.setEmpresaId(empresa);
         return this;
     }
 

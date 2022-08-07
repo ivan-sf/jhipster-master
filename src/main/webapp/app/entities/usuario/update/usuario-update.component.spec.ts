@@ -117,14 +117,12 @@ describe('Usuario Management Update Component', () => {
 
     it('Should call Empresa query and add missing value', () => {
       const usuario: IUsuario = { id: 456 };
-      const empresas: IEmpresa[] = [{ id: 30068 }];
-      usuario.empresas = empresas;
-      const empresaId: IEmpresa = { id: 36344 };
-      usuario.empresaId = empresaId;
+      const empresaIds: IEmpresa[] = [{ id: 30068 }];
+      usuario.empresaIds = empresaIds;
 
-      const empresaCollection: IEmpresa[] = [{ id: 67619 }];
+      const empresaCollection: IEmpresa[] = [{ id: 36344 }];
       jest.spyOn(empresaService, 'query').mockReturnValue(of(new HttpResponse({ body: empresaCollection })));
-      const additionalEmpresas = [...empresas, empresaId];
+      const additionalEmpresas = [...empresaIds];
       const expectedCollection: IEmpresa[] = [...additionalEmpresas, ...empresaCollection];
       jest.spyOn(empresaService, 'addEmpresaToCollectionIfMissing').mockReturnValue(expectedCollection);
 
@@ -144,10 +142,8 @@ describe('Usuario Management Update Component', () => {
       usuario.rol = rol;
       const sucursals: ISucursal = { id: 24921 };
       usuario.sucursals = [sucursals];
-      const empresas: IEmpresa = { id: 76098 };
-      usuario.empresas = [empresas];
-      const empresaId: IEmpresa = { id: 9456 };
-      usuario.empresaId = empresaId;
+      const empresaIds: IEmpresa = { id: 67619 };
+      usuario.empresaIds = [empresaIds];
 
       activatedRoute.data = of({ usuario });
       comp.ngOnInit();
@@ -156,8 +152,7 @@ describe('Usuario Management Update Component', () => {
       expect(comp.usersSharedCollection).toContain(user);
       expect(comp.rolsCollection).toContain(rol);
       expect(comp.sucursalsSharedCollection).toContain(sucursals);
-      expect(comp.empresasSharedCollection).toContain(empresas);
-      expect(comp.empresasSharedCollection).toContain(empresaId);
+      expect(comp.empresasSharedCollection).toContain(empresaIds);
     });
   });
 

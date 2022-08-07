@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 
@@ -15,15 +15,21 @@ import { EventManager, EventWithContent } from 'app/core/util/event-manager.serv
 import { DataUtils, FileLoadError } from 'app/core/util/data-util.service';
 import { IEmpresa } from 'app/entities/empresa/empresa.model';
 import { EmpresaService } from 'app/entities/empresa/service/empresa.service';
+import { WelcomeComponent } from 'app/welcome/welcome.component';
+import { AccountService } from 'app/core/auth/account.service';
+import { Account } from 'app/core/auth/account.model';
 
 @Component({
   selector: 'jhi-sucursal-update',
   templateUrl: './sucursal-update.component.html',
 })
 export class SucursalUpdateComponent implements OnInit {
+  account: Account | null = null;
   isSaving = false;
-
+  hidden = true;
+  empresa: any;
   empresasSharedCollection: IEmpresa[] = [];
+  auxS = WelcomeComponent.auxSucursal;
 
   editForm = this.fb.group({
     id: [],
@@ -38,27 +44,50 @@ export class SucursalUpdateComponent implements OnInit {
     fechaRegistro: [],
     empresa: [],
   });
-
+  return: any | null;
   constructor(
     protected dataUtils: DataUtils,
     protected eventManager: EventManager,
     protected sucursalService: SucursalService,
     protected empresaService: EmpresaService,
     protected activatedRoute: ActivatedRoute,
-    protected fb: FormBuilder
+    protected fb: FormBuilder,
+    private accountService: AccountService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
+    if (this.activatedRoute.snapshot.paramMap.get('return') !== '') {
+      this.return = this.activatedRoute.snapshot.paramMap.get('return');
+    }
+
+    console.error(this.return);
+
     this.activatedRoute.data.subscribe(({ sucursal }) => {
       if (sucursal.id === undefined) {
         const today = dayjs().startOf('day');
         sucursal.fechaRegistro = today;
       }
 
-      this.updateForm(sucursal);
+      this.accountService.getAuthenticationState().subscribe(account => {
+        this.account = account;
+        this.checkEmpresa(sucursal);
+      });
+      // this.updateForm(sucursal);
 
       this.loadRelationshipsOptions();
     });
+  }
+
+  checkEmpresa(sucursal: any): void {
+    this.empresaService
+      .query({
+        'userId.equals': this.account?.id,
+      })
+      .subscribe(success => {
+        this.empresa = success.body![0];
+        this.updateForm(sucursal);
+      });
   }
 
   byteSize(base64String: string): string {
@@ -102,7 +131,11 @@ export class SucursalUpdateComponent implements OnInit {
   }
 
   protected onSaveSuccess(): void {
-    this.previousState();
+    if (this.return !== null) {
+      this.router.navigate(['empresa', this.empresa.id, 'edit', { return: this.return }]);
+    } else {
+      this.previousState();
+    }
   }
 
   protected onSaveError(): void {
@@ -116,16 +149,16 @@ export class SucursalUpdateComponent implements OnInit {
   protected updateForm(sucursal: ISucursal): void {
     this.editForm.patchValue({
       id: sucursal.id,
-      nombre: sucursal.nombre,
+      nombre: sucursal.nombre === undefined ? this.empresa.nombre : sucursal.nombre,
       nit: sucursal.nit,
       detalle: sucursal.detalle,
-      direccion: sucursal.direccion,
+      direccion: sucursal.direccion === undefined ? this.empresa.direccion : sucursal.direccion,
       direccionGPS: sucursal.direccionGPS,
       logo: sucursal.logo,
       logoContentType: sucursal.logoContentType,
       estado: sucursal.estado,
       fechaRegistro: sucursal.fechaRegistro ? sucursal.fechaRegistro.format(DATE_TIME_FORMAT) : null,
-      empresa: sucursal.empresa,
+      empresa: sucursal.empresa === undefined ? this.empresa : sucursal.empresa,
     });
 
     this.empresasSharedCollection = this.empresaService.addEmpresaToCollectionIfMissing(this.empresasSharedCollection, sucursal.empresa);

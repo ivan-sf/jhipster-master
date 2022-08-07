@@ -63,7 +63,7 @@ public class Sucursal implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties(
-        value = { "componentes", "rols", "usuarios", "sucursals", "sucursalIds", "infoLegalIds", "usuarioIds" },
+        value = { "user", "componentes", "rols", "sucursals", "sucursalIds", "infoLegalIds", "usuarioIds" },
         allowSetters = true
     )
     private Empresa empresa;
@@ -73,15 +73,12 @@ public class Sucursal implements Serializable {
     private Set<InfoLegal> infoLegals = new HashSet<>();
 
     @ManyToMany(mappedBy = "sucursals")
-    @JsonIgnoreProperties(
-        value = { "user", "rol", "infoLegals", "sucursals", "empresas", "empresaId", "bodegas", "oficinas" },
-        allowSetters = true
-    )
+    @JsonIgnoreProperties(value = { "user", "rol", "infoLegals", "sucursals", "empresaIds", "bodegas", "oficinas" }, allowSetters = true)
     private Set<Usuario> usuarios = new HashSet<>();
 
     @ManyToMany(mappedBy = "sucursalIds")
     @JsonIgnoreProperties(
-        value = { "componentes", "rols", "usuarios", "sucursals", "sucursalIds", "infoLegalIds", "usuarioIds" },
+        value = { "user", "componentes", "rols", "sucursals", "sucursalIds", "infoLegalIds", "usuarioIds" },
         allowSetters = true
     )
     private Set<Empresa> empresaIds = new HashSet<>();

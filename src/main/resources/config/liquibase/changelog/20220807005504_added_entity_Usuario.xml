@@ -65,9 +65,6 @@
             <column name="rol_id" type="bigint">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_usuario__rol_id" />
             </column>
-            <column name="empresa_id_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
         <dropDefaultValue tableName="usuario" columnName="edad" columnDataType="${datetimeType}"/>
@@ -87,8 +84,8 @@
 
         <addPrimaryKey columnNames="usuario_id, sucursal_id" tableName="rel_usuario__sucursal"/>
 
-        <createTable tableName="rel_usuario__empresa">
-            <column name="empresa_id" type="bigint">
+        <createTable tableName="rel_usuario__empresa_id">
+            <column name="empresa_id_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
             <column name="usuario_id" type="bigint">
@@ -96,7 +93,7 @@
             </column>
         </createTable>
 
-        <addPrimaryKey columnNames="usuario_id, empresa_id" tableName="rel_usuario__empresa"/>
+        <addPrimaryKey columnNames="usuario_id, empresa_id_id" tableName="rel_usuario__empresa_id"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->

@@ -1,100 +1,100 @@
-<div class="d-flex justify-content-center">
-  <div class="col-8">
-    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="jhi-sucursal-heading" data-cy="SucursalCreateUpdateHeading">Create or edit a Sucursal</h2>
+<div class="card-master">
+  <div class="card-form">
+    <form name="editForm" class="form" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h1 id="jhi-sucursal-heading" data-cy="SucursalCreateUpdateHeading">Crear nueva sucursal.</h1>
 
-      <div>
-        <jhi-alert-error></jhi-alert-error>
+      <jhi-alert-error></jhi-alert-error>
 
-        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
-          <label class="form-label" for="field_id">ID</label>
-          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
-        </div>
+      <div class="row mb-3" [hidden]="editForm.get('id')!.value == null" [hidden]="hidden">
+        <label class="form-label" for="field_id">ID</label>
+        <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+      </div>
 
-        <div class="row mb-3">
-          <label class="form-label" for="field_nombre">Nombre</label>
-          <input type="text" class="form-control" name="nombre" id="field_nombre" data-cy="nombre" formControlName="nombre" />
-        </div>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Nombre"
+        name="nombre"
+        id="field_nombre"
+        data-cy="nombre"
+        formControlName="nombre"
+      />
 
-        <div class="row mb-3">
-          <label class="form-label" for="field_nit">Nit</label>
-          <input type="text" class="form-control" name="nit" id="field_nit" data-cy="nit" formControlName="nit" />
-        </div>
+      <input
+        [hidden]="hidden"
+        type="text"
+        class="form-control"
+        placeholder="Nit"
+        name="nit"
+        id="field_nit"
+        data-cy="nit"
+        formControlName="nit"
+      />
 
-        <div class="row mb-3">
-          <label class="form-label" for="field_detalle">Detalle</label>
-          <textarea class="form-control" name="detalle" id="field_detalle" data-cy="detalle" formControlName="detalle"></textarea>
-        </div>
+      <textarea
+        class="form-control"
+        placeholder="Detalle"
+        name="detalle"
+        id="field_detalle"
+        data-cy="detalle"
+        formControlName="detalle"
+      ></textarea>
 
-        <div class="row mb-3">
-          <label class="form-label" for="field_direccion">Direccion</label>
-          <input type="text" class="form-control" name="direccion" id="field_direccion" data-cy="direccion" formControlName="direccion" />
-        </div>
+      <input
+        type="text"
+        class="form-control"
+        name="direccion"
+        placeholder="Direccion"
+        id="field_direccion"
+        data-cy="direccion"
+        formControlName="direccion"
+      />
 
-        <div class="row mb-3">
-          <label class="form-label" for="field_direccionGPS">Direccion GPS</label>
+      <div class="row mb-3" [hidden]="hidden">
+        <label class="form-label" for="field_direccionGPS">Direccion GPS</label>
+        <input
+          type="text"
+          class="form-control"
+          name="direccionGPS"
+          id="field_direccionGPS"
+          data-cy="direccionGPS"
+          formControlName="direccionGPS"
+        />
+      </div>
+
+      <input type="file" placeholder="Logo" id="file_logo" data-cy="logo" (change)="setFileData($event, 'logo', false)" />
+
+      <div class="row mb-3" [hidden]="hidden">
+        <label class="form-label" for="field_estado">Estado</label>
+        <input type="number" class="form-control" name="estado" id="field_estado" data-cy="estado" formControlName="estado" />
+      </div>
+
+      <div class="row mb-3" [hidden]="hidden">
+        <label class="form-label" for="field_fechaRegistro">Fecha Registro</label>
+        <div class="d-flex">
           <input
-            type="text"
+            id="field_fechaRegistro"
+            data-cy="fechaRegistro"
+            type="datetime-local"
             class="form-control"
-            name="direccionGPS"
-            id="field_direccionGPS"
-            data-cy="direccionGPS"
-            formControlName="direccionGPS"
+            name="fechaRegistro"
+            formControlName="fechaRegistro"
+            placeholder="YYYY-MM-DD HH:mm"
           />
         </div>
+      </div>
 
-        <div class="row mb-3">
-          <label class="form-label" for="field_logo">Logo</label>
-          <div>
-            <div *ngIf="editForm.get('logo')!.value" class="form-text text-danger clearfix">
-              <a class="pull-start" (click)="openFile(editForm.get('logo')!.value, editForm.get('logoContentType')!.value)">open</a><br />
-              <span class="pull-start">{{ editForm.get('logoContentType')!.value }}, {{ byteSize(editForm.get('logo')!.value) }}</span>
-              <button
-                type="button"
-                (click)="editForm.patchValue({ logo: null }); editForm.patchValue({ logoContentType: null })"
-                class="btn btn-secondary btn-xs pull-end"
-              >
-                <fa-icon icon="times"></fa-icon>
-              </button>
-            </div>
-            <input type="file" id="file_logo" data-cy="logo" (change)="setFileData($event, 'logo', false)" />
-          </div>
-          <input type="hidden" class="form-control" name="logo" id="field_logo" data-cy="logo" formControlName="logo" />
-          <input type="hidden" class="form-control" name="logoContentType" id="field_logoContentType" formControlName="logoContentType" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" for="field_estado">Estado</label>
-          <input type="number" class="form-control" name="estado" id="field_estado" data-cy="estado" formControlName="estado" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" for="field_fechaRegistro">Fecha Registro</label>
-          <div class="d-flex">
-            <input
-              id="field_fechaRegistro"
-              data-cy="fechaRegistro"
-              type="datetime-local"
-              class="form-control"
-              name="fechaRegistro"
-              formControlName="fechaRegistro"
-              placeholder="YYYY-MM-DD HH:mm"
-            />
-          </div>
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" for="field_empresa">Empresa</label>
-          <select class="form-control" id="field_empresa" data-cy="empresa" name="empresa" formControlName="empresa">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="empresaOption.id === editForm.get('empresa')!.value?.id ? editForm.get('empresa')!.value : empresaOption"
-              *ngFor="let empresaOption of empresasSharedCollection; trackBy: trackEmpresaById"
-            >
-              {{ empresaOption.id }}
-            </option>
-          </select>
-        </div>
+      <div class="row mb-3" [hidden]="hidden">
+        <label class="form-label" for="field_empresa">Empresa</label>
+        <select class="form-control" id="field_empresa" data-cy="empresa" name="empresa" formControlName="empresa">
+          <option [ngValue]="null"></option>
+          <option
+            [ngValue]="empresaOption.id === editForm.get('empresa')!.value?.id ? editForm.get('empresa')!.value : empresaOption"
+            *ngFor="let empresaOption of empresasSharedCollection; trackBy: trackEmpresaById"
+          >
+            {{ empresaOption.id }}
+          </option>
+        </select>
       </div>
 
       <div>

@@ -21,6 +21,7 @@ import { ISucursal } from 'app/entities/sucursal/sucursal.model';
 import { SucursalService } from 'app/entities/sucursal/service/sucursal.service';
 import { IEmpresa } from 'app/entities/empresa/empresa.model';
 import { EmpresaService } from 'app/entities/empresa/service/empresa.service';
+import { WelcomeComponent } from 'app/welcome/welcome.component';
 
 @Component({
   selector: 'jhi-usuario-update',
@@ -28,7 +29,7 @@ import { EmpresaService } from 'app/entities/empresa/service/empresa.service';
 })
 export class UsuarioUpdateComponent implements OnInit {
   isSaving = false;
-
+  auxR = WelcomeComponent.auxRepresentante;
   usersSharedCollection: IUser[] = [];
   rolsCollection: IRol[] = [];
   sucursalsSharedCollection: ISucursal[] = [];
@@ -54,8 +55,7 @@ export class UsuarioUpdateComponent implements OnInit {
     user: [],
     rol: [],
     sucursals: [],
-    empresas: [],
-    empresaId: [],
+    empresaIds: [],
   });
 
   constructor(
@@ -82,6 +82,7 @@ export class UsuarioUpdateComponent implements OnInit {
 
       this.loadRelationshipsOptions();
     });
+    WelcomeComponent.auxRepresentante = false;
   }
 
   byteSize(base64String: string): string {
@@ -191,8 +192,7 @@ export class UsuarioUpdateComponent implements OnInit {
       user: usuario.user,
       rol: usuario.rol,
       sucursals: usuario.sucursals,
-      empresas: usuario.empresas,
-      empresaId: usuario.empresaId,
+      empresaIds: usuario.empresaIds,
     });
 
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(this.usersSharedCollection, usuario.user);
@@ -203,8 +203,7 @@ export class UsuarioUpdateComponent implements OnInit {
     );
     this.empresasSharedCollection = this.empresaService.addEmpresaToCollectionIfMissing(
       this.empresasSharedCollection,
-      ...(usuario.empresas ?? []),
-      usuario.empresaId
+      ...(usuario.empresaIds ?? [])
     );
   }
 
@@ -236,11 +235,7 @@ export class UsuarioUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IEmpresa[]>) => res.body ?? []))
       .pipe(
         map((empresas: IEmpresa[]) =>
-          this.empresaService.addEmpresaToCollectionIfMissing(
-            empresas,
-            ...(this.editForm.get('empresas')!.value ?? []),
-            this.editForm.get('empresaId')!.value
-          )
+          this.empresaService.addEmpresaToCollectionIfMissing(empresas, ...(this.editForm.get('empresaIds')!.value ?? []))
         )
       )
       .subscribe((empresas: IEmpresa[]) => (this.empresasSharedCollection = empresas));
@@ -270,8 +265,7 @@ export class UsuarioUpdateComponent implements OnInit {
       user: this.editForm.get(['user'])!.value,
       rol: this.editForm.get(['rol'])!.value,
       sucursals: this.editForm.get(['sucursals'])!.value,
-      empresas: this.editForm.get(['empresas'])!.value,
-      empresaId: this.editForm.get(['empresaId'])!.value,
+      empresaIds: this.editForm.get(['empresaIds'])!.value,
     };
   }
 }

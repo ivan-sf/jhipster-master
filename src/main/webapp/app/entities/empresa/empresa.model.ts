@@ -1,9 +1,10 @@
 import dayjs from 'dayjs/esm';
+import { IUser } from 'app/entities/user/user.model';
 import { IComponente } from 'app/entities/componente/componente.model';
 import { IRol } from 'app/entities/rol/rol.model';
-import { IUsuario } from 'app/entities/usuario/usuario.model';
 import { ISucursal } from 'app/entities/sucursal/sucursal.model';
 import { IInfoLegal } from 'app/entities/info-legal/info-legal.model';
+import { IUsuario } from 'app/entities/usuario/usuario.model';
 
 export interface IEmpresa {
   id?: number;
@@ -15,9 +16,9 @@ export interface IEmpresa {
   indicativo?: string | null;
   estado?: number | null;
   fechaRegistro?: dayjs.Dayjs | null;
+  user?: IUser | null;
   componentes?: IComponente[] | null;
   rols?: IRol[] | null;
-  usuarios?: IUsuario[] | null;
   sucursals?: ISucursal[] | null;
   sucursalIds?: ISucursal[] | null;
   infoLegalIds?: IInfoLegal[] | null;
@@ -35,9 +36,9 @@ export class Empresa implements IEmpresa {
     public indicativo?: string | null,
     public estado?: number | null,
     public fechaRegistro?: dayjs.Dayjs | null,
+    public user?: IUser | null,
     public componentes?: IComponente[] | null,
     public rols?: IRol[] | null,
-    public usuarios?: IUsuario[] | null,
     public sucursals?: ISucursal[] | null,
     public sucursalIds?: ISucursal[] | null,
     public infoLegalIds?: IInfoLegal[] | null,

@@ -19,7 +19,7 @@ public class UsuarioRepositoryWithBagRelationshipsImpl implements UsuarioReposit
 
     @Override
     public Optional<Usuario> fetchBagRelationships(Optional<Usuario> usuario) {
-        return usuario.map(this::fetchSucursals).map(this::fetchEmpresas);
+        return usuario.map(this::fetchSucursals).map(this::fetchEmpresaIds);
     }
 
     @Override
@@ -29,7 +29,7 @@ public class UsuarioRepositoryWithBagRelationshipsImpl implements UsuarioReposit
 
     @Override
     public List<Usuario> fetchBagRelationships(List<Usuario> usuarios) {
-        return Optional.of(usuarios).map(this::fetchSucursals).map(this::fetchEmpresas).get();
+        return Optional.of(usuarios).map(this::fetchSucursals).map(this::fetchEmpresaIds).get();
     }
 
     Usuario fetchSucursals(Usuario result) {
@@ -51,18 +51,18 @@ public class UsuarioRepositoryWithBagRelationshipsImpl implements UsuarioReposit
             .getResultList();
     }
 
-    Usuario fetchEmpresas(Usuario result) {
+    Usuario fetchEmpresaIds(Usuario result) {
         return entityManager
-            .createQuery("select usuario from Usuario usuario left join fetch usuario.empresas where usuario is :usuario", Usuario.class)
+            .createQuery("select usuario from Usuario usuario left join fetch usuario.empresaIds where usuario is :usuario", Usuario.class)
             .setParameter("usuario", result)
             .setHint(QueryHints.PASS_DISTINCT_THROUGH, false)
             .getSingleResult();
     }
 
-    List<Usuario> fetchEmpresas(List<Usuario> usuarios) {
+    List<Usuario> fetchEmpresaIds(List<Usuario> usuarios) {
         return entityManager
             .createQuery(
-                "select distinct usuario from Usuario usuario left join fetch usuario.empresas where usuario in :usuarios",
+                "select distinct usuario from Usuario usuario left join fetch usuario.empresaIds where usuario in :usuarios",
                 Usuario.class
             )
             .setParameter("usuarios", usuarios)

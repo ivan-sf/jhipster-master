@@ -125,7 +125,6 @@ relationship OneToMany {
 	Usuario to InfoLegal{usuario}
 	Empresa to Componente{empresa}
 	Empresa to Rol{empresa}
-	Empresa to Usuario{empresaId}
 	Empresa to Sucursal{empresa}
 	Sucursal to Oficina{sucursal}
 	Sucursal to Inventario{sucursal}
@@ -141,7 +140,7 @@ relationship ManyToMany {
     Bodega{usuario} to Usuario{bodega}
     Oficina{usuario} to Usuario{oficina}
     Usuario{sucursal} to Sucursal{usuario}
-    Usuario{empresa} to Empresa{usuarioId}
+    Usuario{empresaId} to Empresa{usuarioId}
     Empresa{sucursalId} to Sucursal{empresaId}
     Producto{precioIngreso} to Precio{productoIngreso}
     Producto{precioSalida} to Precio{productoSalida}
@@ -149,6 +148,7 @@ relationship ManyToMany {
 
 relationship OneToOne {
   Usuario{user(login)} to User
+  Empresa{user(login)} to User
   Usuario{rol} to Rol
 }
 

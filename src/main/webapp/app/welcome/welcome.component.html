@@ -1,7 +1,26 @@
-<div class="card-welcome" *ngIf="usuario === '' || usuario === undefined">
+<div class="card-welcome" *ngIf="empresa === undefined && paso == 1">
   <div class="info">
     <h1>Hola, {{ account!.login }}. Gracias por elegirnos, por favor continúa con la configuración.</h1>
     <p>Recuerda que este proceso es necesario e importante para el correcto funcionamiento de la aplicación.</p>
-    <button routerLink="/empresa/new">Configurar empresa</button>
+    <button (click)="createEmpresa()">Configurar empresa</button>
+  </div>
+</div>
+
+<div class="card-welcome" *ngIf="sucursal === undefined && paso == 2">
+  <div class="info">
+    <h1>Bien hecho, {{ account!.login }}. Ahora puedes configurar sucursales para tu empresa.</h1>
+    <p>Acontinuación configura tu sucursal principal.</p>
+    <button (click)="createSucursal()">Configurar sucursal</button>
+  </div>
+</div>
+
+<div class="card-welcome" *ngIf="usuario === undefined && paso == 3">
+  <div class="info">
+    <h1>Muy bien, ya casi terminamos ahora necesitamos algo de información legal.</h1>
+    <p>
+      Esta información es muy importante para el correcto funcionamiento del area de facturacion y contabilidad. Iniciemos con los datos del
+      representante legal de la empresa.
+    </p>
+    <button (click)="createUsuario()">Configurar representante</button>
   </div>
 </div>

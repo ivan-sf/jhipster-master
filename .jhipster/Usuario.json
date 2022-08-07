@@ -101,14 +101,8 @@
       "otherEntityName": "empresa",
       "otherEntityRelationshipName": "usuarioId",
       "ownerSide": true,
-      "relationshipName": "empresa",
-      "relationshipType": "many-to-many"
-    },
-    {
-      "otherEntityName": "empresa",
-      "otherEntityRelationshipName": "usuario",
       "relationshipName": "empresaId",
-      "relationshipType": "many-to-one"
+      "relationshipType": "many-to-many"
     },
     {
       "otherEntityName": "bodega",

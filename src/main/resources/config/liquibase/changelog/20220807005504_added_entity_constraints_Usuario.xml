@@ -33,20 +33,14 @@
                                  referencedTableName="sucursal"/>
 
         <addForeignKeyConstraint baseColumnNames="usuario_id"
-                                 baseTableName="rel_usuario__empresa"
-                                 constraintName="fk_rel_usuario__empresa__usuario_id"
+                                 baseTableName="rel_usuario__empresa_id"
+                                 constraintName="fk_rel_usuario__empresa_id__usuario_id"
                                  referencedColumnNames="id"
                                  referencedTableName="usuario"/>
 
-        <addForeignKeyConstraint baseColumnNames="empresa_id"
-                                 baseTableName="rel_usuario__empresa"
-                                 constraintName="fk_rel_usuario__empresa__empresa_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="empresa"/>
-
         <addForeignKeyConstraint baseColumnNames="empresa_id_id"
-                                 baseTableName="usuario"
-                                 constraintName="fk_usuario__empresa_id_id"
+                                 baseTableName="rel_usuario__empresa_id"
+                                 constraintName="fk_rel_usuario__empresa_id__empresa_id_id"
                                  referencedColumnNames="id"
                                  referencedTableName="empresa"/>
     </changeSet>

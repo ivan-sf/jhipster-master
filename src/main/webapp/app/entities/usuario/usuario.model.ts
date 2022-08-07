@@ -28,8 +28,7 @@ export interface IUsuario {
   rol?: IRol | null;
   infoLegals?: IInfoLegal[] | null;
   sucursals?: ISucursal[] | null;
-  empresas?: IEmpresa[] | null;
-  empresaId?: IEmpresa | null;
+  empresaIds?: IEmpresa[] | null;
   bodegas?: IBodega[] | null;
   oficinas?: IOficina[] | null;
 }
@@ -56,8 +55,7 @@ export class Usuario implements IUsuario {
     public rol?: IRol | null,
     public infoLegals?: IInfoLegal[] | null,
     public sucursals?: ISucursal[] | null,
-    public empresas?: IEmpresa[] | null,
-    public empresaId?: IEmpresa | null,
+    public empresaIds?: IEmpresa[] | null,
     public bodegas?: IBodega[] | null,
     public oficinas?: IOficina[] | null
   ) {}

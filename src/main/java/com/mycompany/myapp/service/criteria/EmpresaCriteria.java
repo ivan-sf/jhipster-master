@@ -45,11 +45,11 @@ public class EmpresaCriteria implements Serializable, Criteria {
 
     private InstantFilter fechaRegistro;
 
+    private LongFilter userId;
+
     private LongFilter componenteId;
 
     private LongFilter rolId;
-
-    private LongFilter usuarioId;
 
     private LongFilter sucursalId;
 
@@ -73,9 +73,9 @@ public class EmpresaCriteria implements Serializable, Criteria {
         this.indicativo = other.indicativo == null ? null : other.indicativo.copy();
         this.estado = other.estado == null ? null : other.estado.copy();
         this.fechaRegistro = other.fechaRegistro == null ? null : other.fechaRegistro.copy();
+        this.userId = other.userId == null ? null : other.userId.copy();
         this.componenteId = other.componenteId == null ? null : other.componenteId.copy();
         this.rolId = other.rolId == null ? null : other.rolId.copy();
-        this.usuarioId = other.usuarioId == null ? null : other.usuarioId.copy();
         this.sucursalId = other.sucursalId == null ? null : other.sucursalId.copy();
         this.sucursalIdId = other.sucursalIdId == null ? null : other.sucursalIdId.copy();
         this.infoLegalIdId = other.infoLegalIdId == null ? null : other.infoLegalIdId.copy();
@@ -223,6 +223,21 @@ public class EmpresaCriteria implements Serializable, Criteria {
         this.fechaRegistro = fechaRegistro;
     }
 
+    public LongFilter getUserId() {
+        return userId;
+    }
+
+    public LongFilter userId() {
+        if (userId == null) {
+            userId = new LongFilter();
+        }
+        return userId;
+    }
+
+    public void setUserId(LongFilter userId) {
+        this.userId = userId;
+    }
+
     public LongFilter getComponenteId() {
         return componenteId;
     }
@@ -251,21 +266,6 @@ public class EmpresaCriteria implements Serializable, Criteria {
 
     public void setRolId(LongFilter rolId) {
         this.rolId = rolId;
-    }
-
-    public LongFilter getUsuarioId() {
-        return usuarioId;
-    }
-
-    public LongFilter usuarioId() {
-        if (usuarioId == null) {
-            usuarioId = new LongFilter();
-        }
-        return usuarioId;
-    }
-
-    public void setUsuarioId(LongFilter usuarioId) {
-        this.usuarioId = usuarioId;
     }
 
     public LongFilter getSucursalId() {
@@ -355,9 +355,9 @@ public class EmpresaCriteria implements Serializable, Criteria {
             Objects.equals(indicativo, that.indicativo) &&
             Objects.equals(estado, that.estado) &&
             Objects.equals(fechaRegistro, that.fechaRegistro) &&
+            Objects.equals(userId, that.userId) &&
             Objects.equals(componenteId, that.componenteId) &&
             Objects.equals(rolId, that.rolId) &&
-            Objects.equals(usuarioId, that.usuarioId) &&
             Objects.equals(sucursalId, that.sucursalId) &&
             Objects.equals(sucursalIdId, that.sucursalIdId) &&
             Objects.equals(infoLegalIdId, that.infoLegalIdId) &&
@@ -378,9 +378,9 @@ public class EmpresaCriteria implements Serializable, Criteria {
             indicativo,
             estado,
             fechaRegistro,
+            userId,
             componenteId,
             rolId,
-            usuarioId,
             sucursalId,
             sucursalIdId,
             infoLegalIdId,
@@ -402,9 +402,9 @@ public class EmpresaCriteria implements Serializable, Criteria {
             (indicativo != null ? "indicativo=" + indicativo + ", " : "") +
             (estado != null ? "estado=" + estado + ", " : "") +
             (fechaRegistro != null ? "fechaRegistro=" + fechaRegistro + ", " : "") +
+            (userId != null ? "userId=" + userId + ", " : "") +
             (componenteId != null ? "componenteId=" + componenteId + ", " : "") +
             (rolId != null ? "rolId=" + rolId + ", " : "") +
-            (usuarioId != null ? "usuarioId=" + usuarioId + ", " : "") +
             (sucursalId != null ? "sucursalId=" + sucursalId + ", " : "") +
             (sucursalIdId != null ? "sucursalIdId=" + sucursalIdId + ", " : "") +
             (infoLegalIdId != null ? "infoLegalIdId=" + infoLegalIdId + ", " : "") +

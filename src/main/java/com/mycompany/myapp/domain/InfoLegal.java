@@ -59,7 +59,7 @@ public class InfoLegal implements Serializable {
         inverseJoinColumns = @JoinColumn(name = "empresa_id_id")
     )
     @JsonIgnoreProperties(
-        value = { "componentes", "rols", "usuarios", "sucursals", "sucursalIds", "infoLegalIds", "usuarioIds" },
+        value = { "user", "componentes", "rols", "sucursals", "sucursalIds", "infoLegalIds", "usuarioIds" },
         allowSetters = true
     )
     private Set<Empresa> empresaIds = new HashSet<>();
@@ -74,10 +74,7 @@ public class InfoLegal implements Serializable {
     private Set<Sucursal> sucursals = new HashSet<>();
 
     @ManyToOne
-    @JsonIgnoreProperties(
-        value = { "user", "rol", "infoLegals", "sucursals", "empresas", "empresaId", "bodegas", "oficinas" },
-        allowSetters = true
-    )
+    @JsonIgnoreProperties(value = { "user", "rol", "infoLegals", "sucursals", "empresaIds", "bodegas", "oficinas" }, allowSetters = true)
     private Usuario usuario;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

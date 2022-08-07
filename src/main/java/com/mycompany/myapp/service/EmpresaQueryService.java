@@ -109,6 +109,12 @@ public class EmpresaQueryService extends QueryService<Empresa> {
             if (criteria.getFechaRegistro() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getFechaRegistro(), Empresa_.fechaRegistro));
             }
+            if (criteria.getUserId() != null) {
+                specification =
+                    specification.and(
+                        buildSpecification(criteria.getUserId(), root -> root.join(Empresa_.user, JoinType.LEFT).get(User_.id))
+                    );
+            }
             if (criteria.getComponenteId() != null) {
                 specification =
                     specification.and(
@@ -122,12 +128,6 @@ public class EmpresaQueryService extends QueryService<Empresa> {
                 specification =
                     specification.and(
                         buildSpecification(criteria.getRolId(), root -> root.join(Empresa_.rols, JoinType.LEFT).get(Rol_.id))
-                    );
-            }
-            if (criteria.getUsuarioId() != null) {
-                specification =
-                    specification.and(
-                        buildSpecification(criteria.getUsuarioId(), root -> root.join(Empresa_.usuarios, JoinType.LEFT).get(Usuario_.id))
                     );
             }
             if (criteria.getSucursalId() != null) {
