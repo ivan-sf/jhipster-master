@@ -1,98 +1,91 @@
-<div class="d-flex justify-content-center">
-  <div class="col-8">
-    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="jhi-empresa-heading" data-cy="EmpresaCreateUpdateHeading">Create or edit a Empresa</h2>
+<div class="card card-empresa">
+  <div class="card-form">
+    <form name="editForm" class="form" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h1 id="jhi-empresa-heading" data-cy="EmpresaCreateUpdateHeading">Crear nueva empresa</h1>
 
-      <div>
-        <jhi-alert-error></jhi-alert-error>
+      <jhi-alert-error></jhi-alert-error>
 
-        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
-          <label class="form-label" for="field_id">ID</label>
-          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
-        </div>
+      <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+        <label class="form-label" for="field_id">ID</label>
+        <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+      </div>
 
-        <div class="row mb-3">
-          <label class="form-label" for="field_nombre">Nombre</label>
-          <input type="text" class="form-control" name="nombre" id="field_nombre" data-cy="nombre" formControlName="nombre" />
-        </div>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Nombre"
+        name="nombre"
+        id="field_nombre"
+        data-cy="nombre"
+        formControlName="nombre"
+      />
 
-        <div class="row mb-3">
-          <label class="form-label" for="field_direccion">Direccion</label>
-          <input type="text" class="form-control" name="direccion" id="field_direccion" data-cy="direccion" formControlName="direccion" />
-        </div>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Dirección"
+        name="direccion"
+        id="field_direccion"
+        data-cy="direccion"
+        formControlName="direccion"
+      />
 
-        <div class="row mb-3">
-          <label class="form-label" for="field_direccionGPS">Direccion GPS</label>
-          <input
-            type="text"
-            class="form-control"
-            name="direccionGPS"
-            id="field_direccionGPS"
-            data-cy="direccionGPS"
-            formControlName="direccionGPS"
-          />
-        </div>
+      <div class="row mb-3" [hidden]="hidden">
+        <label class="form-label" for="field_direccionGPS">Direccion GPS</label>
+        <input
+          type="text"
+          class="form-control"
+          name="direccionGPS"
+          id="field_direccionGPS"
+          data-cy="direccionGPS"
+          formControlName="direccionGPS"
+        />
+      </div>
 
-        <div class="row mb-3">
-          <label class="form-label" for="field_email">Email</label>
-          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
-        </div>
+      <input type="text" class="form-control" name="email" placeholder="Email" id="field_email" data-cy="email" formControlName="email" />
 
-        <div class="row mb-3">
-          <label class="form-label" for="field_celular">Celular</label>
-          <input type="text" class="form-control" name="celular" id="field_celular" data-cy="celular" formControlName="celular" />
-        </div>
+      <input
+        type="text"
+        class="form-control"
+        name="celular"
+        placeholder="Celular"
+        id="field_celular"
+        data-cy="celular"
+        formControlName="celular"
+      />
 
-        <div class="row mb-3">
-          <label class="form-label" for="field_indicativo">Indicativo</label>
-          <input
-            type="text"
-            class="form-control"
-            name="indicativo"
-            id="field_indicativo"
-            data-cy="indicativo"
-            formControlName="indicativo"
-          />
-        </div>
+      <div class="row mb-3" [hidden]="hidden">
+        <label class="form-label" for="field_indicativo">Indicativo</label>
+        <input type="text" class="form-control" name="indicativo" id="field_indicativo" data-cy="indicativo" formControlName="indicativo" />
+      </div>
 
-        <div class="row mb-3">
-          <label class="form-label" for="field_estado">Estado</label>
-          <input type="number" class="form-control" name="estado" id="field_estado" data-cy="estado" formControlName="estado" />
-        </div>
+      <div class="row mb-3" [hidden]="hidden">
+        <label class="form-label" for="field_estado">Estado</label>
+        <input type="number" class="form-control" name="estado" id="field_estado" data-cy="estado" formControlName="estado" />
+      </div>
 
-        <div class="row mb-3">
-          <label class="form-label" for="field_fechaRegistro">Fecha Registro</label>
-          <div class="d-flex">
-            <input
-              id="field_fechaRegistro"
-              data-cy="fechaRegistro"
-              type="datetime-local"
-              class="form-control"
-              name="fechaRegistro"
-              formControlName="fechaRegistro"
-              placeholder="YYYY-MM-DD HH:mm"
-            />
-          </div>
-        </div>
+      <div class="d-flex" [hidden]="hidden">
+        <input
+          [hidden]="hidden"
+          id="field_fechaRegistro"
+          data-cy="fechaRegistro"
+          type="datetime-local"
+          class="form-control"
+          name="fechaRegistro"
+          formControlName="fechaRegistro"
+        />
+      </div>
 
-        <div class="row mb-3">
-          <label for="field_sucursalIds">Sucursal Id</label>
-          <select
-            class="form-control"
-            id="field_sucursalIds"
-            data-cy="sucursalId"
-            multiple
-            name="sucursalIds"
-            formControlName="sucursalIds"
+      <div class="row mb-3" [hidden]="hidden">
+        <label for="field_sucursalIds">Sucursal Id</label>
+        <select class="form-control" id="field_sucursalIds" data-cy="sucursalId" multiple name="sucursalIds" formControlName="sucursalIds">
+          <option
+            [ngValue]="getSelectedSucursal(sucursalOption, editForm.get('sucursalIds')!.value)"
+            *ngFor="let sucursalOption of sucursalsSharedCollection; trackBy: trackSucursalById"
           >
-            <option
-              [ngValue]="getSelectedSucursal(sucursalOption, editForm.get('sucursalIds')!.value)"
-              *ngFor="let sucursalOption of sucursalsSharedCollection; trackBy: trackSucursalById"
-            >
-              {{ sucursalOption.id }}
-            </option>
-          </select>
-        </div>
+            {{ sucursalOption.id }}
+          </option>
+        </select>
       </div>
 
       <div>

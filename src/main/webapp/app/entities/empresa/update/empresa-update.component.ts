@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -16,11 +16,12 @@ import { SucursalService } from 'app/entities/sucursal/service/sucursal.service'
 @Component({
   selector: 'jhi-empresa-update',
   templateUrl: './empresa-update.component.html',
+  styleUrls: ['./empresa-update.component.scss'],
 })
 export class EmpresaUpdateComponent implements OnInit {
   isSaving = false;
-
   sucursalsSharedCollection: ISucursal[] = [];
+  hidden = true;
 
   editForm = this.fb.group({
     id: [],

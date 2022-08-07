@@ -1,0 +1,39 @@
+.card-welcome {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: delay 2s ease;
+  .info {
+    text-align: center;
+    width: 50%;
+    h1 {
+      font-size: 25pt;
+      margin: 40px 0;
+      font-weight: 800;
+    }
+    p {
+      font-size: 14pt;
+      font-weight: 600;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: var(--primary);
+      color: var(--text);
+      margin: 20px 0;
+    }
+    button:hover {
+      filter: grayscale(0.5);
+    }
+  }
+}
+
+@keyframes delay {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

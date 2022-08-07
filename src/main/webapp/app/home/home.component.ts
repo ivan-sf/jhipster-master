@@ -112,19 +112,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     } else {
       const login = this.registerForm.get(['login'])!.value;
       const email = this.registerForm.get(['email'])!.value;
-      this.registerService.save({ login, email, password, langKey: 'en' }).subscribe({
+      const lastName = this.registerForm.get(['empresa'])!.value;
+      this.registerService.save({ login, email, password, lastName, langKey: 'en' }).subscribe({
         next: () => {
           this.success = true;
-          this.loginAuth(this.registerForm.get(['empresa'])!.value);
         },
         error: response => this.processError(response),
       });
     }
-  }
-
-  loginAuth(empresa: any): void {
-    localStorage.setItem('empresa', empresa);
-    console.error('localStorage.getItem()', localStorage.getItem('empresa'));
   }
 
   private processError(response: HttpErrorResponse): void {

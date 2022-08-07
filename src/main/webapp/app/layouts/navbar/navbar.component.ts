@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit {
   version = '';
   account: Account | null = null;
   entitiesNavbarItems: any[] = [];
-
+  role: boolean = false;
   constructor(
     private loginService: LoginService,
     private accountService: AccountService,

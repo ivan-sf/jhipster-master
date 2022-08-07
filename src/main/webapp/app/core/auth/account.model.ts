@@ -1,5 +1,6 @@
 export class Account {
   constructor(
+    public id: any,
     public activated: boolean,
     public authorities: string[],
     public email: string,

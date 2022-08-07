@@ -1,1 +1,7 @@
-<p>welcome works!</p>
+<div class="card-welcome" *ngIf="usuario === '' || usuario === undefined">
+  <div class="info">
+    <h1>Hola, {{ account!.login }}. Gracias por elegirnos, por favor continúa con la configuración.</h1>
+    <p>Recuerda que este proceso es necesario e importante para el correcto funcionamiento de la aplicación.</p>
+    <button routerLink="/empresa/new">Configurar empresa</button>
+  </div>
+</div>
