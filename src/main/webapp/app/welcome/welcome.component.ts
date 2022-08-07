@@ -87,7 +87,8 @@ export class WelcomeComponent implements OnInit {
   createUsuario(): void {
     console.error('this.usuario', this.usuario);
     console.error('this.idUser', this.idUser);
+    console.error('this.empresa', this.empresa);
     WelcomeComponent.auxRepresentante = true;
-    this.router.navigate(['usuario', 'new', { return: 'welcome', user: this.idUser }]);
+    this.router.navigate(['usuario', 'new', { return: 'welcome', empresa: this.empresa.id }]);
   }
 }

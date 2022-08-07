@@ -22,6 +22,8 @@ import { SucursalService } from 'app/entities/sucursal/service/sucursal.service'
 import { IEmpresa } from 'app/entities/empresa/empresa.model';
 import { EmpresaService } from 'app/entities/empresa/service/empresa.service';
 import { WelcomeComponent } from 'app/welcome/welcome.component';
+import { Account } from 'app/core/auth/account.model';
+import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
   selector: 'jhi-usuario-update',
@@ -29,6 +31,8 @@ import { WelcomeComponent } from 'app/welcome/welcome.component';
 })
 export class UsuarioUpdateComponent implements OnInit {
   isSaving = false;
+  hidden = true;
+  account: Account | null = null;
   auxR = WelcomeComponent.auxRepresentante;
   usersSharedCollection: IUser[] = [];
   rolsCollection: IRol[] = [];
@@ -58,6 +62,12 @@ export class UsuarioUpdateComponent implements OnInit {
     empresaIds: [],
   });
   return: any | null;
+  user: any | null;
+  empresaId: any | null;
+  empresa: any;
+  usuario: any;
+  sucursal: any;
+  rol: any;
 
   constructor(
     protected dataUtils: DataUtils,
@@ -68,24 +78,71 @@ export class UsuarioUpdateComponent implements OnInit {
     protected sucursalService: SucursalService,
     protected empresaService: EmpresaService,
     protected activatedRoute: ActivatedRoute,
-    protected fb: FormBuilder
+    protected fb: FormBuilder,
+    private accountService: AccountService
   ) {}
 
   ngOnInit(): void {
     this.return = this.activatedRoute.snapshot.paramMap.get('return');
+    this.empresaId = this.activatedRoute.snapshot.paramMap.get('empresa');
+
+    if (this.return === 'welcome') {
+      this.auxR = true;
+      this.accountService.getAuthenticationState().subscribe(account => {
+        this.account = account;
+        this.getEmpresa();
+        // this.getRol();
+      });
+    }
 
     this.activatedRoute.data.subscribe(({ usuario }) => {
+      this.usuario = usuario;
       if (usuario.id === undefined) {
         const today = dayjs().startOf('day');
         usuario.edad = today;
         usuario.fechaRegistro = today;
       }
-
-      this.updateForm(usuario);
-
+      if (this.return === null) {
+        this.updateForm(this.usuario);
+      }
       this.loadRelationshipsOptions();
     });
     WelcomeComponent.auxRepresentante = false;
+  }
+
+  getEmpresa(): void {
+    this.empresaService
+      .query({
+        'id.equals': this.empresaId,
+      })
+      .subscribe(success => {
+        this.empresa = success.body;
+        this.getSucursal();
+      });
+  }
+
+  getSucursal(): void {
+    this.sucursalService
+      .query({
+        'empresaId.equals': this.empresaId,
+      })
+      .subscribe(success => {
+        this.sucursal = success.body;
+        this.getRol();
+      });
+  }
+
+  getRol(): void {
+    this.rolService
+      .query({
+        'empresaId.equals': this.empresaId,
+        'nombre.equals': 'SUPER_ADMIN',
+      })
+      .subscribe(success => {
+        this.rol = success.body![0];
+        this.updateForm(this.usuario);
+        // this.getRol();
+      });
   }
 
   byteSize(base64String: string): string {
@@ -175,6 +232,17 @@ export class UsuarioUpdateComponent implements OnInit {
   }
 
   protected updateForm(usuario: IUsuario): void {
+    let newUser;
+    let newEmpresa;
+    let newSucursal;
+    let newRol;
+    this.account !== null && this.return === 'welcome' ? (newUser = this.account) : (newUser = usuario.user);
+    this.empresa !== undefined && this.return === 'welcome' ? (newEmpresa = this.empresa) : (newEmpresa = usuario.empresaIds);
+    this.sucursal !== undefined && this.return === 'welcome' ? (newSucursal = this.sucursal) : (newSucursal = usuario.sucursals);
+    this.rol !== undefined && this.return === 'welcome' ? (newRol = this.rol) : (newRol = usuario.rol);
+
+    console.error('this.rol', this.rol);
+    console.error('newroil', newRol);
     this.editForm.patchValue({
       id: usuario.id,
       primerNombre: usuario.primerNombre,
@@ -192,10 +260,10 @@ export class UsuarioUpdateComponent implements OnInit {
       foto: usuario.foto,
       fotoContentType: usuario.fotoContentType,
       fechaRegistro: usuario.fechaRegistro ? usuario.fechaRegistro.format(DATE_TIME_FORMAT) : null,
-      user: usuario.user,
-      rol: usuario.rol,
-      sucursals: usuario.sucursals,
-      empresaIds: usuario.empresaIds,
+      user: newUser,
+      rol: newRol,
+      sucursals: newSucursal,
+      empresaIds: newEmpresa,
     });
 
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(this.usersSharedCollection, usuario.user);

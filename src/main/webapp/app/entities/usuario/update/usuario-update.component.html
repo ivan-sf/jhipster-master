@@ -7,119 +7,112 @@
 
       <jhi-alert-error></jhi-alert-error>
 
-      <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+      <div class="row mb-3" [hidden]="hidden">
         <label class="form-label" for="field_id">ID</label>
         <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
       </div>
 
-      <div class="row mb-3">
-        <label class="form-label" for="field_primerNombre">Primer Nombre</label>
-        <input
-          type="text"
-          class="form-control"
-          name="primerNombre"
-          id="field_primerNombre"
-          data-cy="primerNombre"
-          formControlName="primerNombre"
-        />
-      </div>
+      <input
+        placeholder="Primer Nombre"
+        type="text"
+        class="form-control"
+        name="primerNombre"
+        id="field_primerNombre"
+        data-cy="primerNombre"
+        formControlName="primerNombre"
+      />
 
-      <div class="row mb-3">
-        <label class="form-label" for="field_segundoNombre">Segundo Nombre</label>
-        <input
-          type="text"
-          class="form-control"
-          name="segundoNombre"
-          id="field_segundoNombre"
-          data-cy="segundoNombre"
-          formControlName="segundoNombre"
-        />
-      </div>
+      <input
+        placeholder="Segundo Nombre"
+        type="text"
+        class="form-control"
+        name="segundoNombre"
+        id="field_segundoNombre"
+        data-cy="segundoNombre"
+        formControlName="segundoNombre"
+      />
 
-      <div class="row mb-3">
-        <label class="form-label" for="field_primerApellido">Primer Apellido</label>
-        <input
-          type="text"
-          class="form-control"
-          name="primerApellido"
-          id="field_primerApellido"
-          data-cy="primerApellido"
-          formControlName="primerApellido"
-        />
-      </div>
+      <input
+        placeholder="Primer Apellido"
+        type="text"
+        class="form-control"
+        name="primerApellido"
+        id="field_primerApellido"
+        data-cy="primerApellido"
+        formControlName="primerApellido"
+      />
 
-      <div class="row mb-3">
-        <label class="form-label" for="field_segundoApellido">Segundo Apellido</label>
-        <input
-          type="text"
-          class="form-control"
-          name="segundoApellido"
-          id="field_segundoApellido"
-          data-cy="segundoApellido"
-          formControlName="segundoApellido"
-        />
-      </div>
+      <input
+        placeholder="Segundo Apellido"
+        type="text"
+        class="form-control"
+        name="segundoApellido"
+        id="field_segundoApellido"
+        data-cy="segundoApellido"
+        formControlName="segundoApellido"
+      />
 
-      <div class="row mb-3">
-        <label class="form-label" for="field_tipoDocumento">Tipo Documento</label>
-        <input
-          type="text"
-          class="form-control"
-          name="tipoDocumento"
-          id="field_tipoDocumento"
-          data-cy="tipoDocumento"
-          formControlName="tipoDocumento"
-        />
-      </div>
+      <input
+        placeholder="Tipo Documento"
+        type="text"
+        class="form-control"
+        name="tipoDocumento"
+        id="field_tipoDocumento"
+        data-cy="tipoDocumento"
+        formControlName="tipoDocumento"
+      />
 
-      <div class="row mb-3">
-        <label class="form-label" for="field_documento">Documento</label>
-        <input type="text" class="form-control" name="documento" id="field_documento" data-cy="documento" formControlName="documento" />
-      </div>
+      <input
+        type="text"
+        placeholder="Documento"
+        class="form-control"
+        name="documento"
+        id="field_documento"
+        data-cy="documento"
+        formControlName="documento"
+      />
 
-      <div class="row mb-3">
-        <label class="form-label" for="field_documentoDV">Documento DV</label>
-        <input
-          type="text"
-          class="form-control"
-          name="documentoDV"
-          id="field_documentoDV"
-          data-cy="documentoDV"
-          formControlName="documentoDV"
-        />
-      </div>
+      <input
+        type="text"
+        placeholder="Documento DV"
+        class="form-control"
+        name="documentoDV"
+        id="field_documentoDV"
+        data-cy="documentoDV"
+        formControlName="documentoDV"
+      />
 
-      <div class="row mb-3">
-        <label class="form-label" for="field_edad">Edad</label>
-        <div class="d-flex">
-          <input
-            id="field_edad"
-            data-cy="edad"
-            type="datetime-local"
-            class="form-control"
-            name="edad"
-            formControlName="edad"
-            placeholder="YYYY-MM-DD HH:mm"
-          />
-        </div>
-      </div>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Indicativo"
+        name="indicativo"
+        id="field_indicativo"
+        data-cy="indicativo"
+        formControlName="indicativo"
+      />
 
-      <div class="row mb-3">
-        <label class="form-label" for="field_indicativo">Indicativo</label>
-        <input type="text" class="form-control" name="indicativo" id="field_indicativo" data-cy="indicativo" formControlName="indicativo" />
-      </div>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Celular"
+        name="celular"
+        id="field_celular"
+        data-cy="celular"
+        formControlName="celular"
+      />
 
-      <div class="row mb-3">
-        <label class="form-label" for="field_celular">Celular</label>
-        <input type="text" class="form-control" name="celular" id="field_celular" data-cy="celular" formControlName="celular" />
-      </div>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Direccion"
+        name="direccion"
+        id="field_direccion"
+        data-cy="direccion"
+        formControlName="direccion"
+      />
 
-      <div class="row mb-3">
-        <label class="form-label" for="field_direccion">Direccion</label>
-        <input type="text" class="form-control" name="direccion" id="field_direccion" data-cy="direccion" formControlName="direccion" />
-      </div>
-
-      <div class="row mb-3">
+      <div class="row mb-3" [hidden]="hidden">
         <label class="form-label" for="field_direccionGps">Direccion Gps</label>
         <input
           type="text"
@@ -131,27 +124,24 @@
         />
       </div>
 
-      <div class="row mb-3">
-        <label class="form-label" for="field_foto">Foto</label>
-        <div>
-          <div *ngIf="editForm.get('foto')!.value" class="form-text text-danger clearfix">
-            <a class="pull-start" (click)="openFile(editForm.get('foto')!.value, editForm.get('fotoContentType')!.value)">open</a><br />
-            <span class="pull-start">{{ editForm.get('fotoContentType')!.value }}, {{ byteSize(editForm.get('foto')!.value) }}</span>
-            <button
-              type="button"
-              (click)="editForm.patchValue({ foto: null }); editForm.patchValue({ fotoContentType: null })"
-              class="btn btn-secondary btn-xs pull-end"
-            >
-              <fa-icon icon="times"></fa-icon>
-            </button>
-          </div>
-          <input type="file" id="file_foto" data-cy="foto" (change)="setFileData($event, 'foto', false)" />
+      <div>
+        <div *ngIf="editForm.get('foto')!.value" class="form-text text-danger clearfix">
+          <a class="pull-start" (click)="openFile(editForm.get('foto')!.value, editForm.get('fotoContentType')!.value)">open</a><br />
+          <span class="pull-start">{{ editForm.get('fotoContentType')!.value }}, {{ byteSize(editForm.get('foto')!.value) }}</span>
+          <button
+            type="button"
+            (click)="editForm.patchValue({ foto: null }); editForm.patchValue({ fotoContentType: null })"
+            class="btn btn-secondary btn-xs pull-end"
+          >
+            <fa-icon icon="times"></fa-icon>
+          </button>
         </div>
-        <input type="hidden" class="form-control" name="foto" id="field_foto" data-cy="foto" formControlName="foto" />
-        <input type="hidden" class="form-control" name="fotoContentType" id="field_fotoContentType" formControlName="fotoContentType" />
+        <input type="file" id="file_foto" data-cy="foto" (change)="setFileData($event, 'foto', false)" />
       </div>
+      <input type="hidden" class="form-control" name="foto" id="field_foto" data-cy="foto" formControlName="foto" />
+      <input type="hidden" class="form-control" name="fotoContentType" id="field_fotoContentType" formControlName="fotoContentType" />
 
-      <div class="row mb-3">
+      <div class="row mb-3" [hidden]="hidden">
         <label class="form-label" for="field_fechaRegistro">Fecha Registro</label>
         <div class="d-flex">
           <input
@@ -166,7 +156,7 @@
         </div>
       </div>
 
-      <div class="row mb-3">
+      <div class="row mb-3" [hidden]="hidden">
         <label class="form-label" for="field_user">User</label>
         <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user">
           <option [ngValue]="null"></option>
@@ -179,7 +169,7 @@
         </select>
       </div>
 
-      <div class="row mb-3">
+      <div class="row mb-3" [hidden]="hidden">
         <label class="form-label" for="field_rol">Rol</label>
         <select class="form-control" id="field_rol" data-cy="rol" name="rol" formControlName="rol">
           <option [ngValue]="null"></option>
@@ -192,7 +182,7 @@
         </select>
       </div>
 
-      <div class="row mb-3">
+      <div class="row mb-3" [hidden]="hidden">
         <label for="field_sucursals">Sucursal</label>
         <select class="form-control" id="field_sucursals" data-cy="sucursal" multiple name="sucursals" formControlName="sucursals">
           <option
@@ -204,7 +194,7 @@
         </select>
       </div>
 
-      <div class="row mb-3">
+      <div class="row mb-3" [hidden]="hidden">
         <label for="field_empresaIds">Empresa Id</label>
         <select class="form-control" id="field_empresaIds" data-cy="empresaId" multiple name="empresaIds" formControlName="empresaIds">
           <option
@@ -215,6 +205,17 @@
           </option>
         </select>
       </div>
+
+      <label class="form-label" for="field_edad">Edad</label>
+      <input
+        id="field_edad"
+        data-cy="edad"
+        type="datetime-local"
+        class="form-control"
+        name="edad"
+        formControlName="edad"
+        placeholder="YYYY-MM-DD HH:mm"
+      />
 
       <div>
         <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
