@@ -1,0 +1,44 @@
+{
+  "applications": "*",
+  "changelogDate": "20220807005457",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "precio",
+  "fields": [
+    {
+      "fieldName": "valor",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "detalle",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "fechaRegistro",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Precio",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "producto",
+      "otherEntityRelationshipName": "precioIngreso",
+      "ownerSide": false,
+      "relationshipName": "productoIngreso",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "producto",
+      "otherEntityRelationshipName": "precioSalida",
+      "ownerSide": false,
+      "relationshipName": "productoSalida",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

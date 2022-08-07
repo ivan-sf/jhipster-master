@@ -1,0 +1,123 @@
+<div>
+  <h2 id="page-heading" data-cy="UsuarioHeading">
+    <span>Usuarios</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="reset()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-usuario"
+        [routerLink]="['/usuario/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Usuario </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="usuarios?.length === 0">
+    <span>No usuarios found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="usuarios && usuarios.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="reset()">
+          <th scope="col" jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="primerNombre"><span>Primer Nombre</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="segundoNombre"><span>Segundo Nombre</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="primerApellido"><span>Primer Apellido</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="segundoApellido"><span>Segundo Apellido</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="tipoDocumento"><span>Tipo Documento</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="documento"><span>Documento</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="documentoDV"><span>Documento DV</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="edad"><span>Edad</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="indicativo"><span>Indicativo</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="celular"><span>Celular</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="direccion"><span>Direccion</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="direccionGps"><span>Direccion Gps</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="foto"><span>Foto</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="fechaRegistro"><span>Fecha Registro</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="user.login"><span>User</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="rol.id"><span>Rol</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="empresaId.id"><span>Empresa Id</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+        <tr *ngFor="let usuario of usuarios; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/usuario', usuario.id, 'view']">{{ usuario.id }}</a>
+          </td>
+          <td>{{ usuario.primerNombre }}</td>
+          <td>{{ usuario.segundoNombre }}</td>
+          <td>{{ usuario.primerApellido }}</td>
+          <td>{{ usuario.segundoApellido }}</td>
+          <td>{{ usuario.tipoDocumento }}</td>
+          <td>{{ usuario.documento }}</td>
+          <td>{{ usuario.documentoDV }}</td>
+          <td>{{ usuario.edad | formatMediumDatetime }}</td>
+          <td>{{ usuario.indicativo }}</td>
+          <td>{{ usuario.celular }}</td>
+          <td>{{ usuario.direccion }}</td>
+          <td>{{ usuario.direccionGps }}</td>
+          <td>
+            <a *ngIf="usuario.foto" (click)="openFile(usuario.foto, usuario.fotoContentType)">open</a>
+            <span *ngIf="usuario.foto">{{ usuario.fotoContentType }}, {{ byteSize(usuario.foto) }}</span>
+          </td>
+          <td>{{ usuario.fechaRegistro | formatMediumDatetime }}</td>
+          <td>
+            {{ usuario.user?.login }}
+          </td>
+          <td>
+            <div *ngIf="usuario.rol">
+              <a [routerLink]="['/rol', usuario.rol?.id, 'view']">{{ usuario.rol?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="usuario.empresaId">
+              <a [routerLink]="['/empresa', usuario.empresaId?.id, 'view']">{{ usuario.empresaId?.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/usuario', usuario.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/usuario', usuario.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(usuario)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

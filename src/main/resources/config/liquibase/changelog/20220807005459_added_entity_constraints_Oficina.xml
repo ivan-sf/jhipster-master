@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity Oficina.
+    -->
+    <changeSet id="20220807005459-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="oficina_id"
+                                 baseTableName="rel_oficina__usuario"
+                                 constraintName="fk_rel_oficina__usuario__oficina_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="oficina"/>
+
+        <addForeignKeyConstraint baseColumnNames="usuario_id"
+                                 baseTableName="rel_oficina__usuario"
+                                 constraintName="fk_rel_oficina__usuario__usuario_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="usuario"/>
+
+        <addForeignKeyConstraint baseColumnNames="sucursal_id"
+                                 baseTableName="oficina"
+                                 constraintName="fk_oficina__sucursal_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="sucursal"/>
+    </changeSet>
+</databaseChangeLog>

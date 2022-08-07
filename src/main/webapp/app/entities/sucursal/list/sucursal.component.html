@@ -1,0 +1,101 @@
+<div>
+  <h2 id="page-heading" data-cy="SucursalHeading">
+    <span>Sucursals</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="reset()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-sucursal"
+        [routerLink]="['/sucursal/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Sucursal </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="sucursals?.length === 0">
+    <span>No sucursals found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="sucursals && sucursals.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="reset()">
+          <th scope="col" jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="nombre"><span>Nombre</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="nit"><span>Nit</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="detalle"><span>Detalle</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="direccion"><span>Direccion</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="direccionGPS"><span>Direccion GPS</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="logo"><span>Logo</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="estado"><span>Estado</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="fechaRegistro"><span>Fecha Registro</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="empresa.id"><span>Empresa</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+        <tr *ngFor="let sucursal of sucursals; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/sucursal', sucursal.id, 'view']">{{ sucursal.id }}</a>
+          </td>
+          <td>{{ sucursal.nombre }}</td>
+          <td>{{ sucursal.nit }}</td>
+          <td>{{ sucursal.detalle }}</td>
+          <td>{{ sucursal.direccion }}</td>
+          <td>{{ sucursal.direccionGPS }}</td>
+          <td>
+            <a *ngIf="sucursal.logo" (click)="openFile(sucursal.logo, sucursal.logoContentType)">open</a>
+            <span *ngIf="sucursal.logo">{{ sucursal.logoContentType }}, {{ byteSize(sucursal.logo) }}</span>
+          </td>
+          <td>{{ sucursal.estado }}</td>
+          <td>{{ sucursal.fechaRegistro | formatMediumDatetime }}</td>
+          <td>
+            <div *ngIf="sucursal.empresa">
+              <a [routerLink]="['/empresa', sucursal.empresa?.id, 'view']">{{ sucursal.empresa?.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/sucursal', sucursal.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/sucursal', sucursal.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(sucursal)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

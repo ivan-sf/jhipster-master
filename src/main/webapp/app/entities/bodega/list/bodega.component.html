@@ -1,0 +1,78 @@
+<div>
+  <h2 id="page-heading" data-cy="BodegaHeading">
+    <span>Bodegas</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="reset()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-bodega"
+        [routerLink]="['/bodega/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Bodega </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="bodegas?.length === 0">
+    <span>No bodegas found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="bodegas && bodegas.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="reset()">
+          <th scope="col" jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="nombre"><span>Nombre</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="detalle"><span>Detalle</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="ubicacion"><span>Ubicacion</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="inventario.id"><span>Inventario</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+        <tr *ngFor="let bodega of bodegas; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/bodega', bodega.id, 'view']">{{ bodega.id }}</a>
+          </td>
+          <td>{{ bodega.nombre }}</td>
+          <td>{{ bodega.detalle }}</td>
+          <td>{{ bodega.ubicacion }}</td>
+          <td>
+            <div *ngIf="bodega.inventario">
+              <a [routerLink]="['/inventario', bodega.inventario?.id, 'view']">{{ bodega.inventario?.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/bodega', bodega.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/bodega', bodega.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(bodega)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

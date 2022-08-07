@@ -1,0 +1,33 @@
+{
+  "applications": "*",
+  "changelogDate": "20220807005500",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "inventario",
+  "fields": [
+    {
+      "fieldName": "nombre",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Inventario",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "bodega",
+      "otherEntityRelationshipName": "inventario",
+      "relationshipName": "bodega",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "sucursal",
+      "otherEntityRelationshipName": "inventario",
+      "relationshipName": "sucursal",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

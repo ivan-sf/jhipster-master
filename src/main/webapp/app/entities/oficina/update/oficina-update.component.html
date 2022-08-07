@@ -1,0 +1,72 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-oficina-heading" data-cy="OficinaCreateUpdateHeading">Create or edit a Oficina</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_nombre">Nombre</label>
+          <input type="text" class="form-control" name="nombre" id="field_nombre" data-cy="nombre" formControlName="nombre" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_detalle">Detalle</label>
+          <textarea class="form-control" name="detalle" id="field_detalle" data-cy="detalle" formControlName="detalle"></textarea>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_ubicacion">Ubicacion</label>
+          <input type="text" class="form-control" name="ubicacion" id="field_ubicacion" data-cy="ubicacion" formControlName="ubicacion" />
+        </div>
+
+        <div class="row mb-3">
+          <label for="field_usuarios">Usuario</label>
+          <select class="form-control" id="field_usuarios" data-cy="usuario" multiple name="usuarios" formControlName="usuarios">
+            <option
+              [ngValue]="getSelectedUsuario(usuarioOption, editForm.get('usuarios')!.value)"
+              *ngFor="let usuarioOption of usuariosSharedCollection; trackBy: trackUsuarioById"
+            >
+              {{ usuarioOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_sucursal">Sucursal</label>
+          <select class="form-control" id="field_sucursal" data-cy="sucursal" name="sucursal" formControlName="sucursal">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="sucursalOption.id === editForm.get('sucursal')!.value?.id ? editForm.get('sucursal')!.value : sucursalOption"
+              *ngFor="let sucursalOption of sucursalsSharedCollection; trackBy: trackSucursalById"
+            >
+              {{ sucursalOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,171 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-info-legal-heading" data-cy="InfoLegalCreateUpdateHeading">Create or edit a Info Legal</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_nit">Nit</label>
+          <input type="text" class="form-control" name="nit" id="field_nit" data-cy="nit" formControlName="nit" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_regimen">Regimen</label>
+          <input type="number" class="form-control" name="regimen" id="field_regimen" data-cy="regimen" formControlName="regimen" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_resolucionPos">Resolucion Pos</label>
+          <input
+            type="text"
+            class="form-control"
+            name="resolucionPos"
+            id="field_resolucionPos"
+            data-cy="resolucionPos"
+            formControlName="resolucionPos"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_prefijoPosInicial">Prefijo Pos Inicial</label>
+          <input
+            type="number"
+            class="form-control"
+            name="prefijoPosInicial"
+            id="field_prefijoPosInicial"
+            data-cy="prefijoPosInicial"
+            formControlName="prefijoPosInicial"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_prefijoPosFinal">Prefijo Pos Final</label>
+          <input
+            type="number"
+            class="form-control"
+            name="prefijoPosFinal"
+            id="field_prefijoPosFinal"
+            data-cy="prefijoPosFinal"
+            formControlName="prefijoPosFinal"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_resolucionFacElec">Resolucion Fac Elec</label>
+          <input
+            type="text"
+            class="form-control"
+            name="resolucionFacElec"
+            id="field_resolucionFacElec"
+            data-cy="resolucionFacElec"
+            formControlName="resolucionFacElec"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_prefijoFacElecFinal">Prefijo Fac Elec Final</label>
+          <input
+            type="number"
+            class="form-control"
+            name="prefijoFacElecFinal"
+            id="field_prefijoFacElecFinal"
+            data-cy="prefijoFacElecFinal"
+            formControlName="prefijoFacElecFinal"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_resolucionNomElec">Resolucion Nom Elec</label>
+          <input
+            type="text"
+            class="form-control"
+            name="resolucionNomElec"
+            id="field_resolucionNomElec"
+            data-cy="resolucionNomElec"
+            formControlName="resolucionNomElec"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_estado">Estado</label>
+          <input type="number" class="form-control" name="estado" id="field_estado" data-cy="estado" formControlName="estado" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_fechaRegistro">Fecha Registro</label>
+          <div class="d-flex">
+            <input
+              id="field_fechaRegistro"
+              data-cy="fechaRegistro"
+              type="datetime-local"
+              class="form-control"
+              name="fechaRegistro"
+              formControlName="fechaRegistro"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label for="field_empresaIds">Empresa Id</label>
+          <select class="form-control" id="field_empresaIds" data-cy="empresaId" multiple name="empresaIds" formControlName="empresaIds">
+            <option
+              [ngValue]="getSelectedEmpresa(empresaOption, editForm.get('empresaIds')!.value)"
+              *ngFor="let empresaOption of empresasSharedCollection; trackBy: trackEmpresaById"
+            >
+              {{ empresaOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label for="field_sucursals">Sucursal</label>
+          <select class="form-control" id="field_sucursals" data-cy="sucursal" multiple name="sucursals" formControlName="sucursals">
+            <option
+              [ngValue]="getSelectedSucursal(sucursalOption, editForm.get('sucursals')!.value)"
+              *ngFor="let sucursalOption of sucursalsSharedCollection; trackBy: trackSucursalById"
+            >
+              {{ sucursalOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_usuario">Usuario</label>
+          <select class="form-control" id="field_usuario" data-cy="usuario" name="usuario" formControlName="usuario">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="usuarioOption.id === editForm.get('usuario')!.value?.id ? editForm.get('usuario')!.value : usuarioOption"
+              *ngFor="let usuarioOption of usuariosSharedCollection; trackBy: trackUsuarioById"
+            >
+              {{ usuarioOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

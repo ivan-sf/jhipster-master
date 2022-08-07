@@ -1,0 +1,72 @@
+{
+  "applications": "*",
+  "changelogDate": "20220807005455",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "producto",
+  "fields": [
+    {
+      "fieldName": "nombre",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "detalle",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "iva",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "foto",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "fechaRegistro",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Producto",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "codigo",
+      "otherEntityRelationshipName": "producto",
+      "ownerSide": true,
+      "relationshipName": "codigo",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "precio",
+      "otherEntityRelationshipName": "productoIngreso",
+      "ownerSide": true,
+      "relationshipName": "precioIngreso",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "precio",
+      "otherEntityRelationshipName": "productoSalida",
+      "ownerSide": true,
+      "relationshipName": "precioSalida",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "bodega",
+      "otherEntityRelationshipName": "producto",
+      "relationshipName": "bodega",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "oficina",
+      "otherEntityRelationshipName": "producto",
+      "relationshipName": "oficina",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

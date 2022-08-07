@@ -1,0 +1,77 @@
+{
+  "applications": "*",
+  "changelogDate": "20220807005453",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "info_legal",
+  "fields": [
+    {
+      "fieldName": "nit",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "regimen",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "resolucionPos",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "prefijoPosInicial",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "prefijoPosFinal",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "resolucionFacElec",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "prefijoFacElecFinal",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "resolucionNomElec",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "estado",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "fechaRegistro",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "InfoLegal",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "empresa",
+      "otherEntityRelationshipName": "infoLegalId",
+      "ownerSide": true,
+      "relationshipName": "empresaId",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "sucursal",
+      "otherEntityRelationshipName": "infoLegal",
+      "ownerSide": true,
+      "relationshipName": "sucursal",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "usuario",
+      "otherEntityRelationshipName": "infoLegal",
+      "relationshipName": "usuario",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

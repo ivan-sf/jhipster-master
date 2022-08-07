@@ -1,23 +1,92 @@
-/* ==========================================================================
-Main page styles
-========================================================================== */
-
-.hipster {
-  display: inline-block;
-  width: 347px;
-  height: 497px;
-  background: url('../../content/images/jhipster_family_member_0.svg') no-repeat center top;
-  background-size: contain;
+.alert {
+  border: transparent;
+  margin: 0;
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: var(--primary);
+  text-align: center;
+  color: var(--text);
+  padding: 10px;
+  font-weight: 400;
+  z-index: 1;
 }
+.alert-danger {
+  background-color: var(--danger);
+}
+.card {
+  // border: solid black;
+  background-color: transparent;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  position: relative;
 
-/* wait autoprefixer update to allow simple generation of high pixel density media query */
-@media only screen and (-webkit-min-device-pixel-ratio: 2),
-  only screen and (-moz-min-device-pixel-ratio: 2),
-  only screen and (-o-min-device-pixel-ratio: 2/1),
-  only screen and (min-resolution: 192dpi),
-  only screen and (min-resolution: 2dppx) {
-  .hipster {
-    background: url('../../content/images/jhipster_family_member_0.svg') no-repeat center top;
-    background-size: contain;
+  .sub-card {
+    width: 50vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    h1 {
+      font-weight: 600;
+      font-size: 23pt;
+      transition: 1s all ease;
+    }
+    h1:hover {
+      font-weight: 800;
+      transition: 1s all ease;
+    }
+    .card-form {
+      .form {
+        text-align: center;
+        margin: 30px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        input[type='text'],
+        input[type='password'],
+        input[type='email'] {
+          background-color: rgba($color: #000000, $alpha: 0.1);
+          border: transparent;
+          width: 30vw;
+          height: 40px;
+        }
+        button {
+          width: 15vw;
+          background-color: var(--primary);
+          border: transparent;
+          margin: 40px 0;
+          border-radius: 10px;
+        }
+      }
+    }
+  }
+  .sub-card:nth-child(1) {
+    background-color: var(--text);
+    color: var(--primary);
+  }
+  .sub-card:nth-child(2) {
+    background-color: var(--primary);
+    color: var(--text);
+    .card-form {
+      .form {
+        input {
+          margin: 10px 0;
+          color: var(--text);
+        }
+        input::placeholder {
+          color: var(--text);
+        }
+        button {
+          background-color: var(--text);
+          margin: 10px 0;
+        }
+      }
+    }
   }
 }

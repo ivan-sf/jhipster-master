@@ -1,0 +1,69 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="sucursal">
+      <h2 data-cy="sucursalDetailsHeading"><span>Sucursal</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ sucursal.id }}</span>
+        </dd>
+        <dt><span>Nombre</span></dt>
+        <dd>
+          <span>{{ sucursal.nombre }}</span>
+        </dd>
+        <dt><span>Nit</span></dt>
+        <dd>
+          <span>{{ sucursal.nit }}</span>
+        </dd>
+        <dt><span>Detalle</span></dt>
+        <dd>
+          <span>{{ sucursal.detalle }}</span>
+        </dd>
+        <dt><span>Direccion</span></dt>
+        <dd>
+          <span>{{ sucursal.direccion }}</span>
+        </dd>
+        <dt><span>Direccion GPS</span></dt>
+        <dd>
+          <span>{{ sucursal.direccionGPS }}</span>
+        </dd>
+        <dt><span>Logo</span></dt>
+        <dd>
+          <div *ngIf="sucursal.logo">
+            <a (click)="openFile(sucursal.logo, sucursal.logoContentType)">open</a>
+            {{ sucursal.logoContentType }}, {{ byteSize(sucursal.logo) }}
+          </div>
+        </dd>
+        <dt><span>Estado</span></dt>
+        <dd>
+          <span>{{ sucursal.estado }}</span>
+        </dd>
+        <dt><span>Fecha Registro</span></dt>
+        <dd>
+          <span>{{ sucursal.fechaRegistro | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Empresa</span></dt>
+        <dd>
+          <div *ngIf="sucursal.empresa">
+            <a [routerLink]="['/empresa', sucursal.empresa?.id, 'view']">{{ sucursal.empresa?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/sucursal', sucursal.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

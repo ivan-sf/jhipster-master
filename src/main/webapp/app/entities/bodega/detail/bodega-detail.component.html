@@ -1,0 +1,53 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="bodega">
+      <h2 data-cy="bodegaDetailsHeading"><span>Bodega</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ bodega.id }}</span>
+        </dd>
+        <dt><span>Nombre</span></dt>
+        <dd>
+          <span>{{ bodega.nombre }}</span>
+        </dd>
+        <dt><span>Detalle</span></dt>
+        <dd>
+          <span>{{ bodega.detalle }}</span>
+        </dd>
+        <dt><span>Ubicacion</span></dt>
+        <dd>
+          <span>{{ bodega.ubicacion }}</span>
+        </dd>
+        <dt><span>Usuario</span></dt>
+        <dd>
+          <span *ngFor="let usuario of bodega.usuarios; let last = last">
+            <a [routerLink]="['/usuario', usuario?.id, 'view']">{{ usuario.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span>Inventario</span></dt>
+        <dd>
+          <div *ngIf="bodega.inventario">
+            <a [routerLink]="['/inventario', bodega.inventario?.id, 'view']">{{ bodega.inventario?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/bodega', bodega.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

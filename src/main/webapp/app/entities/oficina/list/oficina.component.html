@@ -1,0 +1,88 @@
+<div>
+  <h2 id="page-heading" data-cy="OficinaHeading">
+    <span>Oficinas</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="reset()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-oficina"
+        [routerLink]="['/oficina/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Oficina </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="oficinas?.length === 0">
+    <span>No oficinas found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="oficinas && oficinas.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="reset()">
+          <th scope="col" jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="nombre"><span>Nombre</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="detalle"><span>Detalle</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="ubicacion"><span>Ubicacion</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="sucursal.id"><span>Sucursal</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+        <tr *ngFor="let oficina of oficinas; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/oficina', oficina.id, 'view']">{{ oficina.id }}</a>
+          </td>
+          <td>{{ oficina.nombre }}</td>
+          <td>{{ oficina.detalle }}</td>
+          <td>{{ oficina.ubicacion }}</td>
+          <td>
+            <div *ngIf="oficina.sucursal">
+              <a [routerLink]="['/sucursal', oficina.sucursal?.id, 'view']">{{ oficina.sucursal?.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/oficina', oficina.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/oficina', oficina.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(oficina)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

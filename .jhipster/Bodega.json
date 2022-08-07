@@ -1,0 +1,49 @@
+{
+  "applications": "*",
+  "changelogDate": "20220807005458",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "bodega",
+  "fields": [
+    {
+      "fieldName": "nombre",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "detalle",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "ubicacion",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Bodega",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "producto",
+      "otherEntityRelationshipName": "bodega",
+      "relationshipName": "producto",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "usuario",
+      "otherEntityRelationshipName": "bodega",
+      "ownerSide": true,
+      "relationshipName": "usuario",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "inventario",
+      "otherEntityRelationshipName": "bodega",
+      "relationshipName": "inventario",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

@@ -1,0 +1,49 @@
+{
+  "applications": "*",
+  "changelogDate": "20220807005459",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "oficina",
+  "fields": [
+    {
+      "fieldName": "nombre",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "detalle",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "ubicacion",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Oficina",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "producto",
+      "otherEntityRelationshipName": "oficina",
+      "relationshipName": "producto",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "usuario",
+      "otherEntityRelationshipName": "oficina",
+      "ownerSide": true,
+      "relationshipName": "usuario",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "sucursal",
+      "otherEntityRelationshipName": "oficina",
+      "relationshipName": "sucursal",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

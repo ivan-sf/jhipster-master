@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity Usuario.
+    -->
+    <changeSet id="20220807005504-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="usuario"
+                                 constraintName="fk_usuario__user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="rol_id"
+                                 baseTableName="usuario"
+                                 constraintName="fk_usuario__rol_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="rol"/>
+
+        <addForeignKeyConstraint baseColumnNames="usuario_id"
+                                 baseTableName="rel_usuario__sucursal"
+                                 constraintName="fk_rel_usuario__sucursal__usuario_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="usuario"/>
+
+        <addForeignKeyConstraint baseColumnNames="sucursal_id"
+                                 baseTableName="rel_usuario__sucursal"
+                                 constraintName="fk_rel_usuario__sucursal__sucursal_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="sucursal"/>
+
+        <addForeignKeyConstraint baseColumnNames="usuario_id"
+                                 baseTableName="rel_usuario__empresa"
+                                 constraintName="fk_rel_usuario__empresa__usuario_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="usuario"/>
+
+        <addForeignKeyConstraint baseColumnNames="empresa_id"
+                                 baseTableName="rel_usuario__empresa"
+                                 constraintName="fk_rel_usuario__empresa__empresa_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="empresa"/>
+
+        <addForeignKeyConstraint baseColumnNames="empresa_id_id"
+                                 baseTableName="usuario"
+                                 constraintName="fk_usuario__empresa_id_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="empresa"/>
+    </changeSet>
+</databaseChangeLog>

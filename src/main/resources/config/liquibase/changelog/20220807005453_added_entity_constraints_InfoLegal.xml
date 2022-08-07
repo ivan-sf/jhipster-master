@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity InfoLegal.
+    -->
+    <changeSet id="20220807005453-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="info_legal_id"
+                                 baseTableName="rel_info_legal__empresa_id"
+                                 constraintName="fk_rel_info_legal__empresa_id__info_legal_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="info_legal"/>
+
+        <addForeignKeyConstraint baseColumnNames="empresa_id_id"
+                                 baseTableName="rel_info_legal__empresa_id"
+                                 constraintName="fk_rel_info_legal__empresa_id__empresa_id_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="empresa"/>
+
+        <addForeignKeyConstraint baseColumnNames="info_legal_id"
+                                 baseTableName="rel_info_legal__sucursal"
+                                 constraintName="fk_rel_info_legal__sucursal__info_legal_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="info_legal"/>
+
+        <addForeignKeyConstraint baseColumnNames="sucursal_id"
+                                 baseTableName="rel_info_legal__sucursal"
+                                 constraintName="fk_rel_info_legal__sucursal__sucursal_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="sucursal"/>
+
+        <addForeignKeyConstraint baseColumnNames="usuario_id"
+                                 baseTableName="info_legal"
+                                 constraintName="fk_info_legal__usuario_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="usuario"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity Producto.
+    -->
+    <changeSet id="20220807005455-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="producto_id"
+                                 baseTableName="rel_producto__codigo"
+                                 constraintName="fk_rel_producto__codigo__producto_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="producto"/>
+
+        <addForeignKeyConstraint baseColumnNames="codigo_id"
+                                 baseTableName="rel_producto__codigo"
+                                 constraintName="fk_rel_producto__codigo__codigo_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="codigo"/>
+
+        <addForeignKeyConstraint baseColumnNames="producto_id"
+                                 baseTableName="rel_producto__precio_ingreso"
+                                 constraintName="fk_rel_producto__precio_ingreso__producto_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="producto"/>
+
+        <addForeignKeyConstraint baseColumnNames="precio_ingreso_id"
+                                 baseTableName="rel_producto__precio_ingreso"
+                                 constraintName="fk_rel_producto__precio_ingreso__precio_ingreso_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="precio"/>
+
+        <addForeignKeyConstraint baseColumnNames="producto_id"
+                                 baseTableName="rel_producto__precio_salida"
+                                 constraintName="fk_rel_producto__precio_salida__producto_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="producto"/>
+
+        <addForeignKeyConstraint baseColumnNames="precio_salida_id"
+                                 baseTableName="rel_producto__precio_salida"
+                                 constraintName="fk_rel_producto__precio_salida__precio_salida_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="precio"/>
+
+        <addForeignKeyConstraint baseColumnNames="bodega_id"
+                                 baseTableName="producto"
+                                 constraintName="fk_producto__bodega_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="bodega"/>
+
+        <addForeignKeyConstraint baseColumnNames="oficina_id"
+                                 baseTableName="producto"
+                                 constraintName="fk_producto__oficina_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="oficina"/>
+    </changeSet>
+</databaseChangeLog>

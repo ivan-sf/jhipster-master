@@ -1,54 +1,110 @@
-<div class="row">
-  <div class="col-md-3">
-    <span class="hipster img-fluid rounded"></span>
-  </div>
+<div class="alert alert-danger" *ngIf="errorUserExists"><strong>Nombre de usuario registrado!</strong> Por favor elije otro.</div>
 
-  <div class="col-md-9">
-    <h1 class="display-4"><span>Welcome, Java Hipster!</span> (Deliv)</h1>
+<div class="alert alert-danger" *ngIf="errorEmailExists"><strong>Email registrado!</strong> Por favor elije otro.</div>
+<div class="alert alert-success" *ngIf="success">
+  <strong>Registration exitoso!</strong> Por favor revise su correo electrónico para confirmación.
+</div>
+<div *ngIf="account == null" class="card">
+  <div class="sub-card">
+    <h1>Iniciar sesion</h1>
+    <div class="card-form">
+      <form class="form" role="form" (ngSubmit)="login()" [formGroup]="loginForm">
+        <div class="mb-3">
+          <input
+            type="text"
+            class="form-control"
+            name="username"
+            id="username"
+            placeholder="Correo"
+            formControlName="username"
+            #username
+            data-cy="username"
+          />
+        </div>
 
-    <p class="lead">This is your homepage</p>
+        <div class="mb-3">
+          <input
+            type="password"
+            class="form-control"
+            name="password"
+            id="password"
+            placeholder="Clave"
+            formControlName="password"
+            data-cy="password"
+          />
+        </div>
 
-    <div [ngSwitch]="account !== null">
-      <div class="alert alert-success" *ngSwitchCase="true">
-        <span id="home-logged-message" *ngIf="account">You are logged in as user "{{ account.login }}".</span>
-      </div>
+        <div class="form-check">
+          <label class="form-check-label" for="rememberMe">
+            <input class="form-check-input" type="checkbox" name="rememberMe" id="rememberMe" formControlName="rememberMe" />
+            <span>Remember me</span>
+          </label>
+        </div>
 
-      <div class="alert alert-warning" *ngSwitchCase="false">
-        <span>If you want to </span>
-        <a class="alert-link" (click)="login()">sign in</a
-        ><span
-          >, you can try the default accounts:<br />- Administrator (login="admin" and password="admin") <br />- User (login="user" and
-          password="user").</span
-        >
-      </div>
-
-      <div class="alert alert-warning" *ngSwitchCase="false">
-        <span>You don't have an account yet?</span>&nbsp;
-        <a class="alert-link" routerLink="account/register">Register a new account</a>
-      </div>
+        <button type="submit" class="btn btn-primary" data-cy="submit">Sign in</button>
+        <a class="alert-link" routerLink="/account/reset/request" data-cy="forgetYourPasswordSelector">Recuperar clave</a>
+      </form>
     </div>
+  </div>
+  <div class="sub-card" *ngIf="!success">
+    <h1 routerLink="account/register">Registrar empresa</h1>
 
-    <p>If you have any question on JHipster:</p>
+    <div class="card-form">
+      <form name="form" class="form" role="form" (ngSubmit)="register()" [formGroup]="registerForm">
+        <input
+          type="text"
+          class="form-control"
+          id="login"
+          name="login"
+          placeholder="Nombre de usuario"
+          formControlName="login"
+          data-cy="username"
+          #login
+        />
 
-    <ul>
-      <li><a href="https://www.jhipster.tech/" target="_blank" rel="noopener noreferrer">JHipster homepage</a></li>
-      <li>
-        <a href="https://stackoverflow.com/tags/jhipster/info" target="_blank" rel="noopener noreferrer">JHipster on Stack Overflow</a>
-      </li>
-      <li>
-        <a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank" rel="noopener noreferrer"
-          >JHipster bug tracker</a
-        >
-      </li>
-      <li>
-        <a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer">JHipster public chat room</a>
-      </li>
-      <li><a href="https://twitter.com/jhipster" target="_blank" rel="noopener noreferrer">follow @jhipster on Twitter</a></li>
-    </ul>
+        <input
+          type="text"
+          class="form-control"
+          id="empresa"
+          name="empresa"
+          placeholder="Nombre de empresa"
+          formControlName="empresa"
+          data-cy="empresa"
+          #login
+        />
 
-    <p>
-      <span>If you like JHipster, don't forget to give us a star on</span>
-      <a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer">GitHub</a>!
-    </p>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          name="email"
+          placeholder="Correo electronico"
+          formControlName="email"
+          data-cy="email"
+        />
+
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          name="password"
+          placeholder="Clave"
+          formControlName="password"
+          data-cy="firstPassword"
+        />
+
+        <input
+          type="password"
+          class="form-control"
+          id="confirmPassword"
+          name="confirmPassword"
+          placeholder="Confirmar clave"
+          formControlName="confirmPassword"
+          data-cy="secondPassword"
+        />
+
+        <button type="submit" [disabled]="registerForm.invalid" class="btn btn-primary" data-cy="submit">Register</button>
+      </form>
+    </div>
   </div>
 </div>

@@ -1,0 +1,90 @@
+{
+  "applications": "*",
+  "changelogDate": "20220807005454",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "sucursal",
+  "fields": [
+    {
+      "fieldName": "nombre",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "nit",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "detalle",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "direccion",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "direccionGPS",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "logo",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "estado",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "fechaRegistro",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Sucursal",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "oficina",
+      "otherEntityRelationshipName": "sucursal",
+      "relationshipName": "oficina",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "inventario",
+      "otherEntityRelationshipName": "sucursal",
+      "relationshipName": "inventario",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "empresa",
+      "otherEntityRelationshipName": "sucursal",
+      "relationshipName": "empresa",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "infoLegal",
+      "otherEntityRelationshipName": "sucursal",
+      "ownerSide": false,
+      "relationshipName": "infoLegal",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "usuario",
+      "otherEntityRelationshipName": "sucursal",
+      "ownerSide": false,
+      "relationshipName": "usuario",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "empresa",
+      "otherEntityRelationshipName": "sucursalId",
+      "ownerSide": false,
+      "relationshipName": "empresaId",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

@@ -1,0 +1,117 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="usuario">
+      <h2 data-cy="usuarioDetailsHeading"><span>Usuario</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ usuario.id }}</span>
+        </dd>
+        <dt><span>Primer Nombre</span></dt>
+        <dd>
+          <span>{{ usuario.primerNombre }}</span>
+        </dd>
+        <dt><span>Segundo Nombre</span></dt>
+        <dd>
+          <span>{{ usuario.segundoNombre }}</span>
+        </dd>
+        <dt><span>Primer Apellido</span></dt>
+        <dd>
+          <span>{{ usuario.primerApellido }}</span>
+        </dd>
+        <dt><span>Segundo Apellido</span></dt>
+        <dd>
+          <span>{{ usuario.segundoApellido }}</span>
+        </dd>
+        <dt><span>Tipo Documento</span></dt>
+        <dd>
+          <span>{{ usuario.tipoDocumento }}</span>
+        </dd>
+        <dt><span>Documento</span></dt>
+        <dd>
+          <span>{{ usuario.documento }}</span>
+        </dd>
+        <dt><span>Documento DV</span></dt>
+        <dd>
+          <span>{{ usuario.documentoDV }}</span>
+        </dd>
+        <dt><span>Edad</span></dt>
+        <dd>
+          <span>{{ usuario.edad | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Indicativo</span></dt>
+        <dd>
+          <span>{{ usuario.indicativo }}</span>
+        </dd>
+        <dt><span>Celular</span></dt>
+        <dd>
+          <span>{{ usuario.celular }}</span>
+        </dd>
+        <dt><span>Direccion</span></dt>
+        <dd>
+          <span>{{ usuario.direccion }}</span>
+        </dd>
+        <dt><span>Direccion Gps</span></dt>
+        <dd>
+          <span>{{ usuario.direccionGps }}</span>
+        </dd>
+        <dt><span>Foto</span></dt>
+        <dd>
+          <div *ngIf="usuario.foto">
+            <a (click)="openFile(usuario.foto, usuario.fotoContentType)">open</a>
+            {{ usuario.fotoContentType }}, {{ byteSize(usuario.foto) }}
+          </div>
+        </dd>
+        <dt><span>Fecha Registro</span></dt>
+        <dd>
+          <span>{{ usuario.fechaRegistro | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>User</span></dt>
+        <dd>
+          <span>{{ usuario.user?.login }}</span>
+        </dd>
+        <dt><span>Rol</span></dt>
+        <dd>
+          <div *ngIf="usuario.rol">
+            <a [routerLink]="['/rol', usuario.rol?.id, 'view']">{{ usuario.rol?.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Sucursal</span></dt>
+        <dd>
+          <span *ngFor="let sucursal of usuario.sucursals; let last = last">
+            <a [routerLink]="['/sucursal', sucursal?.id, 'view']">{{ sucursal.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span>Empresa</span></dt>
+        <dd>
+          <span *ngFor="let empresa of usuario.empresas; let last = last">
+            <a [routerLink]="['/empresa', empresa?.id, 'view']">{{ empresa.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span>Empresa Id</span></dt>
+        <dd>
+          <div *ngIf="usuario.empresaId">
+            <a [routerLink]="['/empresa', usuario.empresaId?.id, 'view']">{{ usuario.empresaId?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/usuario', usuario.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,84 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="producto">
+      <h2 data-cy="productoDetailsHeading"><span>Producto</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ producto.id }}</span>
+        </dd>
+        <dt><span>Nombre</span></dt>
+        <dd>
+          <span>{{ producto.nombre }}</span>
+        </dd>
+        <dt><span>Detalle</span></dt>
+        <dd>
+          <span>{{ producto.detalle }}</span>
+        </dd>
+        <dt><span>Iva</span></dt>
+        <dd>
+          <span>{{ producto.iva }}</span>
+        </dd>
+        <dt><span>Foto</span></dt>
+        <dd>
+          <div *ngIf="producto.foto">
+            <a (click)="openFile(producto.foto, producto.fotoContentType)">open</a>
+            {{ producto.fotoContentType }}, {{ byteSize(producto.foto) }}
+          </div>
+        </dd>
+        <dt><span>Fecha Registro</span></dt>
+        <dd>
+          <span>{{ producto.fechaRegistro | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Codigo</span></dt>
+        <dd>
+          <span *ngFor="let codigo of producto.codigos; let last = last">
+            <a [routerLink]="['/codigo', codigo?.id, 'view']">{{ codigo.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span>Precio Ingreso</span></dt>
+        <dd>
+          <span *ngFor="let precioIngreso of producto.precioIngresos; let last = last">
+            <a [routerLink]="['/precio', precioIngreso?.id, 'view']">{{ precioIngreso.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span>Precio Salida</span></dt>
+        <dd>
+          <span *ngFor="let precioSalida of producto.precioSalidas; let last = last">
+            <a [routerLink]="['/precio', precioSalida?.id, 'view']">{{ precioSalida.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span>Bodega</span></dt>
+        <dd>
+          <div *ngIf="producto.bodega">
+            <a [routerLink]="['/bodega', producto.bodega?.id, 'view']">{{ producto.bodega?.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Oficina</span></dt>
+        <dd>
+          <div *ngIf="producto.oficina">
+            <a [routerLink]="['/oficina', producto.oficina?.id, 'view']">{{ producto.oficina?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/producto', producto.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,61 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-codigo-heading" data-cy="CodigoCreateUpdateHeading">Create or edit a Codigo</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_codigo">Codigo</label>
+          <input type="text" class="form-control" name="codigo" id="field_codigo" data-cy="codigo" formControlName="codigo" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_detalle">Detalle</label>
+          <textarea class="form-control" name="detalle" id="field_detalle" data-cy="detalle" formControlName="detalle"></textarea>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_fechaRegistro">Fecha Registro</label>
+          <div class="input-group">
+            <input
+              id="field_fechaRegistro"
+              data-cy="fechaRegistro"
+              type="text"
+              class="form-control"
+              name="fechaRegistro"
+              ngbDatepicker
+              #fechaRegistroDp="ngbDatepicker"
+              formControlName="fechaRegistro"
+            />
+            <button type="button" class="btn btn-secondary" (click)="fechaRegistroDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

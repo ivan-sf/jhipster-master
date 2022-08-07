@@ -1,0 +1,101 @@
+<div>
+  <h2 id="page-heading" data-cy="ProductoHeading">
+    <span>Productos</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="reset()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-producto"
+        [routerLink]="['/producto/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Producto </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="productos?.length === 0">
+    <span>No productos found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="productos && productos.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="reset()">
+          <th scope="col" jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="nombre"><span>Nombre</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="detalle"><span>Detalle</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="iva"><span>Iva</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="foto"><span>Foto</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="fechaRegistro"><span>Fecha Registro</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="bodega.id"><span>Bodega</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="oficina.id"><span>Oficina</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+        <tr *ngFor="let producto of productos; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/producto', producto.id, 'view']">{{ producto.id }}</a>
+          </td>
+          <td>{{ producto.nombre }}</td>
+          <td>{{ producto.detalle }}</td>
+          <td>{{ producto.iva }}</td>
+          <td>
+            <a *ngIf="producto.foto" (click)="openFile(producto.foto, producto.fotoContentType)">open</a>
+            <span *ngIf="producto.foto">{{ producto.fotoContentType }}, {{ byteSize(producto.foto) }}</span>
+          </td>
+          <td>{{ producto.fechaRegistro | formatMediumDate }}</td>
+          <td>
+            <div *ngIf="producto.bodega">
+              <a [routerLink]="['/bodega', producto.bodega?.id, 'view']">{{ producto.bodega?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="producto.oficina">
+              <a [routerLink]="['/oficina', producto.oficina?.id, 'view']">{{ producto.oficina?.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/producto', producto.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/producto', producto.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(producto)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

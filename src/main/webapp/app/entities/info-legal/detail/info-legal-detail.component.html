@@ -1,0 +1,88 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="infoLegal">
+      <h2 data-cy="infoLegalDetailsHeading"><span>Info Legal</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ infoLegal.id }}</span>
+        </dd>
+        <dt><span>Nit</span></dt>
+        <dd>
+          <span>{{ infoLegal.nit }}</span>
+        </dd>
+        <dt><span>Regimen</span></dt>
+        <dd>
+          <span>{{ infoLegal.regimen }}</span>
+        </dd>
+        <dt><span>Resolucion Pos</span></dt>
+        <dd>
+          <span>{{ infoLegal.resolucionPos }}</span>
+        </dd>
+        <dt><span>Prefijo Pos Inicial</span></dt>
+        <dd>
+          <span>{{ infoLegal.prefijoPosInicial }}</span>
+        </dd>
+        <dt><span>Prefijo Pos Final</span></dt>
+        <dd>
+          <span>{{ infoLegal.prefijoPosFinal }}</span>
+        </dd>
+        <dt><span>Resolucion Fac Elec</span></dt>
+        <dd>
+          <span>{{ infoLegal.resolucionFacElec }}</span>
+        </dd>
+        <dt><span>Prefijo Fac Elec Final</span></dt>
+        <dd>
+          <span>{{ infoLegal.prefijoFacElecFinal }}</span>
+        </dd>
+        <dt><span>Resolucion Nom Elec</span></dt>
+        <dd>
+          <span>{{ infoLegal.resolucionNomElec }}</span>
+        </dd>
+        <dt><span>Estado</span></dt>
+        <dd>
+          <span>{{ infoLegal.estado }}</span>
+        </dd>
+        <dt><span>Fecha Registro</span></dt>
+        <dd>
+          <span>{{ infoLegal.fechaRegistro | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Empresa Id</span></dt>
+        <dd>
+          <span *ngFor="let empresaId of infoLegal.empresaIds; let last = last">
+            <a [routerLink]="['/empresa', empresaId?.id, 'view']">{{ empresaId.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span>Sucursal</span></dt>
+        <dd>
+          <span *ngFor="let sucursal of infoLegal.sucursals; let last = last">
+            <a [routerLink]="['/sucursal', sucursal?.id, 'view']">{{ sucursal.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span>Usuario</span></dt>
+        <dd>
+          <div *ngIf="infoLegal.usuario">
+            <a [routerLink]="['/usuario', infoLegal.usuario?.id, 'view']">{{ infoLegal.usuario?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/info-legal', infoLegal.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

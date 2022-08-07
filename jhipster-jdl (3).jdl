@@ -1,0 +1,161 @@
+entity Empresa {
+	nombre String
+	direccion String
+	direccionGPS String
+	email String
+	celular String
+	indicativo String
+	estado Integer
+    fechaRegistro Instant
+}
+
+entity InfoLegal {
+	nit String
+    regimen Integer
+	resolucionPos String
+    prefijoPosInicial Integer
+    prefijoPosFinal Integer
+    resolucionFacElec String
+    prefijoFacElecFinal Integer
+    prefijoFacElecFinal Integer
+    resolucionNomElec String
+	estado Integer
+    fechaRegistro Instant
+}
+
+entity Sucursal {
+	nombre String
+	nit String
+	detalle TextBlob
+    direccion String
+	direccionGPS String
+	logo Blob
+	estado Integer
+    fechaRegistro Instant
+}
+
+entity Producto {
+	nombre String
+	detalle TextBlob
+	iva String
+	foto Blob
+    fechaRegistro LocalDate
+}
+
+entity Codigo {
+	codigo String
+	detalle TextBlob
+    fechaRegistro LocalDate
+}
+
+entity Precio {
+	valor Integer
+	detalle TextBlob
+    fechaRegistro LocalDate
+}
+
+entity Bodega {
+	nombre String
+	detalle TextBlob
+	ubicacion String
+}
+
+entity Oficina {
+	nombre String
+	detalle TextBlob
+	ubicacion String
+}
+
+entity Inventario {
+	nombre String
+}
+
+entity Movimiento {
+	name String
+}
+
+entity ComprobanteContable {
+	name String
+}
+
+entity ComprobanteContable {
+	name String
+}
+
+entity TipoComprobanteContable {
+	name String
+}
+
+entity Usuario {
+	primerNombre String
+	segundoNombre String
+	primerApellido String
+	segundoApellido String
+	tipoDocumento String
+	documento String
+	documentoDV String
+	edad Instant
+	indicativo String
+	celular String
+	direccion String
+	direccionGps String
+	foto Blob
+    fechaRegistro Instant
+}
+
+entity Componente {
+	nombre String
+	descripcion TextBlob
+    estado Integer
+    fechaRegistro Instant
+}
+
+entity Rol {
+	nombre String
+	descripcion TextBlob
+    estado Integer
+    fechaRegistro Instant
+}
+
+entity TipoUsuario {
+	name String
+}
+
+relationship OneToMany {
+	Usuario to InfoLegal{usuario}
+	Empresa to Componente{empresa}
+	Empresa to Rol{empresa}
+	Empresa to Usuario{empresaId}
+	Empresa to Sucursal{empresa}
+	Sucursal to Oficina{sucursal}
+	Sucursal to Inventario{sucursal}
+	Inventario to Bodega{inventario}
+	Bodega to Producto{bodega}
+	Oficina to Producto{oficina}
+}
+
+relationship ManyToMany {
+	InfoLegal{empresaId} to Empresa{infoLegalId}
+	InfoLegal{sucursal} to Sucursal{infoLegal}
+    Producto{codigo} to Codigo{producto}
+    Bodega{usuario} to Usuario{bodega}
+    Oficina{usuario} to Usuario{oficina}
+    Usuario{sucursal} to Sucursal{usuario}
+    Usuario{empresa} to Empresa{usuarioId}
+    Empresa{sucursalId} to Sucursal{empresaId}
+    Producto{precioIngreso} to Precio{productoIngreso}
+    Producto{precioSalida} to Precio{productoSalida}
+}
+
+relationship OneToOne {
+  Usuario{user(login)} to User
+  Usuario{rol} to Rol
+}
+
+paginate * with infinite-scroll
+service * with serviceImpl
+filter *
+
+
+
+

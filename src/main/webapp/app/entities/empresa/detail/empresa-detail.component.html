@@ -1,0 +1,67 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="empresa">
+      <h2 data-cy="empresaDetailsHeading"><span>Empresa</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ empresa.id }}</span>
+        </dd>
+        <dt><span>Nombre</span></dt>
+        <dd>
+          <span>{{ empresa.nombre }}</span>
+        </dd>
+        <dt><span>Direccion</span></dt>
+        <dd>
+          <span>{{ empresa.direccion }}</span>
+        </dd>
+        <dt><span>Direccion GPS</span></dt>
+        <dd>
+          <span>{{ empresa.direccionGPS }}</span>
+        </dd>
+        <dt><span>Email</span></dt>
+        <dd>
+          <span>{{ empresa.email }}</span>
+        </dd>
+        <dt><span>Celular</span></dt>
+        <dd>
+          <span>{{ empresa.celular }}</span>
+        </dd>
+        <dt><span>Indicativo</span></dt>
+        <dd>
+          <span>{{ empresa.indicativo }}</span>
+        </dd>
+        <dt><span>Estado</span></dt>
+        <dd>
+          <span>{{ empresa.estado }}</span>
+        </dd>
+        <dt><span>Fecha Registro</span></dt>
+        <dd>
+          <span>{{ empresa.fechaRegistro | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Sucursal Id</span></dt>
+        <dd>
+          <span *ngFor="let sucursalId of empresa.sucursalIds; let last = last">
+            <a [routerLink]="['/sucursal', sucursalId?.id, 'view']">{{ sucursalId.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/empresa', empresa.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

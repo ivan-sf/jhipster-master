@@ -1,6 +1,7 @@
 @import 'bootstrap-variables';
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
+// @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 
 /* ==============================================================
 Bootstrap tweaks
@@ -229,3 +230,16 @@ angular-cli removes postcss-rtl processed inline css, processed rules must be ad
   }
 }
 /* jhipster-needle-scss-add-main JHipster will add new css style */
+
+* {
+  font-family: 'Lato', sans-serif;
+  --primary: #38ac93;
+  --secondary: #a6bb6a;
+  --danger: #dc3545;
+  --text: #f5f5f5;
+}
+
+button {
+  border: transparent;
+  border-radius: 10px;
+}

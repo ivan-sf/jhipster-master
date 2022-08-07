@@ -1,0 +1,162 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-producto-heading" data-cy="ProductoCreateUpdateHeading">Create or edit a Producto</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_nombre">Nombre</label>
+          <input type="text" class="form-control" name="nombre" id="field_nombre" data-cy="nombre" formControlName="nombre" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_detalle">Detalle</label>
+          <textarea class="form-control" name="detalle" id="field_detalle" data-cy="detalle" formControlName="detalle"></textarea>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_iva">Iva</label>
+          <input type="text" class="form-control" name="iva" id="field_iva" data-cy="iva" formControlName="iva" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_foto">Foto</label>
+          <div>
+            <div *ngIf="editForm.get('foto')!.value" class="form-text text-danger clearfix">
+              <a class="pull-start" (click)="openFile(editForm.get('foto')!.value, editForm.get('fotoContentType')!.value)">open</a><br />
+              <span class="pull-start">{{ editForm.get('fotoContentType')!.value }}, {{ byteSize(editForm.get('foto')!.value) }}</span>
+              <button
+                type="button"
+                (click)="editForm.patchValue({ foto: null }); editForm.patchValue({ fotoContentType: null })"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input type="file" id="file_foto" data-cy="foto" (change)="setFileData($event, 'foto', false)" />
+          </div>
+          <input type="hidden" class="form-control" name="foto" id="field_foto" data-cy="foto" formControlName="foto" />
+          <input type="hidden" class="form-control" name="fotoContentType" id="field_fotoContentType" formControlName="fotoContentType" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_fechaRegistro">Fecha Registro</label>
+          <div class="input-group">
+            <input
+              id="field_fechaRegistro"
+              data-cy="fechaRegistro"
+              type="text"
+              class="form-control"
+              name="fechaRegistro"
+              ngbDatepicker
+              #fechaRegistroDp="ngbDatepicker"
+              formControlName="fechaRegistro"
+            />
+            <button type="button" class="btn btn-secondary" (click)="fechaRegistroDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label for="field_codigos">Codigo</label>
+          <select class="form-control" id="field_codigos" data-cy="codigo" multiple name="codigos" formControlName="codigos">
+            <option
+              [ngValue]="getSelectedCodigo(codigoOption, editForm.get('codigos')!.value)"
+              *ngFor="let codigoOption of codigosSharedCollection; trackBy: trackCodigoById"
+            >
+              {{ codigoOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label for="field_precioIngresos">Precio Ingreso</label>
+          <select
+            class="form-control"
+            id="field_precioIngresos"
+            data-cy="precioIngreso"
+            multiple
+            name="precioIngresos"
+            formControlName="precioIngresos"
+          >
+            <option
+              [ngValue]="getSelectedPrecio(precioOption, editForm.get('precioIngresos')!.value)"
+              *ngFor="let precioOption of preciosSharedCollection; trackBy: trackPrecioById"
+            >
+              {{ precioOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label for="field_precioSalidas">Precio Salida</label>
+          <select
+            class="form-control"
+            id="field_precioSalidas"
+            data-cy="precioSalida"
+            multiple
+            name="precioSalidas"
+            formControlName="precioSalidas"
+          >
+            <option
+              [ngValue]="getSelectedPrecio(precioOption, editForm.get('precioSalidas')!.value)"
+              *ngFor="let precioOption of preciosSharedCollection; trackBy: trackPrecioById"
+            >
+              {{ precioOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_bodega">Bodega</label>
+          <select class="form-control" id="field_bodega" data-cy="bodega" name="bodega" formControlName="bodega">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="bodegaOption.id === editForm.get('bodega')!.value?.id ? editForm.get('bodega')!.value : bodegaOption"
+              *ngFor="let bodegaOption of bodegasSharedCollection; trackBy: trackBodegaById"
+            >
+              {{ bodegaOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_oficina">Oficina</label>
+          <select class="form-control" id="field_oficina" data-cy="oficina" name="oficina" formControlName="oficina">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="oficinaOption.id === editForm.get('oficina')!.value?.id ? editForm.get('oficina')!.value : oficinaOption"
+              *ngFor="let oficinaOption of oficinasSharedCollection; trackBy: trackOficinaById"
+            >
+              {{ oficinaOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

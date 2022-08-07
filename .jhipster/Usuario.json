@@ -1,0 +1,129 @@
+{
+  "applications": "*",
+  "changelogDate": "20220807005504",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "usuario",
+  "fields": [
+    {
+      "fieldName": "primerNombre",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "segundoNombre",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "primerApellido",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "segundoApellido",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "tipoDocumento",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "documento",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "documentoDV",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "edad",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "indicativo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "celular",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "direccion",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "direccionGps",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "foto",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "fechaRegistro",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Usuario",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "login",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "usuario",
+      "ownerSide": true,
+      "relationshipName": "user",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "rol",
+      "otherEntityRelationshipName": "usuario",
+      "ownerSide": true,
+      "relationshipName": "rol",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "infoLegal",
+      "otherEntityRelationshipName": "usuario",
+      "relationshipName": "infoLegal",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "sucursal",
+      "otherEntityRelationshipName": "usuario",
+      "ownerSide": true,
+      "relationshipName": "sucursal",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "empresa",
+      "otherEntityRelationshipName": "usuarioId",
+      "ownerSide": true,
+      "relationshipName": "empresa",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "empresa",
+      "otherEntityRelationshipName": "usuario",
+      "relationshipName": "empresaId",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "bodega",
+      "otherEntityRelationshipName": "usuario",
+      "ownerSide": false,
+      "relationshipName": "bodega",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "oficina",
+      "otherEntityRelationshipName": "usuario",
+      "ownerSide": false,
+      "relationshipName": "oficina",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

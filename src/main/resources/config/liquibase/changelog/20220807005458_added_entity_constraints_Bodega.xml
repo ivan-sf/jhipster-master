@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity Bodega.
+    -->
+    <changeSet id="20220807005458-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="bodega_id"
+                                 baseTableName="rel_bodega__usuario"
+                                 constraintName="fk_rel_bodega__usuario__bodega_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="bodega"/>
+
+        <addForeignKeyConstraint baseColumnNames="usuario_id"
+                                 baseTableName="rel_bodega__usuario"
+                                 constraintName="fk_rel_bodega__usuario__usuario_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="usuario"/>
+
+        <addForeignKeyConstraint baseColumnNames="inventario_id"
+                                 baseTableName="bodega"
+                                 constraintName="fk_bodega__inventario_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="inventario"/>
+    </changeSet>
+</databaseChangeLog>
