@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 
@@ -33,6 +33,8 @@ export class BodegaUpdateComponent implements OnInit {
     usuarios: [],
     inventario: [],
   });
+  return: any | null;
+  inventario: any | null;
 
   constructor(
     protected dataUtils: DataUtils,
@@ -41,15 +43,48 @@ export class BodegaUpdateComponent implements OnInit {
     protected usuarioService: UsuarioService,
     protected inventarioService: InventarioService,
     protected activatedRoute: ActivatedRoute,
-    protected fb: FormBuilder
+    protected fb: FormBuilder,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
+    this.return = this.activatedRoute.snapshot.paramMap.get('return');
+    this.inventario = this.activatedRoute.snapshot.paramMap.get('inventario');
+    console.error('this.return', this.return);
+    console.error('this.inventario', this.inventario);
+    if (this.return === 'sucursal' && this.inventario !== null) {
+      this.getInventario();
+    }
+
     this.activatedRoute.data.subscribe(({ bodega }) => {
       this.updateForm(bodega);
 
       this.loadRelationshipsOptions();
     });
+  }
+
+  getInventario(): void {
+    this.inventarioService
+      .query({
+        'id.equals': this.inventario,
+      })
+      .subscribe(success => {
+        this.inventario = success.body![0];
+        this.generateBodega();
+      });
+  }
+
+  generateBodega(): void {
+    const bodega = {
+      id: undefined,
+      nombre: 'Bodega Principal',
+      detalle: undefined,
+      ubicacion: undefined,
+      usuarios: undefined,
+      inventario: this.inventario,
+    };
+    this.updateForm(bodega);
+    this.save();
   }
 
   byteSize(base64String: string): string {
@@ -108,7 +143,11 @@ export class BodegaUpdateComponent implements OnInit {
   }
 
   protected onSaveSuccess(): void {
-    this.previousState();
+    if (this.inventario !== null) {
+      this.router.navigate(['/']);
+    } else {
+      this.previousState();
+    }
   }
 
   protected onSaveError(): void {

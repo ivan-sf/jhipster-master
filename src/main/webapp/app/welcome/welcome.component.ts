@@ -76,7 +76,8 @@ export class WelcomeComponent implements OnInit {
   }
 
   createEmpresa(): void {
-    this.router.navigate(['empresa', 'new']);
+    console.error('this.empresathis.empresathis.empresathis.empresathis.empresa', this.empresa);
+    this.router.navigate(['empresa', 'new', { return: 'welcome' }]);
   }
 
   createSucursal(): void {

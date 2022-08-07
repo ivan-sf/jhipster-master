@@ -131,8 +131,8 @@ export class SucursalUpdateComponent implements OnInit {
   }
 
   protected onSaveSuccess(): void {
-    if (this.return !== null) {
-      this.router.navigate(['empresa', this.empresa.id, 'edit', { return: this.return }]);
+    if (this.return === 'welcome') {
+      this.router.navigate(['empresa', this.empresa.id, 'edit', { return: 'sucursal' }]);
     } else {
       this.previousState();
     }

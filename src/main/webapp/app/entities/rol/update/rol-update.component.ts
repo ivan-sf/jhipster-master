@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 
@@ -15,12 +15,15 @@ import { EventManager, EventWithContent } from 'app/core/util/event-manager.serv
 import { DataUtils, FileLoadError } from 'app/core/util/data-util.service';
 import { IEmpresa } from 'app/entities/empresa/empresa.model';
 import { EmpresaService } from 'app/entities/empresa/service/empresa.service';
+import { Account } from 'app/core/auth/account.model';
+import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
   selector: 'jhi-rol-update',
   templateUrl: './rol-update.component.html',
 })
 export class RolUpdateComponent implements OnInit {
+  account: Account | null = null;
   isSaving = false;
 
   empresasSharedCollection: IEmpresa[] = [];
@@ -33,6 +36,7 @@ export class RolUpdateComponent implements OnInit {
     fechaRegistro: [],
     empresa: [],
   });
+  return: any | null;
 
   constructor(
     protected dataUtils: DataUtils,
@@ -40,19 +44,68 @@ export class RolUpdateComponent implements OnInit {
     protected rolService: RolService,
     protected empresaService: EmpresaService,
     protected activatedRoute: ActivatedRoute,
-    protected fb: FormBuilder
+    protected fb: FormBuilder,
+    private accountService: AccountService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ rol }) => {
-      if (rol.id === undefined) {
-        const today = dayjs().startOf('day');
-        rol.fechaRegistro = today;
-      }
+    this.return = this.activatedRoute.snapshot.paramMap.get('return');
+    if (this.return === 'welcome') {
+      this.accountService.getAuthenticationState().subscribe(account => {
+        this.account = account;
+        this.getEmpresa();
+      });
+    } else {
+      this.activatedRoute.data.subscribe(({ rol }) => {
+        if (rol.id === undefined) {
+          const today = dayjs().startOf('day');
+          rol.fechaRegistro = today;
+        }
 
+        this.updateForm(rol);
+
+        this.loadRelationshipsOptions();
+      });
+    }
+  }
+
+  getEmpresa(): void {
+    this.empresaService
+      .query({
+        'userId.equals': this.account?.id,
+      })
+      .subscribe(success => {
+        const empresa = success.body![0];
+        this.generateRoles(empresa);
+      });
+  }
+
+  generateRoles(empresaID: any): void {
+    const roles = [
+      { nombre: 'ADMIN_TECH' },
+      { nombre: 'SUPER_ADMIN' },
+      // {'nombre':'ADMINISTRADOR'},
+      // {'nombre':'EMPLEADO_CAJA'},
+      // {'nombre':'EMPLEADO_CONTADOR'},
+      // {'nombre':'EMPLEADO_NOMINA'},
+      // {'nombre':'CLIENTE_USUARIO'},
+      // {'nombre':'CLIENTE_PACIENTE'},
+      // {'nombre':'PROVEEDOR'}
+    ];
+
+    roles.forEach(element => {
+      console.error(element.nombre);
+      const rol = {
+        id: undefined,
+        nombre: element.nombre,
+        descripcion: undefined,
+        estado: undefined,
+        fechaRegistro: undefined,
+        empresa: empresaID,
+      };
       this.updateForm(rol);
-
-      this.loadRelationshipsOptions();
+      this.save();
     });
   }
 
@@ -97,7 +150,11 @@ export class RolUpdateComponent implements OnInit {
   }
 
   protected onSaveSuccess(): void {
-    this.previousState();
+    if (this.return === 'welcome') {
+      this.router.navigate(['/']);
+    } else {
+      this.previousState();
+    }
   }
 
   protected onSaveError(): void {

@@ -54,15 +54,11 @@ export class EmpresaUpdateComponent implements OnInit {
     protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder,
     private accountService: AccountService,
-    private router: Router,
-    private route: ActivatedRoute
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    if (this.route.snapshot.paramMap.get('return') !== '') {
-      this.return = this.route.snapshot.paramMap.get('return');
-    }
-
+    this.return = this.activatedRoute.snapshot.paramMap.get('return');
     this.activatedRoute.data.subscribe(({ empresa }) => {
       this.empresaId = empresa.id;
       if (empresa.id === undefined) {
@@ -84,7 +80,6 @@ export class EmpresaUpdateComponent implements OnInit {
   }
 
   getSucursales(empresa: any): void {
-    console.error('this.empresaId', this.empresaId);
     this.sucursalService
       .query({
         'empresaId.equals': this.empresaId,
@@ -132,15 +127,22 @@ export class EmpresaUpdateComponent implements OnInit {
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IEmpresa>>): void {
-    result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
-      next: () => this.onSaveSuccess(),
-      error: () => this.onSaveError(),
-    });
+    result.pipe(finalize(() => this.onSaveFinalize())).subscribe(
+      success => {
+        this.onSaveSuccess(success);
+      },
+      error => {
+        this.onSaveError();
+      }
+    );
   }
 
-  protected onSaveSuccess(): void {
-    if (this.return !== null) {
-      this.router.navigate([this.return]);
+  protected onSaveSuccess(empresa: any): void {
+    if (this.return === 'welcome') {
+      this.router.navigate(['rol', 'new', { return: 'welcome' }]);
+    }
+    if (this.return === 'sucursal') {
+      this.router.navigate(['inventario', 'new', { return: 'sucursal' }]);
     } else {
       this.previousState();
     }
@@ -209,8 +211,9 @@ export class EmpresaUpdateComponent implements OnInit {
         ? dayjs(this.editForm.get(['fechaRegistro'])!.value, DATE_TIME_FORMAT)
         : undefined,
       user: this.editForm.get(['user'])!.value,
-      sucursalIds: this.editForm.get(['sucursalIds'])!.value,
-      // sucursalIds: this.sucursales,
+      // sucursalIds: [],
+      // sucursalIds: this.editForm.get(['sucursalIds'])!.value,
+      sucursalIds: this.sucursales,
     };
   }
 }
