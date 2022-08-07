@@ -4,6 +4,7 @@ import { Account } from 'app/core/auth/account.model';
 import { AccountService } from 'app/core/auth/account.service';
 import { EmpresaService } from 'app/entities/empresa/service/empresa.service';
 import { EmpresaUpdateComponent } from 'app/entities/empresa/update/empresa-update.component';
+import { InfoLegalService } from 'app/entities/info-legal/service/info-legal.service';
 import { SucursalService } from 'app/entities/sucursal/service/sucursal.service';
 import { UsuarioService } from 'app/entities/usuario/service/usuario.service';
 
@@ -19,6 +20,7 @@ export class WelcomeComponent implements OnInit {
   //SUCURSAL
   usuario: any = undefined;
   empresa: any = undefined;
+  info: any = undefined;
   sucursal: any = undefined;
   paso = 0;
   public static auxRepresentante: boolean = false;
@@ -28,7 +30,8 @@ export class WelcomeComponent implements OnInit {
     private empresaService: EmpresaService,
     private router: Router,
     private usuarioService: UsuarioService,
-    private sucursalService: SucursalService
+    private sucursalService: SucursalService,
+    private infoLegalService: InfoLegalService
   ) {}
 
   ngOnInit(): void {
@@ -58,8 +61,8 @@ export class WelcomeComponent implements OnInit {
       })
       .subscribe(success => {
         this.sucursal = success.body![0];
-        this.sucursal === undefined && this.empresa !== undefined ? (this.paso = 2) : null;
-        this.sucursal !== undefined && this.empresa !== undefined ? this.checkUser() : null;
+        this.sucursal === undefined ? (this.paso = 2) : null;
+        this.sucursal !== undefined ? this.checkUser() : null;
         // (this.empresa !== undefined && this.sucursal !== undefined && this.usuario === undefined) ? this.paso = 3 : null;
       });
   }
@@ -71,7 +74,20 @@ export class WelcomeComponent implements OnInit {
       })
       .subscribe(success => {
         this.usuario = success.body![0];
-        this.empresa !== undefined && this.sucursal !== undefined && this.usuario === undefined ? (this.paso = 3) : null;
+        this.usuario === undefined ? (this.paso = 3) : null;
+        this.usuario !== undefined ? this.checkInfo() : null;
+      });
+  }
+
+  checkInfo(): void {
+    this.infoLegalService
+      .query({
+        'empresaId.equals': this.empresa.id,
+      })
+      .subscribe(success => {
+        this.info = success.body![0];
+        this.info === undefined ? (this.paso = 4) : null;
+        console.error('this.info', this.info);
       });
   }
 
@@ -85,10 +101,10 @@ export class WelcomeComponent implements OnInit {
   }
 
   createUsuario(): void {
-    console.error('this.usuario', this.usuario);
-    console.error('this.idUser', this.idUser);
-    console.error('this.empresa', this.empresa);
-    WelcomeComponent.auxRepresentante = true;
     this.router.navigate(['usuario', 'new', { return: 'welcome', empresa: this.empresa.id }]);
+  }
+
+  createInfo(): void {
+    this.router.navigate(['info-legal', 'new', { return: 'welcome', empresa: this.empresa.id }]);
   }
 }

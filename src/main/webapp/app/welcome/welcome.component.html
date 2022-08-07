@@ -16,11 +16,22 @@
 
 <div class="card-welcome" *ngIf="usuario === undefined && paso == 3">
   <div class="info">
-    <h1>Muy bien, ya casi terminamos ahora necesitamos algo de información legal.</h1>
+    <h1>Muy bien, ya casi terminamos ahora necesitamos algo de información sobre el representante legal.</h1>
     <p>
       Esta información es muy importante para el correcto funcionamiento del area de facturacion y contabilidad. Iniciemos con los datos del
       representante legal de la empresa.
     </p>
     <button (click)="createUsuario()">Configurar representante</button>
+  </div>
+</div>
+
+<div class="card-welcome" *ngIf="info === undefined && paso == 4">
+  <div class="info">
+    <h1>Perfecto! Ahora ingresa la información legal de tu empresa para finalizar.</h1>
+    <p>
+      La información legal que ingreses se relacionara directamente con tu sucursal principal, recuerda que puedes generar una información
+      legal por cada sucursal o todas tus sucursales pueden estar relacionadas a una misma.
+    </p>
+    <button (click)="createInfo()">Configurar información legal</button>
   </div>
 </div>
