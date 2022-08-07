@@ -64,16 +64,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.accountService
-      .getAuthenticationState()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(account => (this.account = account));
-    if (this.account !== null) {
-      console.error('routerrouterrouterrouterrouterrouterrouterrouterrouterrouterrouter');
-      this.router.navigate(['/empresa']);
-    } else {
-      console.error('NOTrouterrouterrouterrouterrouterrouterrouterrouterrouterrouterrouter', this.account);
-    }
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
+      if (this.account !== null) {
+        this.router.navigate(['/welcome']);
+      }
+    });
   }
 
   // login(): void {
@@ -119,17 +115,16 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.registerService.save({ login, email, password, langKey: 'en' }).subscribe({
         next: () => {
           this.success = true;
-          this.loginAuth();
+          this.loginAuth(this.registerForm.get(['empresa'])!.value);
         },
         error: response => this.processError(response),
       });
     }
   }
 
-  loginAuth(): void {
-    this.username = this.registerForm.get(['login'])!.value;
-    this.password = this.registerForm.get(['password'])!.value;
-    this.rememberMe = true;
+  loginAuth(empresa: any): void {
+    localStorage.setItem('empresa', empresa);
+    console.error('localStorage.getItem()', localStorage.getItem('empresa'));
   }
 
   private processError(response: HttpErrorResponse): void {
