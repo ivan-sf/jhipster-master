@@ -1,104 +1,127 @@
-<div class="d-flex justify-content-center">
-  <div class="col-8">
-    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="jhi-info-legal-heading" data-cy="InfoLegalCreateUpdateHeading">Create or edit a Info Legal</h2>
+<div class="card-master">
+  <div class="card-form">
+    <form name="editForm" class="form" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h1 id="jhi-info-legal-heading" data-cy="InfoLegalCreateUpdateHeading">Crear información Legal</h1>
 
       <div>
         <jhi-alert-error></jhi-alert-error>
 
-        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+        <div class="row mb-3" [hidden]="hidden">
           <label class="form-label" for="field_id">ID</label>
           <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" for="field_nit">Nit</label>
-          <input type="text" class="form-control" name="nit" id="field_nit" data-cy="nit" formControlName="nit" />
+        <input type="text" placeholder="NIT" class="form-control" name="nit" id="field_nit" data-cy="nit" formControlName="nit" />
+
+        <input
+          type="number"
+          placeholder="Regimen"
+          class="form-control"
+          name="regimen"
+          id="field_regimen"
+          data-cy="regimen"
+          formControlName="regimen"
+        />
+
+        <div class="row mb-3" [hidden]="hidden">
+          <label class="form-label" for="field_prefijo">Prefijo</label>
+          <input type="number" class="form-control" name="prefijo" id="field_prefijo" data-cy="prefijo" formControlName="prefijo" />
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" for="field_regimen">Regimen</label>
-          <input type="number" class="form-control" name="regimen" id="field_regimen" data-cy="regimen" formControlName="regimen" />
+        <div class="pos" [hidden]="poshidden">
+          <div class="row mb-3">
+            <label class="form-label" for="field_resolucionPos">Resolucion Pos</label>
+            <input
+              type="text"
+              class="form-control"
+              name="resolucionPos"
+              id="field_resolucionPos"
+              data-cy="resolucionPos"
+              formControlName="resolucionPos"
+            />
+          </div>
+
+          <div class="row mb-3">
+            <label class="form-label" for="field_prefijoPosInicial">Prefijo Pos Inicial</label>
+            <input
+              type="number"
+              class="form-control"
+              name="prefijoPosInicial"
+              id="field_prefijoPosInicial"
+              data-cy="prefijoPosInicial"
+              formControlName="prefijoPosInicial"
+            />
+          </div>
+
+          <div class="row mb-3">
+            <label class="form-label" for="field_prefijoPosFinal">Prefijo Pos Final</label>
+            <input
+              type="number"
+              class="form-control"
+              name="prefijoPosFinal"
+              id="field_prefijoPosFinal"
+              data-cy="prefijoPosFinal"
+              formControlName="prefijoPosFinal"
+            />
+          </div>
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" for="field_resolucionPos">Resolucion Pos</label>
-          <input
-            type="text"
-            class="form-control"
-            name="resolucionPos"
-            id="field_resolucionPos"
-            data-cy="resolucionPos"
-            formControlName="resolucionPos"
-          />
+        <div class="fe" [hidden]="fehidden">
+          <div class="row mb-3">
+            <label class="form-label" for="field_resolucionFacElec">Resolucion Fac Elec</label>
+            <input
+              type="text"
+              class="form-control"
+              name="resolucionFacElec"
+              id="field_resolucionFacElec"
+              data-cy="resolucionFacElec"
+              formControlName="resolucionFacElec"
+            />
+          </div>
+
+          <div class="row mb-3">
+            <label class="form-label" for="field_prefijoFacElecInicial">Prefijo Fac Elec Inicial</label>
+            <input
+              type="number"
+              class="form-control"
+              name="prefijoFacElecInicial"
+              id="field_prefijoFacElecInicial"
+              data-cy="prefijoFacElecInicial"
+              formControlName="prefijoFacElecInicial"
+            />
+          </div>
+
+          <div class="row mb-3">
+            <label class="form-label" for="field_prefijoFacElecFinal">Prefijo Fac Elec Final</label>
+            <input
+              type="number"
+              class="form-control"
+              name="prefijoFacElecFinal"
+              id="field_prefijoFacElecFinal"
+              data-cy="prefijoFacElecFinal"
+              formControlName="prefijoFacElecFinal"
+            />
+          </div>
+
+          <div class="row mb-3">
+            <label class="form-label" for="field_resolucionNomElec">Resolucion Nom Elec</label>
+            <input
+              type="text"
+              class="form-control"
+              name="resolucionNomElec"
+              id="field_resolucionNomElec"
+              data-cy="resolucionNomElec"
+              formControlName="resolucionNomElec"
+            />
+          </div>
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" for="field_prefijoPosInicial">Prefijo Pos Inicial</label>
-          <input
-            type="number"
-            class="form-control"
-            name="prefijoPosInicial"
-            id="field_prefijoPosInicial"
-            data-cy="prefijoPosInicial"
-            formControlName="prefijoPosInicial"
-          />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" for="field_prefijoPosFinal">Prefijo Pos Final</label>
-          <input
-            type="number"
-            class="form-control"
-            name="prefijoPosFinal"
-            id="field_prefijoPosFinal"
-            data-cy="prefijoPosFinal"
-            formControlName="prefijoPosFinal"
-          />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" for="field_resolucionFacElec">Resolucion Fac Elec</label>
-          <input
-            type="text"
-            class="form-control"
-            name="resolucionFacElec"
-            id="field_resolucionFacElec"
-            data-cy="resolucionFacElec"
-            formControlName="resolucionFacElec"
-          />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" for="field_prefijoFacElecFinal">Prefijo Fac Elec Final</label>
-          <input
-            type="number"
-            class="form-control"
-            name="prefijoFacElecFinal"
-            id="field_prefijoFacElecFinal"
-            data-cy="prefijoFacElecFinal"
-            formControlName="prefijoFacElecFinal"
-          />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" for="field_resolucionNomElec">Resolucion Nom Elec</label>
-          <input
-            type="text"
-            class="form-control"
-            name="resolucionNomElec"
-            id="field_resolucionNomElec"
-            data-cy="resolucionNomElec"
-            formControlName="resolucionNomElec"
-          />
-        </div>
-
-        <div class="row mb-3">
+        <div class="row mb-3" [hidden]="hidden">
           <label class="form-label" for="field_estado">Estado</label>
           <input type="number" class="form-control" name="estado" id="field_estado" data-cy="estado" formControlName="estado" />
         </div>
 
-        <div class="row mb-3">
+        <div class="row mb-3" [hidden]="hidden">
           <label class="form-label" for="field_fechaRegistro">Fecha Registro</label>
           <div class="d-flex">
             <input
@@ -113,7 +136,7 @@
           </div>
         </div>
 
-        <div class="row mb-3">
+        <div class="row mb-3" [hidden]="hidden">
           <label for="field_empresaIds">Empresa Id</label>
           <select class="form-control" id="field_empresaIds" data-cy="empresaId" multiple name="empresaIds" formControlName="empresaIds">
             <option
@@ -125,7 +148,7 @@
           </select>
         </div>
 
-        <div class="row mb-3">
+        <div class="row mb-3" [hidden]="hidden">
           <label for="field_sucursals">Sucursal</label>
           <select class="form-control" id="field_sucursals" data-cy="sucursal" multiple name="sucursals" formControlName="sucursals">
             <option
@@ -137,7 +160,7 @@
           </select>
         </div>
 
-        <div class="row mb-3">
+        <div class="row mb-3" [hidden]="hidden">
           <label class="form-label" for="field_usuario">Usuario</label>
           <select class="form-control" id="field_usuario" data-cy="usuario" name="usuario" formControlName="usuario">
             <option [ngValue]="null"></option>

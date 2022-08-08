@@ -11,12 +11,15 @@ entity Empresa {
 
 entity InfoLegal {
 	nit String
-    regimen Integer
+    regimen string
+    prefijoFE string
+    prefijoPOS string
+    prefijoNOM string
 	resolucionPos String
     prefijoPosInicial Integer
     prefijoPosFinal Integer
     resolucionFacElec String
-    prefijoFacElecFinal Integer
+    prefijoFacElecInicial Integer
     prefijoFacElecFinal Integer
     resolucionNomElec String
 	estado Integer

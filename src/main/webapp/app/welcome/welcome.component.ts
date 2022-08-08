@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Account } from 'app/core/auth/account.model';
 import { AccountService } from 'app/core/auth/account.service';
 import { EmpresaService } from 'app/entities/empresa/service/empresa.service';
-import { EmpresaUpdateComponent } from 'app/entities/empresa/update/empresa-update.component';
 import { InfoLegalService } from 'app/entities/info-legal/service/info-legal.service';
 import { SucursalService } from 'app/entities/sucursal/service/sucursal.service';
 import { UsuarioService } from 'app/entities/usuario/service/usuario.service';
@@ -82,12 +81,12 @@ export class WelcomeComponent implements OnInit {
   checkInfo(): void {
     this.infoLegalService
       .query({
-        'empresaId.equals': this.empresa.id,
+        'usuarioId.equals': this.usuario.id,
       })
       .subscribe(success => {
         this.info = success.body![0];
         this.info === undefined ? (this.paso = 4) : null;
-        console.error('this.info', this.info);
+        console.error('this.info', success.body);
       });
   }
 
@@ -105,6 +104,10 @@ export class WelcomeComponent implements OnInit {
   }
 
   createInfo(): void {
-    this.router.navigate(['info-legal', 'new', { return: 'welcome', empresa: this.empresa.id }]);
+    this.router.navigate([
+      'info-legal',
+      'new',
+      { return: 'welcome', empresa: this.empresa.id, usuario: this.usuario.id, sucursal: this.sucursal.id },
+    ]);
   }
 }

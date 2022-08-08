@@ -14,6 +14,10 @@
       "fieldType": "Integer"
     },
     {
+      "fieldName": "prefijo",
+      "fieldType": "Integer"
+    },
+    {
       "fieldName": "resolucionPos",
       "fieldType": "String"
     },
@@ -28,6 +32,10 @@
     {
       "fieldName": "resolucionFacElec",
       "fieldType": "String"
+    },
+    {
+      "fieldName": "prefijoFacElecInicial",
+      "fieldType": "Integer"
     },
     {
       "fieldName": "prefijoFacElecFinal",

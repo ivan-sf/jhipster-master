@@ -23,6 +23,9 @@ import { UsuarioService } from 'app/entities/usuario/service/usuario.service';
 })
 export class InfoLegalUpdateComponent implements OnInit {
   isSaving = false;
+  hidden = true;
+  poshidden = true;
+  fehidden = true;
 
   empresasSharedCollection: IEmpresa[] = [];
   sucursalsSharedCollection: ISucursal[] = [];
@@ -32,10 +35,12 @@ export class InfoLegalUpdateComponent implements OnInit {
     id: [],
     nit: [],
     regimen: [],
+    prefijo: [],
     resolucionPos: [],
     prefijoPosInicial: [],
     prefijoPosFinal: [],
     resolucionFacElec: [],
+    prefijoFacElecInicial: [],
     prefijoFacElecFinal: [],
     resolucionNomElec: [],
     estado: [],
@@ -44,6 +49,11 @@ export class InfoLegalUpdateComponent implements OnInit {
     sucursals: [],
     usuario: [],
   });
+  return: any | null;
+  usuarioId: any | null;
+  empresaId: any | null;
+  sucursalId: any | null;
+  infoLegal: any;
 
   constructor(
     protected infoLegalService: InfoLegalService,
@@ -55,16 +65,61 @@ export class InfoLegalUpdateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.return = this.activatedRoute.snapshot.paramMap.get('return');
+    this.usuarioId = this.activatedRoute.snapshot.paramMap.get('usuario');
+    this.empresaId = this.activatedRoute.snapshot.paramMap.get('empresa');
+    this.sucursalId = this.activatedRoute.snapshot.paramMap.get('sucursal');
+
+    if (this.return === 'welcome') {
+      this.getEmpresa();
+    }
+
     this.activatedRoute.data.subscribe(({ infoLegal }) => {
+      this.infoLegal = infoLegal;
       if (infoLegal.id === undefined) {
         const today = dayjs().startOf('day');
         infoLegal.fechaRegistro = today;
       }
-
-      this.updateForm(infoLegal);
-
+      if (this.return === null) {
+        this.updateForm(this.infoLegal);
+      }
       this.loadRelationshipsOptions();
     });
+  }
+
+  getEmpresa(): void {
+    this.empresaService
+      .query({
+        'id.equals': this.empresaId,
+      })
+      .subscribe(success => {
+        this.empresaId = success.body;
+        this.getSucursal();
+      });
+  }
+
+  getSucursal(): void {
+    this.sucursalService
+      .query({
+        'id.equals': this.sucursalId,
+      })
+      .subscribe(success => {
+        this.sucursalId = success.body;
+        this.getUsuario();
+        // this.getSucursal()
+      });
+  }
+
+  getUsuario(): void {
+    this.usuarioService
+      .query({
+        'id.equals': this.usuarioId,
+      })
+      .subscribe(success => {
+        this.usuarioId = success.body![0];
+        this.updateForm(this.infoLegal);
+        // this.getSucursal()
+      });
   }
 
   previousState(): void {
@@ -135,21 +190,29 @@ export class InfoLegalUpdateComponent implements OnInit {
   }
 
   protected updateForm(infoLegal: IInfoLegal): void {
+    let auxEmpresa;
+    let auxSucursal;
+    let auxUsuario;
+    this.empresaId !== null ? (auxEmpresa = this.empresaId) : (auxEmpresa = infoLegal.empresaIds);
+    this.sucursalId !== null ? (auxSucursal = this.sucursalId) : (auxSucursal = infoLegal.sucursals);
+    this.usuarioId !== null ? (auxUsuario = this.usuarioId) : (auxUsuario = infoLegal.usuario);
     this.editForm.patchValue({
       id: infoLegal.id,
       nit: infoLegal.nit,
       regimen: infoLegal.regimen,
+      prefijo: infoLegal.prefijo,
       resolucionPos: infoLegal.resolucionPos,
       prefijoPosInicial: infoLegal.prefijoPosInicial,
       prefijoPosFinal: infoLegal.prefijoPosFinal,
       resolucionFacElec: infoLegal.resolucionFacElec,
+      prefijoFacElecInicial: infoLegal.prefijoFacElecInicial,
       prefijoFacElecFinal: infoLegal.prefijoFacElecFinal,
       resolucionNomElec: infoLegal.resolucionNomElec,
       estado: infoLegal.estado,
       fechaRegistro: infoLegal.fechaRegistro ? infoLegal.fechaRegistro.format(DATE_TIME_FORMAT) : null,
-      empresaIds: infoLegal.empresaIds,
-      sucursals: infoLegal.sucursals,
-      usuario: infoLegal.usuario,
+      empresaIds: auxEmpresa,
+      sucursals: auxSucursal,
+      usuario: auxUsuario,
     });
 
     this.empresasSharedCollection = this.empresaService.addEmpresaToCollectionIfMissing(
@@ -199,10 +262,12 @@ export class InfoLegalUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       nit: this.editForm.get(['nit'])!.value,
       regimen: this.editForm.get(['regimen'])!.value,
+      prefijo: this.editForm.get(['prefijo'])!.value,
       resolucionPos: this.editForm.get(['resolucionPos'])!.value,
       prefijoPosInicial: this.editForm.get(['prefijoPosInicial'])!.value,
       prefijoPosFinal: this.editForm.get(['prefijoPosFinal'])!.value,
       resolucionFacElec: this.editForm.get(['resolucionFacElec'])!.value,
+      prefijoFacElecInicial: this.editForm.get(['prefijoFacElecInicial'])!.value,
       prefijoFacElecFinal: this.editForm.get(['prefijoFacElecFinal'])!.value,
       resolucionNomElec: this.editForm.get(['resolucionNomElec'])!.value,
       estado: this.editForm.get(['estado'])!.value,
