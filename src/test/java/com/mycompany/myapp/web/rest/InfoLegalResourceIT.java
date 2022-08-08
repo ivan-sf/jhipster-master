@@ -47,9 +47,17 @@ class InfoLegalResourceIT {
     private static final String DEFAULT_NIT = "AAAAAAAAAA";
     private static final String UPDATED_NIT = "BBBBBBBBBB";
 
-    private static final Integer DEFAULT_REGIMEN = 1;
-    private static final Integer UPDATED_REGIMEN = 2;
-    private static final Integer SMALLER_REGIMEN = 1 - 1;
+    private static final String DEFAULT_REGIMEN = "AAAAAAAAAA";
+    private static final String UPDATED_REGIMEN = "BBBBBBBBBB";
+
+    private static final String DEFAULT_PREFIJO_FE = "AAAAAAAAAA";
+    private static final String UPDATED_PREFIJO_FE = "BBBBBBBBBB";
+
+    private static final String DEFAULT_PREFIJO_POS = "AAAAAAAAAA";
+    private static final String UPDATED_PREFIJO_POS = "BBBBBBBBBB";
+
+    private static final String DEFAULT_PREFIJO_NOM = "AAAAAAAAAA";
+    private static final String UPDATED_PREFIJO_NOM = "BBBBBBBBBB";
 
     private static final String DEFAULT_RESOLUCION_POS = "AAAAAAAAAA";
     private static final String UPDATED_RESOLUCION_POS = "BBBBBBBBBB";
@@ -65,12 +73,24 @@ class InfoLegalResourceIT {
     private static final String DEFAULT_RESOLUCION_FAC_ELEC = "AAAAAAAAAA";
     private static final String UPDATED_RESOLUCION_FAC_ELEC = "BBBBBBBBBB";
 
+    private static final Integer DEFAULT_PREFIJO_FAC_ELEC_INICIAL = 1;
+    private static final Integer UPDATED_PREFIJO_FAC_ELEC_INICIAL = 2;
+    private static final Integer SMALLER_PREFIJO_FAC_ELEC_INICIAL = 1 - 1;
+
     private static final Integer DEFAULT_PREFIJO_FAC_ELEC_FINAL = 1;
     private static final Integer UPDATED_PREFIJO_FAC_ELEC_FINAL = 2;
     private static final Integer SMALLER_PREFIJO_FAC_ELEC_FINAL = 1 - 1;
 
     private static final String DEFAULT_RESOLUCION_NOM_ELEC = "AAAAAAAAAA";
     private static final String UPDATED_RESOLUCION_NOM_ELEC = "BBBBBBBBBB";
+
+    private static final Integer DEFAULT_PREFIJO_NOM_ELEC_INICIAL = 1;
+    private static final Integer UPDATED_PREFIJO_NOM_ELEC_INICIAL = 2;
+    private static final Integer SMALLER_PREFIJO_NOM_ELEC_INICIAL = 1 - 1;
+
+    private static final Integer DEFAULT_PREFIJO_NOM_ELEC_FINAL = 1;
+    private static final Integer UPDATED_PREFIJO_NOM_ELEC_FINAL = 2;
+    private static final Integer SMALLER_PREFIJO_NOM_ELEC_FINAL = 1 - 1;
 
     private static final Integer DEFAULT_ESTADO = 1;
     private static final Integer UPDATED_ESTADO = 2;
@@ -112,12 +132,18 @@ class InfoLegalResourceIT {
         InfoLegal infoLegal = new InfoLegal()
             .nit(DEFAULT_NIT)
             .regimen(DEFAULT_REGIMEN)
+            .prefijoFE(DEFAULT_PREFIJO_FE)
+            .prefijoPOS(DEFAULT_PREFIJO_POS)
+            .prefijoNOM(DEFAULT_PREFIJO_NOM)
             .resolucionPos(DEFAULT_RESOLUCION_POS)
             .prefijoPosInicial(DEFAULT_PREFIJO_POS_INICIAL)
             .prefijoPosFinal(DEFAULT_PREFIJO_POS_FINAL)
             .resolucionFacElec(DEFAULT_RESOLUCION_FAC_ELEC)
+            .prefijoFacElecInicial(DEFAULT_PREFIJO_FAC_ELEC_INICIAL)
             .prefijoFacElecFinal(DEFAULT_PREFIJO_FAC_ELEC_FINAL)
             .resolucionNomElec(DEFAULT_RESOLUCION_NOM_ELEC)
+            .prefijoNomElecInicial(DEFAULT_PREFIJO_NOM_ELEC_INICIAL)
+            .prefijoNomElecFinal(DEFAULT_PREFIJO_NOM_ELEC_FINAL)
             .estado(DEFAULT_ESTADO)
             .fechaRegistro(DEFAULT_FECHA_REGISTRO);
         return infoLegal;
@@ -133,12 +159,18 @@ class InfoLegalResourceIT {
         InfoLegal infoLegal = new InfoLegal()
             .nit(UPDATED_NIT)
             .regimen(UPDATED_REGIMEN)
+            .prefijoFE(UPDATED_PREFIJO_FE)
+            .prefijoPOS(UPDATED_PREFIJO_POS)
+            .prefijoNOM(UPDATED_PREFIJO_NOM)
             .resolucionPos(UPDATED_RESOLUCION_POS)
             .prefijoPosInicial(UPDATED_PREFIJO_POS_INICIAL)
             .prefijoPosFinal(UPDATED_PREFIJO_POS_FINAL)
             .resolucionFacElec(UPDATED_RESOLUCION_FAC_ELEC)
+            .prefijoFacElecInicial(UPDATED_PREFIJO_FAC_ELEC_INICIAL)
             .prefijoFacElecFinal(UPDATED_PREFIJO_FAC_ELEC_FINAL)
             .resolucionNomElec(UPDATED_RESOLUCION_NOM_ELEC)
+            .prefijoNomElecInicial(UPDATED_PREFIJO_NOM_ELEC_INICIAL)
+            .prefijoNomElecFinal(UPDATED_PREFIJO_NOM_ELEC_FINAL)
             .estado(UPDATED_ESTADO)
             .fechaRegistro(UPDATED_FECHA_REGISTRO);
         return infoLegal;
@@ -164,12 +196,18 @@ class InfoLegalResourceIT {
         InfoLegal testInfoLegal = infoLegalList.get(infoLegalList.size() - 1);
         assertThat(testInfoLegal.getNit()).isEqualTo(DEFAULT_NIT);
         assertThat(testInfoLegal.getRegimen()).isEqualTo(DEFAULT_REGIMEN);
+        assertThat(testInfoLegal.getPrefijoFE()).isEqualTo(DEFAULT_PREFIJO_FE);
+        assertThat(testInfoLegal.getPrefijoPOS()).isEqualTo(DEFAULT_PREFIJO_POS);
+        assertThat(testInfoLegal.getPrefijoNOM()).isEqualTo(DEFAULT_PREFIJO_NOM);
         assertThat(testInfoLegal.getResolucionPos()).isEqualTo(DEFAULT_RESOLUCION_POS);
         assertThat(testInfoLegal.getPrefijoPosInicial()).isEqualTo(DEFAULT_PREFIJO_POS_INICIAL);
         assertThat(testInfoLegal.getPrefijoPosFinal()).isEqualTo(DEFAULT_PREFIJO_POS_FINAL);
         assertThat(testInfoLegal.getResolucionFacElec()).isEqualTo(DEFAULT_RESOLUCION_FAC_ELEC);
+        assertThat(testInfoLegal.getPrefijoFacElecInicial()).isEqualTo(DEFAULT_PREFIJO_FAC_ELEC_INICIAL);
         assertThat(testInfoLegal.getPrefijoFacElecFinal()).isEqualTo(DEFAULT_PREFIJO_FAC_ELEC_FINAL);
         assertThat(testInfoLegal.getResolucionNomElec()).isEqualTo(DEFAULT_RESOLUCION_NOM_ELEC);
+        assertThat(testInfoLegal.getPrefijoNomElecInicial()).isEqualTo(DEFAULT_PREFIJO_NOM_ELEC_INICIAL);
+        assertThat(testInfoLegal.getPrefijoNomElecFinal()).isEqualTo(DEFAULT_PREFIJO_NOM_ELEC_FINAL);
         assertThat(testInfoLegal.getEstado()).isEqualTo(DEFAULT_ESTADO);
         assertThat(testInfoLegal.getFechaRegistro()).isEqualTo(DEFAULT_FECHA_REGISTRO);
     }
@@ -206,12 +244,18 @@ class InfoLegalResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(infoLegal.getId().intValue())))
             .andExpect(jsonPath("$.[*].nit").value(hasItem(DEFAULT_NIT)))
             .andExpect(jsonPath("$.[*].regimen").value(hasItem(DEFAULT_REGIMEN)))
+            .andExpect(jsonPath("$.[*].prefijoFE").value(hasItem(DEFAULT_PREFIJO_FE)))
+            .andExpect(jsonPath("$.[*].prefijoPOS").value(hasItem(DEFAULT_PREFIJO_POS)))
+            .andExpect(jsonPath("$.[*].prefijoNOM").value(hasItem(DEFAULT_PREFIJO_NOM)))
             .andExpect(jsonPath("$.[*].resolucionPos").value(hasItem(DEFAULT_RESOLUCION_POS)))
             .andExpect(jsonPath("$.[*].prefijoPosInicial").value(hasItem(DEFAULT_PREFIJO_POS_INICIAL)))
             .andExpect(jsonPath("$.[*].prefijoPosFinal").value(hasItem(DEFAULT_PREFIJO_POS_FINAL)))
             .andExpect(jsonPath("$.[*].resolucionFacElec").value(hasItem(DEFAULT_RESOLUCION_FAC_ELEC)))
+            .andExpect(jsonPath("$.[*].prefijoFacElecInicial").value(hasItem(DEFAULT_PREFIJO_FAC_ELEC_INICIAL)))
             .andExpect(jsonPath("$.[*].prefijoFacElecFinal").value(hasItem(DEFAULT_PREFIJO_FAC_ELEC_FINAL)))
             .andExpect(jsonPath("$.[*].resolucionNomElec").value(hasItem(DEFAULT_RESOLUCION_NOM_ELEC)))
+            .andExpect(jsonPath("$.[*].prefijoNomElecInicial").value(hasItem(DEFAULT_PREFIJO_NOM_ELEC_INICIAL)))
+            .andExpect(jsonPath("$.[*].prefijoNomElecFinal").value(hasItem(DEFAULT_PREFIJO_NOM_ELEC_FINAL)))
             .andExpect(jsonPath("$.[*].estado").value(hasItem(DEFAULT_ESTADO)))
             .andExpect(jsonPath("$.[*].fechaRegistro").value(hasItem(DEFAULT_FECHA_REGISTRO.toString())));
     }
@@ -248,12 +292,18 @@ class InfoLegalResourceIT {
             .andExpect(jsonPath("$.id").value(infoLegal.getId().intValue()))
             .andExpect(jsonPath("$.nit").value(DEFAULT_NIT))
             .andExpect(jsonPath("$.regimen").value(DEFAULT_REGIMEN))
+            .andExpect(jsonPath("$.prefijoFE").value(DEFAULT_PREFIJO_FE))
+            .andExpect(jsonPath("$.prefijoPOS").value(DEFAULT_PREFIJO_POS))
+            .andExpect(jsonPath("$.prefijoNOM").value(DEFAULT_PREFIJO_NOM))
             .andExpect(jsonPath("$.resolucionPos").value(DEFAULT_RESOLUCION_POS))
             .andExpect(jsonPath("$.prefijoPosInicial").value(DEFAULT_PREFIJO_POS_INICIAL))
             .andExpect(jsonPath("$.prefijoPosFinal").value(DEFAULT_PREFIJO_POS_FINAL))
             .andExpect(jsonPath("$.resolucionFacElec").value(DEFAULT_RESOLUCION_FAC_ELEC))
+            .andExpect(jsonPath("$.prefijoFacElecInicial").value(DEFAULT_PREFIJO_FAC_ELEC_INICIAL))
             .andExpect(jsonPath("$.prefijoFacElecFinal").value(DEFAULT_PREFIJO_FAC_ELEC_FINAL))
             .andExpect(jsonPath("$.resolucionNomElec").value(DEFAULT_RESOLUCION_NOM_ELEC))
+            .andExpect(jsonPath("$.prefijoNomElecInicial").value(DEFAULT_PREFIJO_NOM_ELEC_INICIAL))
+            .andExpect(jsonPath("$.prefijoNomElecFinal").value(DEFAULT_PREFIJO_NOM_ELEC_FINAL))
             .andExpect(jsonPath("$.estado").value(DEFAULT_ESTADO))
             .andExpect(jsonPath("$.fechaRegistro").value(DEFAULT_FECHA_REGISTRO.toString()));
     }
@@ -408,54 +458,262 @@ class InfoLegalResourceIT {
 
     @Test
     @Transactional
-    void getAllInfoLegalsByRegimenIsGreaterThanOrEqualToSomething() throws Exception {
+    void getAllInfoLegalsByRegimenContainsSomething() throws Exception {
         // Initialize the database
         infoLegalRepository.saveAndFlush(infoLegal);
 
-        // Get all the infoLegalList where regimen is greater than or equal to DEFAULT_REGIMEN
-        defaultInfoLegalShouldBeFound("regimen.greaterThanOrEqual=" + DEFAULT_REGIMEN);
+        // Get all the infoLegalList where regimen contains DEFAULT_REGIMEN
+        defaultInfoLegalShouldBeFound("regimen.contains=" + DEFAULT_REGIMEN);
 
-        // Get all the infoLegalList where regimen is greater than or equal to UPDATED_REGIMEN
-        defaultInfoLegalShouldNotBeFound("regimen.greaterThanOrEqual=" + UPDATED_REGIMEN);
+        // Get all the infoLegalList where regimen contains UPDATED_REGIMEN
+        defaultInfoLegalShouldNotBeFound("regimen.contains=" + UPDATED_REGIMEN);
     }
 
     @Test
     @Transactional
-    void getAllInfoLegalsByRegimenIsLessThanOrEqualToSomething() throws Exception {
+    void getAllInfoLegalsByRegimenNotContainsSomething() throws Exception {
         // Initialize the database
         infoLegalRepository.saveAndFlush(infoLegal);
 
-        // Get all the infoLegalList where regimen is less than or equal to DEFAULT_REGIMEN
-        defaultInfoLegalShouldBeFound("regimen.lessThanOrEqual=" + DEFAULT_REGIMEN);
+        // Get all the infoLegalList where regimen does not contain DEFAULT_REGIMEN
+        defaultInfoLegalShouldNotBeFound("regimen.doesNotContain=" + DEFAULT_REGIMEN);
 
-        // Get all the infoLegalList where regimen is less than or equal to SMALLER_REGIMEN
-        defaultInfoLegalShouldNotBeFound("regimen.lessThanOrEqual=" + SMALLER_REGIMEN);
+        // Get all the infoLegalList where regimen does not contain UPDATED_REGIMEN
+        defaultInfoLegalShouldBeFound("regimen.doesNotContain=" + UPDATED_REGIMEN);
     }
 
     @Test
     @Transactional
-    void getAllInfoLegalsByRegimenIsLessThanSomething() throws Exception {
+    void getAllInfoLegalsByPrefijoFEIsEqualToSomething() throws Exception {
         // Initialize the database
         infoLegalRepository.saveAndFlush(infoLegal);
 
-        // Get all the infoLegalList where regimen is less than DEFAULT_REGIMEN
-        defaultInfoLegalShouldNotBeFound("regimen.lessThan=" + DEFAULT_REGIMEN);
+        // Get all the infoLegalList where prefijoFE equals to DEFAULT_PREFIJO_FE
+        defaultInfoLegalShouldBeFound("prefijoFE.equals=" + DEFAULT_PREFIJO_FE);
 
-        // Get all the infoLegalList where regimen is less than UPDATED_REGIMEN
-        defaultInfoLegalShouldBeFound("regimen.lessThan=" + UPDATED_REGIMEN);
+        // Get all the infoLegalList where prefijoFE equals to UPDATED_PREFIJO_FE
+        defaultInfoLegalShouldNotBeFound("prefijoFE.equals=" + UPDATED_PREFIJO_FE);
     }
 
     @Test
     @Transactional
-    void getAllInfoLegalsByRegimenIsGreaterThanSomething() throws Exception {
+    void getAllInfoLegalsByPrefijoFEIsNotEqualToSomething() throws Exception {
         // Initialize the database
         infoLegalRepository.saveAndFlush(infoLegal);
 
-        // Get all the infoLegalList where regimen is greater than DEFAULT_REGIMEN
-        defaultInfoLegalShouldNotBeFound("regimen.greaterThan=" + DEFAULT_REGIMEN);
+        // Get all the infoLegalList where prefijoFE not equals to DEFAULT_PREFIJO_FE
+        defaultInfoLegalShouldNotBeFound("prefijoFE.notEquals=" + DEFAULT_PREFIJO_FE);
 
-        // Get all the infoLegalList where regimen is greater than SMALLER_REGIMEN
-        defaultInfoLegalShouldBeFound("regimen.greaterThan=" + SMALLER_REGIMEN);
+        // Get all the infoLegalList where prefijoFE not equals to UPDATED_PREFIJO_FE
+        defaultInfoLegalShouldBeFound("prefijoFE.notEquals=" + UPDATED_PREFIJO_FE);
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoFEIsInShouldWork() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoFE in DEFAULT_PREFIJO_FE or UPDATED_PREFIJO_FE
+        defaultInfoLegalShouldBeFound("prefijoFE.in=" + DEFAULT_PREFIJO_FE + "," + UPDATED_PREFIJO_FE);
+
+        // Get all the infoLegalList where prefijoFE equals to UPDATED_PREFIJO_FE
+        defaultInfoLegalShouldNotBeFound("prefijoFE.in=" + UPDATED_PREFIJO_FE);
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoFEIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoFE is not null
+        defaultInfoLegalShouldBeFound("prefijoFE.specified=true");
+
+        // Get all the infoLegalList where prefijoFE is null
+        defaultInfoLegalShouldNotBeFound("prefijoFE.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoFEContainsSomething() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoFE contains DEFAULT_PREFIJO_FE
+        defaultInfoLegalShouldBeFound("prefijoFE.contains=" + DEFAULT_PREFIJO_FE);
+
+        // Get all the infoLegalList where prefijoFE contains UPDATED_PREFIJO_FE
+        defaultInfoLegalShouldNotBeFound("prefijoFE.contains=" + UPDATED_PREFIJO_FE);
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoFENotContainsSomething() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoFE does not contain DEFAULT_PREFIJO_FE
+        defaultInfoLegalShouldNotBeFound("prefijoFE.doesNotContain=" + DEFAULT_PREFIJO_FE);
+
+        // Get all the infoLegalList where prefijoFE does not contain UPDATED_PREFIJO_FE
+        defaultInfoLegalShouldBeFound("prefijoFE.doesNotContain=" + UPDATED_PREFIJO_FE);
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoPOSIsEqualToSomething() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoPOS equals to DEFAULT_PREFIJO_POS
+        defaultInfoLegalShouldBeFound("prefijoPOS.equals=" + DEFAULT_PREFIJO_POS);
+
+        // Get all the infoLegalList where prefijoPOS equals to UPDATED_PREFIJO_POS
+        defaultInfoLegalShouldNotBeFound("prefijoPOS.equals=" + UPDATED_PREFIJO_POS);
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoPOSIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoPOS not equals to DEFAULT_PREFIJO_POS
+        defaultInfoLegalShouldNotBeFound("prefijoPOS.notEquals=" + DEFAULT_PREFIJO_POS);
+
+        // Get all the infoLegalList where prefijoPOS not equals to UPDATED_PREFIJO_POS
+        defaultInfoLegalShouldBeFound("prefijoPOS.notEquals=" + UPDATED_PREFIJO_POS);
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoPOSIsInShouldWork() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoPOS in DEFAULT_PREFIJO_POS or UPDATED_PREFIJO_POS
+        defaultInfoLegalShouldBeFound("prefijoPOS.in=" + DEFAULT_PREFIJO_POS + "," + UPDATED_PREFIJO_POS);
+
+        // Get all the infoLegalList where prefijoPOS equals to UPDATED_PREFIJO_POS
+        defaultInfoLegalShouldNotBeFound("prefijoPOS.in=" + UPDATED_PREFIJO_POS);
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoPOSIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoPOS is not null
+        defaultInfoLegalShouldBeFound("prefijoPOS.specified=true");
+
+        // Get all the infoLegalList where prefijoPOS is null
+        defaultInfoLegalShouldNotBeFound("prefijoPOS.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoPOSContainsSomething() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoPOS contains DEFAULT_PREFIJO_POS
+        defaultInfoLegalShouldBeFound("prefijoPOS.contains=" + DEFAULT_PREFIJO_POS);
+
+        // Get all the infoLegalList where prefijoPOS contains UPDATED_PREFIJO_POS
+        defaultInfoLegalShouldNotBeFound("prefijoPOS.contains=" + UPDATED_PREFIJO_POS);
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoPOSNotContainsSomething() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoPOS does not contain DEFAULT_PREFIJO_POS
+        defaultInfoLegalShouldNotBeFound("prefijoPOS.doesNotContain=" + DEFAULT_PREFIJO_POS);
+
+        // Get all the infoLegalList where prefijoPOS does not contain UPDATED_PREFIJO_POS
+        defaultInfoLegalShouldBeFound("prefijoPOS.doesNotContain=" + UPDATED_PREFIJO_POS);
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoNOMIsEqualToSomething() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoNOM equals to DEFAULT_PREFIJO_NOM
+        defaultInfoLegalShouldBeFound("prefijoNOM.equals=" + DEFAULT_PREFIJO_NOM);
+
+        // Get all the infoLegalList where prefijoNOM equals to UPDATED_PREFIJO_NOM
+        defaultInfoLegalShouldNotBeFound("prefijoNOM.equals=" + UPDATED_PREFIJO_NOM);
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoNOMIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoNOM not equals to DEFAULT_PREFIJO_NOM
+        defaultInfoLegalShouldNotBeFound("prefijoNOM.notEquals=" + DEFAULT_PREFIJO_NOM);
+
+        // Get all the infoLegalList where prefijoNOM not equals to UPDATED_PREFIJO_NOM
+        defaultInfoLegalShouldBeFound("prefijoNOM.notEquals=" + UPDATED_PREFIJO_NOM);
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoNOMIsInShouldWork() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoNOM in DEFAULT_PREFIJO_NOM or UPDATED_PREFIJO_NOM
+        defaultInfoLegalShouldBeFound("prefijoNOM.in=" + DEFAULT_PREFIJO_NOM + "," + UPDATED_PREFIJO_NOM);
+
+        // Get all the infoLegalList where prefijoNOM equals to UPDATED_PREFIJO_NOM
+        defaultInfoLegalShouldNotBeFound("prefijoNOM.in=" + UPDATED_PREFIJO_NOM);
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoNOMIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoNOM is not null
+        defaultInfoLegalShouldBeFound("prefijoNOM.specified=true");
+
+        // Get all the infoLegalList where prefijoNOM is null
+        defaultInfoLegalShouldNotBeFound("prefijoNOM.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoNOMContainsSomething() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoNOM contains DEFAULT_PREFIJO_NOM
+        defaultInfoLegalShouldBeFound("prefijoNOM.contains=" + DEFAULT_PREFIJO_NOM);
+
+        // Get all the infoLegalList where prefijoNOM contains UPDATED_PREFIJO_NOM
+        defaultInfoLegalShouldNotBeFound("prefijoNOM.contains=" + UPDATED_PREFIJO_NOM);
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoNOMNotContainsSomething() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoNOM does not contain DEFAULT_PREFIJO_NOM
+        defaultInfoLegalShouldNotBeFound("prefijoNOM.doesNotContain=" + DEFAULT_PREFIJO_NOM);
+
+        // Get all the infoLegalList where prefijoNOM does not contain UPDATED_PREFIJO_NOM
+        defaultInfoLegalShouldBeFound("prefijoNOM.doesNotContain=" + UPDATED_PREFIJO_NOM);
     }
 
     @Test
@@ -824,6 +1082,112 @@ class InfoLegalResourceIT {
 
     @Test
     @Transactional
+    void getAllInfoLegalsByPrefijoFacElecInicialIsEqualToSomething() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoFacElecInicial equals to DEFAULT_PREFIJO_FAC_ELEC_INICIAL
+        defaultInfoLegalShouldBeFound("prefijoFacElecInicial.equals=" + DEFAULT_PREFIJO_FAC_ELEC_INICIAL);
+
+        // Get all the infoLegalList where prefijoFacElecInicial equals to UPDATED_PREFIJO_FAC_ELEC_INICIAL
+        defaultInfoLegalShouldNotBeFound("prefijoFacElecInicial.equals=" + UPDATED_PREFIJO_FAC_ELEC_INICIAL);
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoFacElecInicialIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoFacElecInicial not equals to DEFAULT_PREFIJO_FAC_ELEC_INICIAL
+        defaultInfoLegalShouldNotBeFound("prefijoFacElecInicial.notEquals=" + DEFAULT_PREFIJO_FAC_ELEC_INICIAL);
+
+        // Get all the infoLegalList where prefijoFacElecInicial not equals to UPDATED_PREFIJO_FAC_ELEC_INICIAL
+        defaultInfoLegalShouldBeFound("prefijoFacElecInicial.notEquals=" + UPDATED_PREFIJO_FAC_ELEC_INICIAL);
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoFacElecInicialIsInShouldWork() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoFacElecInicial in DEFAULT_PREFIJO_FAC_ELEC_INICIAL or UPDATED_PREFIJO_FAC_ELEC_INICIAL
+        defaultInfoLegalShouldBeFound(
+            "prefijoFacElecInicial.in=" + DEFAULT_PREFIJO_FAC_ELEC_INICIAL + "," + UPDATED_PREFIJO_FAC_ELEC_INICIAL
+        );
+
+        // Get all the infoLegalList where prefijoFacElecInicial equals to UPDATED_PREFIJO_FAC_ELEC_INICIAL
+        defaultInfoLegalShouldNotBeFound("prefijoFacElecInicial.in=" + UPDATED_PREFIJO_FAC_ELEC_INICIAL);
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoFacElecInicialIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoFacElecInicial is not null
+        defaultInfoLegalShouldBeFound("prefijoFacElecInicial.specified=true");
+
+        // Get all the infoLegalList where prefijoFacElecInicial is null
+        defaultInfoLegalShouldNotBeFound("prefijoFacElecInicial.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoFacElecInicialIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoFacElecInicial is greater than or equal to DEFAULT_PREFIJO_FAC_ELEC_INICIAL
+        defaultInfoLegalShouldBeFound("prefijoFacElecInicial.greaterThanOrEqual=" + DEFAULT_PREFIJO_FAC_ELEC_INICIAL);
+
+        // Get all the infoLegalList where prefijoFacElecInicial is greater than or equal to UPDATED_PREFIJO_FAC_ELEC_INICIAL
+        defaultInfoLegalShouldNotBeFound("prefijoFacElecInicial.greaterThanOrEqual=" + UPDATED_PREFIJO_FAC_ELEC_INICIAL);
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoFacElecInicialIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoFacElecInicial is less than or equal to DEFAULT_PREFIJO_FAC_ELEC_INICIAL
+        defaultInfoLegalShouldBeFound("prefijoFacElecInicial.lessThanOrEqual=" + DEFAULT_PREFIJO_FAC_ELEC_INICIAL);
+
+        // Get all the infoLegalList where prefijoFacElecInicial is less than or equal to SMALLER_PREFIJO_FAC_ELEC_INICIAL
+        defaultInfoLegalShouldNotBeFound("prefijoFacElecInicial.lessThanOrEqual=" + SMALLER_PREFIJO_FAC_ELEC_INICIAL);
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoFacElecInicialIsLessThanSomething() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoFacElecInicial is less than DEFAULT_PREFIJO_FAC_ELEC_INICIAL
+        defaultInfoLegalShouldNotBeFound("prefijoFacElecInicial.lessThan=" + DEFAULT_PREFIJO_FAC_ELEC_INICIAL);
+
+        // Get all the infoLegalList where prefijoFacElecInicial is less than UPDATED_PREFIJO_FAC_ELEC_INICIAL
+        defaultInfoLegalShouldBeFound("prefijoFacElecInicial.lessThan=" + UPDATED_PREFIJO_FAC_ELEC_INICIAL);
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoFacElecInicialIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoFacElecInicial is greater than DEFAULT_PREFIJO_FAC_ELEC_INICIAL
+        defaultInfoLegalShouldNotBeFound("prefijoFacElecInicial.greaterThan=" + DEFAULT_PREFIJO_FAC_ELEC_INICIAL);
+
+        // Get all the infoLegalList where prefijoFacElecInicial is greater than SMALLER_PREFIJO_FAC_ELEC_INICIAL
+        defaultInfoLegalShouldBeFound("prefijoFacElecInicial.greaterThan=" + SMALLER_PREFIJO_FAC_ELEC_INICIAL);
+    }
+
+    @Test
+    @Transactional
     void getAllInfoLegalsByPrefijoFacElecFinalIsEqualToSomething() throws Exception {
         // Initialize the database
         infoLegalRepository.saveAndFlush(infoLegal);
@@ -1002,6 +1366,216 @@ class InfoLegalResourceIT {
 
         // Get all the infoLegalList where resolucionNomElec does not contain UPDATED_RESOLUCION_NOM_ELEC
         defaultInfoLegalShouldBeFound("resolucionNomElec.doesNotContain=" + UPDATED_RESOLUCION_NOM_ELEC);
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoNomElecInicialIsEqualToSomething() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoNomElecInicial equals to DEFAULT_PREFIJO_NOM_ELEC_INICIAL
+        defaultInfoLegalShouldBeFound("prefijoNomElecInicial.equals=" + DEFAULT_PREFIJO_NOM_ELEC_INICIAL);
+
+        // Get all the infoLegalList where prefijoNomElecInicial equals to UPDATED_PREFIJO_NOM_ELEC_INICIAL
+        defaultInfoLegalShouldNotBeFound("prefijoNomElecInicial.equals=" + UPDATED_PREFIJO_NOM_ELEC_INICIAL);
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoNomElecInicialIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoNomElecInicial not equals to DEFAULT_PREFIJO_NOM_ELEC_INICIAL
+        defaultInfoLegalShouldNotBeFound("prefijoNomElecInicial.notEquals=" + DEFAULT_PREFIJO_NOM_ELEC_INICIAL);
+
+        // Get all the infoLegalList where prefijoNomElecInicial not equals to UPDATED_PREFIJO_NOM_ELEC_INICIAL
+        defaultInfoLegalShouldBeFound("prefijoNomElecInicial.notEquals=" + UPDATED_PREFIJO_NOM_ELEC_INICIAL);
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoNomElecInicialIsInShouldWork() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoNomElecInicial in DEFAULT_PREFIJO_NOM_ELEC_INICIAL or UPDATED_PREFIJO_NOM_ELEC_INICIAL
+        defaultInfoLegalShouldBeFound(
+            "prefijoNomElecInicial.in=" + DEFAULT_PREFIJO_NOM_ELEC_INICIAL + "," + UPDATED_PREFIJO_NOM_ELEC_INICIAL
+        );
+
+        // Get all the infoLegalList where prefijoNomElecInicial equals to UPDATED_PREFIJO_NOM_ELEC_INICIAL
+        defaultInfoLegalShouldNotBeFound("prefijoNomElecInicial.in=" + UPDATED_PREFIJO_NOM_ELEC_INICIAL);
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoNomElecInicialIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoNomElecInicial is not null
+        defaultInfoLegalShouldBeFound("prefijoNomElecInicial.specified=true");
+
+        // Get all the infoLegalList where prefijoNomElecInicial is null
+        defaultInfoLegalShouldNotBeFound("prefijoNomElecInicial.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoNomElecInicialIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoNomElecInicial is greater than or equal to DEFAULT_PREFIJO_NOM_ELEC_INICIAL
+        defaultInfoLegalShouldBeFound("prefijoNomElecInicial.greaterThanOrEqual=" + DEFAULT_PREFIJO_NOM_ELEC_INICIAL);
+
+        // Get all the infoLegalList where prefijoNomElecInicial is greater than or equal to UPDATED_PREFIJO_NOM_ELEC_INICIAL
+        defaultInfoLegalShouldNotBeFound("prefijoNomElecInicial.greaterThanOrEqual=" + UPDATED_PREFIJO_NOM_ELEC_INICIAL);
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoNomElecInicialIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoNomElecInicial is less than or equal to DEFAULT_PREFIJO_NOM_ELEC_INICIAL
+        defaultInfoLegalShouldBeFound("prefijoNomElecInicial.lessThanOrEqual=" + DEFAULT_PREFIJO_NOM_ELEC_INICIAL);
+
+        // Get all the infoLegalList where prefijoNomElecInicial is less than or equal to SMALLER_PREFIJO_NOM_ELEC_INICIAL
+        defaultInfoLegalShouldNotBeFound("prefijoNomElecInicial.lessThanOrEqual=" + SMALLER_PREFIJO_NOM_ELEC_INICIAL);
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoNomElecInicialIsLessThanSomething() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoNomElecInicial is less than DEFAULT_PREFIJO_NOM_ELEC_INICIAL
+        defaultInfoLegalShouldNotBeFound("prefijoNomElecInicial.lessThan=" + DEFAULT_PREFIJO_NOM_ELEC_INICIAL);
+
+        // Get all the infoLegalList where prefijoNomElecInicial is less than UPDATED_PREFIJO_NOM_ELEC_INICIAL
+        defaultInfoLegalShouldBeFound("prefijoNomElecInicial.lessThan=" + UPDATED_PREFIJO_NOM_ELEC_INICIAL);
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoNomElecInicialIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoNomElecInicial is greater than DEFAULT_PREFIJO_NOM_ELEC_INICIAL
+        defaultInfoLegalShouldNotBeFound("prefijoNomElecInicial.greaterThan=" + DEFAULT_PREFIJO_NOM_ELEC_INICIAL);
+
+        // Get all the infoLegalList where prefijoNomElecInicial is greater than SMALLER_PREFIJO_NOM_ELEC_INICIAL
+        defaultInfoLegalShouldBeFound("prefijoNomElecInicial.greaterThan=" + SMALLER_PREFIJO_NOM_ELEC_INICIAL);
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoNomElecFinalIsEqualToSomething() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoNomElecFinal equals to DEFAULT_PREFIJO_NOM_ELEC_FINAL
+        defaultInfoLegalShouldBeFound("prefijoNomElecFinal.equals=" + DEFAULT_PREFIJO_NOM_ELEC_FINAL);
+
+        // Get all the infoLegalList where prefijoNomElecFinal equals to UPDATED_PREFIJO_NOM_ELEC_FINAL
+        defaultInfoLegalShouldNotBeFound("prefijoNomElecFinal.equals=" + UPDATED_PREFIJO_NOM_ELEC_FINAL);
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoNomElecFinalIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoNomElecFinal not equals to DEFAULT_PREFIJO_NOM_ELEC_FINAL
+        defaultInfoLegalShouldNotBeFound("prefijoNomElecFinal.notEquals=" + DEFAULT_PREFIJO_NOM_ELEC_FINAL);
+
+        // Get all the infoLegalList where prefijoNomElecFinal not equals to UPDATED_PREFIJO_NOM_ELEC_FINAL
+        defaultInfoLegalShouldBeFound("prefijoNomElecFinal.notEquals=" + UPDATED_PREFIJO_NOM_ELEC_FINAL);
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoNomElecFinalIsInShouldWork() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoNomElecFinal in DEFAULT_PREFIJO_NOM_ELEC_FINAL or UPDATED_PREFIJO_NOM_ELEC_FINAL
+        defaultInfoLegalShouldBeFound("prefijoNomElecFinal.in=" + DEFAULT_PREFIJO_NOM_ELEC_FINAL + "," + UPDATED_PREFIJO_NOM_ELEC_FINAL);
+
+        // Get all the infoLegalList where prefijoNomElecFinal equals to UPDATED_PREFIJO_NOM_ELEC_FINAL
+        defaultInfoLegalShouldNotBeFound("prefijoNomElecFinal.in=" + UPDATED_PREFIJO_NOM_ELEC_FINAL);
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoNomElecFinalIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoNomElecFinal is not null
+        defaultInfoLegalShouldBeFound("prefijoNomElecFinal.specified=true");
+
+        // Get all the infoLegalList where prefijoNomElecFinal is null
+        defaultInfoLegalShouldNotBeFound("prefijoNomElecFinal.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoNomElecFinalIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoNomElecFinal is greater than or equal to DEFAULT_PREFIJO_NOM_ELEC_FINAL
+        defaultInfoLegalShouldBeFound("prefijoNomElecFinal.greaterThanOrEqual=" + DEFAULT_PREFIJO_NOM_ELEC_FINAL);
+
+        // Get all the infoLegalList where prefijoNomElecFinal is greater than or equal to UPDATED_PREFIJO_NOM_ELEC_FINAL
+        defaultInfoLegalShouldNotBeFound("prefijoNomElecFinal.greaterThanOrEqual=" + UPDATED_PREFIJO_NOM_ELEC_FINAL);
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoNomElecFinalIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoNomElecFinal is less than or equal to DEFAULT_PREFIJO_NOM_ELEC_FINAL
+        defaultInfoLegalShouldBeFound("prefijoNomElecFinal.lessThanOrEqual=" + DEFAULT_PREFIJO_NOM_ELEC_FINAL);
+
+        // Get all the infoLegalList where prefijoNomElecFinal is less than or equal to SMALLER_PREFIJO_NOM_ELEC_FINAL
+        defaultInfoLegalShouldNotBeFound("prefijoNomElecFinal.lessThanOrEqual=" + SMALLER_PREFIJO_NOM_ELEC_FINAL);
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoNomElecFinalIsLessThanSomething() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoNomElecFinal is less than DEFAULT_PREFIJO_NOM_ELEC_FINAL
+        defaultInfoLegalShouldNotBeFound("prefijoNomElecFinal.lessThan=" + DEFAULT_PREFIJO_NOM_ELEC_FINAL);
+
+        // Get all the infoLegalList where prefijoNomElecFinal is less than UPDATED_PREFIJO_NOM_ELEC_FINAL
+        defaultInfoLegalShouldBeFound("prefijoNomElecFinal.lessThan=" + UPDATED_PREFIJO_NOM_ELEC_FINAL);
+    }
+
+    @Test
+    @Transactional
+    void getAllInfoLegalsByPrefijoNomElecFinalIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        infoLegalRepository.saveAndFlush(infoLegal);
+
+        // Get all the infoLegalList where prefijoNomElecFinal is greater than DEFAULT_PREFIJO_NOM_ELEC_FINAL
+        defaultInfoLegalShouldNotBeFound("prefijoNomElecFinal.greaterThan=" + DEFAULT_PREFIJO_NOM_ELEC_FINAL);
+
+        // Get all the infoLegalList where prefijoNomElecFinal is greater than SMALLER_PREFIJO_NOM_ELEC_FINAL
+        defaultInfoLegalShouldBeFound("prefijoNomElecFinal.greaterThan=" + SMALLER_PREFIJO_NOM_ELEC_FINAL);
     }
 
     @Test
@@ -1249,12 +1823,18 @@ class InfoLegalResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(infoLegal.getId().intValue())))
             .andExpect(jsonPath("$.[*].nit").value(hasItem(DEFAULT_NIT)))
             .andExpect(jsonPath("$.[*].regimen").value(hasItem(DEFAULT_REGIMEN)))
+            .andExpect(jsonPath("$.[*].prefijoFE").value(hasItem(DEFAULT_PREFIJO_FE)))
+            .andExpect(jsonPath("$.[*].prefijoPOS").value(hasItem(DEFAULT_PREFIJO_POS)))
+            .andExpect(jsonPath("$.[*].prefijoNOM").value(hasItem(DEFAULT_PREFIJO_NOM)))
             .andExpect(jsonPath("$.[*].resolucionPos").value(hasItem(DEFAULT_RESOLUCION_POS)))
             .andExpect(jsonPath("$.[*].prefijoPosInicial").value(hasItem(DEFAULT_PREFIJO_POS_INICIAL)))
             .andExpect(jsonPath("$.[*].prefijoPosFinal").value(hasItem(DEFAULT_PREFIJO_POS_FINAL)))
             .andExpect(jsonPath("$.[*].resolucionFacElec").value(hasItem(DEFAULT_RESOLUCION_FAC_ELEC)))
+            .andExpect(jsonPath("$.[*].prefijoFacElecInicial").value(hasItem(DEFAULT_PREFIJO_FAC_ELEC_INICIAL)))
             .andExpect(jsonPath("$.[*].prefijoFacElecFinal").value(hasItem(DEFAULT_PREFIJO_FAC_ELEC_FINAL)))
             .andExpect(jsonPath("$.[*].resolucionNomElec").value(hasItem(DEFAULT_RESOLUCION_NOM_ELEC)))
+            .andExpect(jsonPath("$.[*].prefijoNomElecInicial").value(hasItem(DEFAULT_PREFIJO_NOM_ELEC_INICIAL)))
+            .andExpect(jsonPath("$.[*].prefijoNomElecFinal").value(hasItem(DEFAULT_PREFIJO_NOM_ELEC_FINAL)))
             .andExpect(jsonPath("$.[*].estado").value(hasItem(DEFAULT_ESTADO)))
             .andExpect(jsonPath("$.[*].fechaRegistro").value(hasItem(DEFAULT_FECHA_REGISTRO.toString())));
 
@@ -1307,12 +1887,18 @@ class InfoLegalResourceIT {
         updatedInfoLegal
             .nit(UPDATED_NIT)
             .regimen(UPDATED_REGIMEN)
+            .prefijoFE(UPDATED_PREFIJO_FE)
+            .prefijoPOS(UPDATED_PREFIJO_POS)
+            .prefijoNOM(UPDATED_PREFIJO_NOM)
             .resolucionPos(UPDATED_RESOLUCION_POS)
             .prefijoPosInicial(UPDATED_PREFIJO_POS_INICIAL)
             .prefijoPosFinal(UPDATED_PREFIJO_POS_FINAL)
             .resolucionFacElec(UPDATED_RESOLUCION_FAC_ELEC)
+            .prefijoFacElecInicial(UPDATED_PREFIJO_FAC_ELEC_INICIAL)
             .prefijoFacElecFinal(UPDATED_PREFIJO_FAC_ELEC_FINAL)
             .resolucionNomElec(UPDATED_RESOLUCION_NOM_ELEC)
+            .prefijoNomElecInicial(UPDATED_PREFIJO_NOM_ELEC_INICIAL)
+            .prefijoNomElecFinal(UPDATED_PREFIJO_NOM_ELEC_FINAL)
             .estado(UPDATED_ESTADO)
             .fechaRegistro(UPDATED_FECHA_REGISTRO);
 
@@ -1330,12 +1916,18 @@ class InfoLegalResourceIT {
         InfoLegal testInfoLegal = infoLegalList.get(infoLegalList.size() - 1);
         assertThat(testInfoLegal.getNit()).isEqualTo(UPDATED_NIT);
         assertThat(testInfoLegal.getRegimen()).isEqualTo(UPDATED_REGIMEN);
+        assertThat(testInfoLegal.getPrefijoFE()).isEqualTo(UPDATED_PREFIJO_FE);
+        assertThat(testInfoLegal.getPrefijoPOS()).isEqualTo(UPDATED_PREFIJO_POS);
+        assertThat(testInfoLegal.getPrefijoNOM()).isEqualTo(UPDATED_PREFIJO_NOM);
         assertThat(testInfoLegal.getResolucionPos()).isEqualTo(UPDATED_RESOLUCION_POS);
         assertThat(testInfoLegal.getPrefijoPosInicial()).isEqualTo(UPDATED_PREFIJO_POS_INICIAL);
         assertThat(testInfoLegal.getPrefijoPosFinal()).isEqualTo(UPDATED_PREFIJO_POS_FINAL);
         assertThat(testInfoLegal.getResolucionFacElec()).isEqualTo(UPDATED_RESOLUCION_FAC_ELEC);
+        assertThat(testInfoLegal.getPrefijoFacElecInicial()).isEqualTo(UPDATED_PREFIJO_FAC_ELEC_INICIAL);
         assertThat(testInfoLegal.getPrefijoFacElecFinal()).isEqualTo(UPDATED_PREFIJO_FAC_ELEC_FINAL);
         assertThat(testInfoLegal.getResolucionNomElec()).isEqualTo(UPDATED_RESOLUCION_NOM_ELEC);
+        assertThat(testInfoLegal.getPrefijoNomElecInicial()).isEqualTo(UPDATED_PREFIJO_NOM_ELEC_INICIAL);
+        assertThat(testInfoLegal.getPrefijoNomElecFinal()).isEqualTo(UPDATED_PREFIJO_NOM_ELEC_FINAL);
         assertThat(testInfoLegal.getEstado()).isEqualTo(UPDATED_ESTADO);
         assertThat(testInfoLegal.getFechaRegistro()).isEqualTo(UPDATED_FECHA_REGISTRO);
     }
@@ -1408,7 +2000,15 @@ class InfoLegalResourceIT {
         InfoLegal partialUpdatedInfoLegal = new InfoLegal();
         partialUpdatedInfoLegal.setId(infoLegal.getId());
 
-        partialUpdatedInfoLegal.nit(UPDATED_NIT).regimen(UPDATED_REGIMEN).prefijoPosFinal(UPDATED_PREFIJO_POS_FINAL).estado(UPDATED_ESTADO);
+        partialUpdatedInfoLegal
+            .nit(UPDATED_NIT)
+            .regimen(UPDATED_REGIMEN)
+            .prefijoNOM(UPDATED_PREFIJO_NOM)
+            .resolucionFacElec(UPDATED_RESOLUCION_FAC_ELEC)
+            .prefijoFacElecFinal(UPDATED_PREFIJO_FAC_ELEC_FINAL)
+            .resolucionNomElec(UPDATED_RESOLUCION_NOM_ELEC)
+            .prefijoNomElecInicial(UPDATED_PREFIJO_NOM_ELEC_INICIAL)
+            .estado(UPDATED_ESTADO);
 
         restInfoLegalMockMvc
             .perform(
@@ -1424,12 +2024,18 @@ class InfoLegalResourceIT {
         InfoLegal testInfoLegal = infoLegalList.get(infoLegalList.size() - 1);
         assertThat(testInfoLegal.getNit()).isEqualTo(UPDATED_NIT);
         assertThat(testInfoLegal.getRegimen()).isEqualTo(UPDATED_REGIMEN);
+        assertThat(testInfoLegal.getPrefijoFE()).isEqualTo(DEFAULT_PREFIJO_FE);
+        assertThat(testInfoLegal.getPrefijoPOS()).isEqualTo(DEFAULT_PREFIJO_POS);
+        assertThat(testInfoLegal.getPrefijoNOM()).isEqualTo(UPDATED_PREFIJO_NOM);
         assertThat(testInfoLegal.getResolucionPos()).isEqualTo(DEFAULT_RESOLUCION_POS);
         assertThat(testInfoLegal.getPrefijoPosInicial()).isEqualTo(DEFAULT_PREFIJO_POS_INICIAL);
-        assertThat(testInfoLegal.getPrefijoPosFinal()).isEqualTo(UPDATED_PREFIJO_POS_FINAL);
-        assertThat(testInfoLegal.getResolucionFacElec()).isEqualTo(DEFAULT_RESOLUCION_FAC_ELEC);
-        assertThat(testInfoLegal.getPrefijoFacElecFinal()).isEqualTo(DEFAULT_PREFIJO_FAC_ELEC_FINAL);
-        assertThat(testInfoLegal.getResolucionNomElec()).isEqualTo(DEFAULT_RESOLUCION_NOM_ELEC);
+        assertThat(testInfoLegal.getPrefijoPosFinal()).isEqualTo(DEFAULT_PREFIJO_POS_FINAL);
+        assertThat(testInfoLegal.getResolucionFacElec()).isEqualTo(UPDATED_RESOLUCION_FAC_ELEC);
+        assertThat(testInfoLegal.getPrefijoFacElecInicial()).isEqualTo(DEFAULT_PREFIJO_FAC_ELEC_INICIAL);
+        assertThat(testInfoLegal.getPrefijoFacElecFinal()).isEqualTo(UPDATED_PREFIJO_FAC_ELEC_FINAL);
+        assertThat(testInfoLegal.getResolucionNomElec()).isEqualTo(UPDATED_RESOLUCION_NOM_ELEC);
+        assertThat(testInfoLegal.getPrefijoNomElecInicial()).isEqualTo(UPDATED_PREFIJO_NOM_ELEC_INICIAL);
+        assertThat(testInfoLegal.getPrefijoNomElecFinal()).isEqualTo(DEFAULT_PREFIJO_NOM_ELEC_FINAL);
         assertThat(testInfoLegal.getEstado()).isEqualTo(UPDATED_ESTADO);
         assertThat(testInfoLegal.getFechaRegistro()).isEqualTo(DEFAULT_FECHA_REGISTRO);
     }
@@ -1449,12 +2055,18 @@ class InfoLegalResourceIT {
         partialUpdatedInfoLegal
             .nit(UPDATED_NIT)
             .regimen(UPDATED_REGIMEN)
+            .prefijoFE(UPDATED_PREFIJO_FE)
+            .prefijoPOS(UPDATED_PREFIJO_POS)
+            .prefijoNOM(UPDATED_PREFIJO_NOM)
             .resolucionPos(UPDATED_RESOLUCION_POS)
             .prefijoPosInicial(UPDATED_PREFIJO_POS_INICIAL)
             .prefijoPosFinal(UPDATED_PREFIJO_POS_FINAL)
             .resolucionFacElec(UPDATED_RESOLUCION_FAC_ELEC)
+            .prefijoFacElecInicial(UPDATED_PREFIJO_FAC_ELEC_INICIAL)
             .prefijoFacElecFinal(UPDATED_PREFIJO_FAC_ELEC_FINAL)
             .resolucionNomElec(UPDATED_RESOLUCION_NOM_ELEC)
+            .prefijoNomElecInicial(UPDATED_PREFIJO_NOM_ELEC_INICIAL)
+            .prefijoNomElecFinal(UPDATED_PREFIJO_NOM_ELEC_FINAL)
             .estado(UPDATED_ESTADO)
             .fechaRegistro(UPDATED_FECHA_REGISTRO);
 
@@ -1472,12 +2084,18 @@ class InfoLegalResourceIT {
         InfoLegal testInfoLegal = infoLegalList.get(infoLegalList.size() - 1);
         assertThat(testInfoLegal.getNit()).isEqualTo(UPDATED_NIT);
         assertThat(testInfoLegal.getRegimen()).isEqualTo(UPDATED_REGIMEN);
+        assertThat(testInfoLegal.getPrefijoFE()).isEqualTo(UPDATED_PREFIJO_FE);
+        assertThat(testInfoLegal.getPrefijoPOS()).isEqualTo(UPDATED_PREFIJO_POS);
+        assertThat(testInfoLegal.getPrefijoNOM()).isEqualTo(UPDATED_PREFIJO_NOM);
         assertThat(testInfoLegal.getResolucionPos()).isEqualTo(UPDATED_RESOLUCION_POS);
         assertThat(testInfoLegal.getPrefijoPosInicial()).isEqualTo(UPDATED_PREFIJO_POS_INICIAL);
         assertThat(testInfoLegal.getPrefijoPosFinal()).isEqualTo(UPDATED_PREFIJO_POS_FINAL);
         assertThat(testInfoLegal.getResolucionFacElec()).isEqualTo(UPDATED_RESOLUCION_FAC_ELEC);
+        assertThat(testInfoLegal.getPrefijoFacElecInicial()).isEqualTo(UPDATED_PREFIJO_FAC_ELEC_INICIAL);
         assertThat(testInfoLegal.getPrefijoFacElecFinal()).isEqualTo(UPDATED_PREFIJO_FAC_ELEC_FINAL);
         assertThat(testInfoLegal.getResolucionNomElec()).isEqualTo(UPDATED_RESOLUCION_NOM_ELEC);
+        assertThat(testInfoLegal.getPrefijoNomElecInicial()).isEqualTo(UPDATED_PREFIJO_NOM_ELEC_INICIAL);
+        assertThat(testInfoLegal.getPrefijoNomElecFinal()).isEqualTo(UPDATED_PREFIJO_NOM_ELEC_FINAL);
         assertThat(testInfoLegal.getEstado()).isEqualTo(UPDATED_ESTADO);
         assertThat(testInfoLegal.getFechaRegistro()).isEqualTo(UPDATED_FECHA_REGISTRO);
     }

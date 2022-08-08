@@ -20,12 +20,14 @@ import { UsuarioService } from 'app/entities/usuario/service/usuario.service';
 @Component({
   selector: 'jhi-info-legal-update',
   templateUrl: './info-legal-update.component.html',
+  styleUrls: ['./info-legal-update.component.scss'],
 })
 export class InfoLegalUpdateComponent implements OnInit {
   isSaving = false;
   hidden = true;
-  poshidden = true;
-  fehidden = true;
+  posHidden = true;
+  feHidden = true;
+  nomHidden = true;
 
   empresasSharedCollection: IEmpresa[] = [];
   sucursalsSharedCollection: ISucursal[] = [];
@@ -35,7 +37,9 @@ export class InfoLegalUpdateComponent implements OnInit {
     id: [],
     nit: [],
     regimen: [],
-    prefijo: [],
+    prefijoFE: [],
+    prefijoPOS: [],
+    prefijoNOM: [],
     resolucionPos: [],
     prefijoPosInicial: [],
     prefijoPosFinal: [],
@@ -43,12 +47,15 @@ export class InfoLegalUpdateComponent implements OnInit {
     prefijoFacElecInicial: [],
     prefijoFacElecFinal: [],
     resolucionNomElec: [],
+    prefijoNomElecInicial: [],
+    prefijoNomElecFinal: [],
     estado: [],
     fechaRegistro: [],
     empresaIds: [],
     sucursals: [],
     usuario: [],
   });
+
   return: any | null;
   usuarioId: any | null;
   empresaId: any | null;
@@ -120,6 +127,13 @@ export class InfoLegalUpdateComponent implements OnInit {
         this.updateForm(this.infoLegal);
         // this.getSucursal()
       });
+  }
+
+  change(type: any): void {
+    console.error('type', type);
+    type === 'pos' ? (this.posHidden = false) : null;
+    type === 'fe' ? (this.feHidden = false) : null;
+    type === 'nom' ? (this.nomHidden = false) : null;
   }
 
   previousState(): void {
@@ -200,7 +214,9 @@ export class InfoLegalUpdateComponent implements OnInit {
       id: infoLegal.id,
       nit: infoLegal.nit,
       regimen: infoLegal.regimen,
-      prefijo: infoLegal.prefijo,
+      prefijoFE: infoLegal.prefijoFE,
+      prefijoPOS: infoLegal.prefijoPOS,
+      prefijoNOM: infoLegal.prefijoNOM,
       resolucionPos: infoLegal.resolucionPos,
       prefijoPosInicial: infoLegal.prefijoPosInicial,
       prefijoPosFinal: infoLegal.prefijoPosFinal,
@@ -208,6 +224,8 @@ export class InfoLegalUpdateComponent implements OnInit {
       prefijoFacElecInicial: infoLegal.prefijoFacElecInicial,
       prefijoFacElecFinal: infoLegal.prefijoFacElecFinal,
       resolucionNomElec: infoLegal.resolucionNomElec,
+      prefijoNomElecInicial: infoLegal.prefijoNomElecInicial,
+      prefijoNomElecFinal: infoLegal.prefijoNomElecFinal,
       estado: infoLegal.estado,
       fechaRegistro: infoLegal.fechaRegistro ? infoLegal.fechaRegistro.format(DATE_TIME_FORMAT) : null,
       empresaIds: auxEmpresa,
@@ -262,7 +280,9 @@ export class InfoLegalUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       nit: this.editForm.get(['nit'])!.value,
       regimen: this.editForm.get(['regimen'])!.value,
-      prefijo: this.editForm.get(['prefijo'])!.value,
+      prefijoFE: this.editForm.get(['prefijoFE'])!.value,
+      prefijoPOS: this.editForm.get(['prefijoPOS'])!.value,
+      prefijoNOM: this.editForm.get(['prefijoNOM'])!.value,
       resolucionPos: this.editForm.get(['resolucionPos'])!.value,
       prefijoPosInicial: this.editForm.get(['prefijoPosInicial'])!.value,
       prefijoPosFinal: this.editForm.get(['prefijoPosFinal'])!.value,
@@ -270,6 +290,8 @@ export class InfoLegalUpdateComponent implements OnInit {
       prefijoFacElecInicial: this.editForm.get(['prefijoFacElecInicial'])!.value,
       prefijoFacElecFinal: this.editForm.get(['prefijoFacElecFinal'])!.value,
       resolucionNomElec: this.editForm.get(['resolucionNomElec'])!.value,
+      prefijoNomElecInicial: this.editForm.get(['prefijoNomElecInicial'])!.value,
+      prefijoNomElecFinal: this.editForm.get(['prefijoNomElecFinal'])!.value,
       estado: this.editForm.get(['estado'])!.value,
       fechaRegistro: this.editForm.get(['fechaRegistro'])!.value
         ? dayjs(this.editForm.get(['fechaRegistro'])!.value, DATE_TIME_FORMAT)

@@ -31,7 +31,13 @@ public class InfoLegalCriteria implements Serializable, Criteria {
 
     private StringFilter nit;
 
-    private IntegerFilter regimen;
+    private StringFilter regimen;
+
+    private StringFilter prefijoFE;
+
+    private StringFilter prefijoPOS;
+
+    private StringFilter prefijoNOM;
 
     private StringFilter resolucionPos;
 
@@ -41,9 +47,15 @@ public class InfoLegalCriteria implements Serializable, Criteria {
 
     private StringFilter resolucionFacElec;
 
+    private IntegerFilter prefijoFacElecInicial;
+
     private IntegerFilter prefijoFacElecFinal;
 
     private StringFilter resolucionNomElec;
+
+    private IntegerFilter prefijoNomElecInicial;
+
+    private IntegerFilter prefijoNomElecFinal;
 
     private IntegerFilter estado;
 
@@ -63,12 +75,18 @@ public class InfoLegalCriteria implements Serializable, Criteria {
         this.id = other.id == null ? null : other.id.copy();
         this.nit = other.nit == null ? null : other.nit.copy();
         this.regimen = other.regimen == null ? null : other.regimen.copy();
+        this.prefijoFE = other.prefijoFE == null ? null : other.prefijoFE.copy();
+        this.prefijoPOS = other.prefijoPOS == null ? null : other.prefijoPOS.copy();
+        this.prefijoNOM = other.prefijoNOM == null ? null : other.prefijoNOM.copy();
         this.resolucionPos = other.resolucionPos == null ? null : other.resolucionPos.copy();
         this.prefijoPosInicial = other.prefijoPosInicial == null ? null : other.prefijoPosInicial.copy();
         this.prefijoPosFinal = other.prefijoPosFinal == null ? null : other.prefijoPosFinal.copy();
         this.resolucionFacElec = other.resolucionFacElec == null ? null : other.resolucionFacElec.copy();
+        this.prefijoFacElecInicial = other.prefijoFacElecInicial == null ? null : other.prefijoFacElecInicial.copy();
         this.prefijoFacElecFinal = other.prefijoFacElecFinal == null ? null : other.prefijoFacElecFinal.copy();
         this.resolucionNomElec = other.resolucionNomElec == null ? null : other.resolucionNomElec.copy();
+        this.prefijoNomElecInicial = other.prefijoNomElecInicial == null ? null : other.prefijoNomElecInicial.copy();
+        this.prefijoNomElecFinal = other.prefijoNomElecFinal == null ? null : other.prefijoNomElecFinal.copy();
         this.estado = other.estado == null ? null : other.estado.copy();
         this.fechaRegistro = other.fechaRegistro == null ? null : other.fechaRegistro.copy();
         this.empresaIdId = other.empresaIdId == null ? null : other.empresaIdId.copy();
@@ -112,19 +130,64 @@ public class InfoLegalCriteria implements Serializable, Criteria {
         this.nit = nit;
     }
 
-    public IntegerFilter getRegimen() {
+    public StringFilter getRegimen() {
         return regimen;
     }
 
-    public IntegerFilter regimen() {
+    public StringFilter regimen() {
         if (regimen == null) {
-            regimen = new IntegerFilter();
+            regimen = new StringFilter();
         }
         return regimen;
     }
 
-    public void setRegimen(IntegerFilter regimen) {
+    public void setRegimen(StringFilter regimen) {
         this.regimen = regimen;
+    }
+
+    public StringFilter getPrefijoFE() {
+        return prefijoFE;
+    }
+
+    public StringFilter prefijoFE() {
+        if (prefijoFE == null) {
+            prefijoFE = new StringFilter();
+        }
+        return prefijoFE;
+    }
+
+    public void setPrefijoFE(StringFilter prefijoFE) {
+        this.prefijoFE = prefijoFE;
+    }
+
+    public StringFilter getPrefijoPOS() {
+        return prefijoPOS;
+    }
+
+    public StringFilter prefijoPOS() {
+        if (prefijoPOS == null) {
+            prefijoPOS = new StringFilter();
+        }
+        return prefijoPOS;
+    }
+
+    public void setPrefijoPOS(StringFilter prefijoPOS) {
+        this.prefijoPOS = prefijoPOS;
+    }
+
+    public StringFilter getPrefijoNOM() {
+        return prefijoNOM;
+    }
+
+    public StringFilter prefijoNOM() {
+        if (prefijoNOM == null) {
+            prefijoNOM = new StringFilter();
+        }
+        return prefijoNOM;
+    }
+
+    public void setPrefijoNOM(StringFilter prefijoNOM) {
+        this.prefijoNOM = prefijoNOM;
     }
 
     public StringFilter getResolucionPos() {
@@ -187,6 +250,21 @@ public class InfoLegalCriteria implements Serializable, Criteria {
         this.resolucionFacElec = resolucionFacElec;
     }
 
+    public IntegerFilter getPrefijoFacElecInicial() {
+        return prefijoFacElecInicial;
+    }
+
+    public IntegerFilter prefijoFacElecInicial() {
+        if (prefijoFacElecInicial == null) {
+            prefijoFacElecInicial = new IntegerFilter();
+        }
+        return prefijoFacElecInicial;
+    }
+
+    public void setPrefijoFacElecInicial(IntegerFilter prefijoFacElecInicial) {
+        this.prefijoFacElecInicial = prefijoFacElecInicial;
+    }
+
     public IntegerFilter getPrefijoFacElecFinal() {
         return prefijoFacElecFinal;
     }
@@ -215,6 +293,36 @@ public class InfoLegalCriteria implements Serializable, Criteria {
 
     public void setResolucionNomElec(StringFilter resolucionNomElec) {
         this.resolucionNomElec = resolucionNomElec;
+    }
+
+    public IntegerFilter getPrefijoNomElecInicial() {
+        return prefijoNomElecInicial;
+    }
+
+    public IntegerFilter prefijoNomElecInicial() {
+        if (prefijoNomElecInicial == null) {
+            prefijoNomElecInicial = new IntegerFilter();
+        }
+        return prefijoNomElecInicial;
+    }
+
+    public void setPrefijoNomElecInicial(IntegerFilter prefijoNomElecInicial) {
+        this.prefijoNomElecInicial = prefijoNomElecInicial;
+    }
+
+    public IntegerFilter getPrefijoNomElecFinal() {
+        return prefijoNomElecFinal;
+    }
+
+    public IntegerFilter prefijoNomElecFinal() {
+        if (prefijoNomElecFinal == null) {
+            prefijoNomElecFinal = new IntegerFilter();
+        }
+        return prefijoNomElecFinal;
+    }
+
+    public void setPrefijoNomElecFinal(IntegerFilter prefijoNomElecFinal) {
+        this.prefijoNomElecFinal = prefijoNomElecFinal;
     }
 
     public IntegerFilter getEstado() {
@@ -313,12 +421,18 @@ public class InfoLegalCriteria implements Serializable, Criteria {
             Objects.equals(id, that.id) &&
             Objects.equals(nit, that.nit) &&
             Objects.equals(regimen, that.regimen) &&
+            Objects.equals(prefijoFE, that.prefijoFE) &&
+            Objects.equals(prefijoPOS, that.prefijoPOS) &&
+            Objects.equals(prefijoNOM, that.prefijoNOM) &&
             Objects.equals(resolucionPos, that.resolucionPos) &&
             Objects.equals(prefijoPosInicial, that.prefijoPosInicial) &&
             Objects.equals(prefijoPosFinal, that.prefijoPosFinal) &&
             Objects.equals(resolucionFacElec, that.resolucionFacElec) &&
+            Objects.equals(prefijoFacElecInicial, that.prefijoFacElecInicial) &&
             Objects.equals(prefijoFacElecFinal, that.prefijoFacElecFinal) &&
             Objects.equals(resolucionNomElec, that.resolucionNomElec) &&
+            Objects.equals(prefijoNomElecInicial, that.prefijoNomElecInicial) &&
+            Objects.equals(prefijoNomElecFinal, that.prefijoNomElecFinal) &&
             Objects.equals(estado, that.estado) &&
             Objects.equals(fechaRegistro, that.fechaRegistro) &&
             Objects.equals(empresaIdId, that.empresaIdId) &&
@@ -334,12 +448,18 @@ public class InfoLegalCriteria implements Serializable, Criteria {
             id,
             nit,
             regimen,
+            prefijoFE,
+            prefijoPOS,
+            prefijoNOM,
             resolucionPos,
             prefijoPosInicial,
             prefijoPosFinal,
             resolucionFacElec,
+            prefijoFacElecInicial,
             prefijoFacElecFinal,
             resolucionNomElec,
+            prefijoNomElecInicial,
+            prefijoNomElecFinal,
             estado,
             fechaRegistro,
             empresaIdId,
@@ -356,12 +476,18 @@ public class InfoLegalCriteria implements Serializable, Criteria {
             (id != null ? "id=" + id + ", " : "") +
             (nit != null ? "nit=" + nit + ", " : "") +
             (regimen != null ? "regimen=" + regimen + ", " : "") +
+            (prefijoFE != null ? "prefijoFE=" + prefijoFE + ", " : "") +
+            (prefijoPOS != null ? "prefijoPOS=" + prefijoPOS + ", " : "") +
+            (prefijoNOM != null ? "prefijoNOM=" + prefijoNOM + ", " : "") +
             (resolucionPos != null ? "resolucionPos=" + resolucionPos + ", " : "") +
             (prefijoPosInicial != null ? "prefijoPosInicial=" + prefijoPosInicial + ", " : "") +
             (prefijoPosFinal != null ? "prefijoPosFinal=" + prefijoPosFinal + ", " : "") +
             (resolucionFacElec != null ? "resolucionFacElec=" + resolucionFacElec + ", " : "") +
+            (prefijoFacElecInicial != null ? "prefijoFacElecInicial=" + prefijoFacElecInicial + ", " : "") +
             (prefijoFacElecFinal != null ? "prefijoFacElecFinal=" + prefijoFacElecFinal + ", " : "") +
             (resolucionNomElec != null ? "resolucionNomElec=" + resolucionNomElec + ", " : "") +
+            (prefijoNomElecInicial != null ? "prefijoNomElecInicial=" + prefijoNomElecInicial + ", " : "") +
+            (prefijoNomElecFinal != null ? "prefijoNomElecFinal=" + prefijoNomElecFinal + ", " : "") +
             (estado != null ? "estado=" + estado + ", " : "") +
             (fechaRegistro != null ? "fechaRegistro=" + fechaRegistro + ", " : "") +
             (empresaIdId != null ? "empresaIdId=" + empresaIdId + ", " : "") +

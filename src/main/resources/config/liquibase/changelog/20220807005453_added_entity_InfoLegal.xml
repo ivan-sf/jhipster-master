@@ -17,7 +17,16 @@
             <column name="nit" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="regimen" type="integer">
+            <column name="regimen" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="prefijo_fe" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="prefijo_pos" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="prefijo_nom" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="resolucion_pos" type="varchar(255)">
@@ -32,10 +41,19 @@
             <column name="resolucion_fac_elec" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="prefijo_fac_elec_inicial" type="integer">
+                <constraints nullable="true" />
+            </column>
             <column name="prefijo_fac_elec_final" type="integer">
                 <constraints nullable="true" />
             </column>
             <column name="resolucion_nom_elec" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="prefijo_nom_elec_inicial" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="prefijo_nom_elec_final" type="integer">
                 <constraints nullable="true" />
             </column>
             <column name="estado" type="integer">
@@ -95,13 +113,19 @@
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
             <column name="nit" type="string"/>
-            <column name="regimen" type="numeric"/>
+            <column name="regimen" type="string"/>
+            <column name="prefijo_fe" type="string"/>
+            <column name="prefijo_pos" type="string"/>
+            <column name="prefijo_nom" type="string"/>
             <column name="resolucion_pos" type="string"/>
             <column name="prefijo_pos_inicial" type="numeric"/>
             <column name="prefijo_pos_final" type="numeric"/>
             <column name="resolucion_fac_elec" type="string"/>
+            <column name="prefijo_fac_elec_inicial" type="numeric"/>
             <column name="prefijo_fac_elec_final" type="numeric"/>
             <column name="resolucion_nom_elec" type="string"/>
+            <column name="prefijo_nom_elec_inicial" type="numeric"/>
+            <column name="prefijo_nom_elec_final" type="numeric"/>
             <column name="estado" type="numeric"/>
             <column name="fecha_registro" type="date"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->

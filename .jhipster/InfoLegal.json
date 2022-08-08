@@ -11,11 +11,19 @@
     },
     {
       "fieldName": "regimen",
-      "fieldType": "Integer"
+      "fieldType": "String"
     },
     {
-      "fieldName": "prefijo",
-      "fieldType": "Integer"
+      "fieldName": "prefijoFE",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "prefijoPOS",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "prefijoNOM",
+      "fieldType": "String"
     },
     {
       "fieldName": "resolucionPos",
@@ -44,6 +52,14 @@
     {
       "fieldName": "resolucionNomElec",
       "fieldType": "String"
+    },
+    {
+      "fieldName": "prefijoNomElecInicial",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "prefijoNomElecFinal",
+      "fieldType": "Integer"
     },
     {
       "fieldName": "estado",

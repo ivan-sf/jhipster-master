@@ -1,177 +1,216 @@
+<div class="buttons">
+  <div class="b b1" *ngIf="posHidden" (click)="change('pos')">Agregar Facturacion POS</div>
+  <div class="b b2" *ngIf="feHidden" (click)="change('fe')">Agregar Facturacion Electronica</div>
+  <div class="b b3" *ngIf="nomHidden" (click)="change('nom')">Agregar Facturacion Nomina electronica</div>
+</div>
 <div class="card-master">
   <div class="card-form">
-    <form name="editForm" class="form" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h1 id="jhi-info-legal-heading" data-cy="InfoLegalCreateUpdateHeading">Crear información Legal</h1>
+    <form class="form" name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h1 id="jhi-info-legal-heading" data-cy="InfoLegalCreateUpdateHeading">Crear Información Legal</h1>
 
-      <div>
-        <jhi-alert-error></jhi-alert-error>
+      <jhi-alert-error></jhi-alert-error>
 
-        <div class="row mb-3" [hidden]="hidden">
-          <label class="form-label" for="field_id">ID</label>
-          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
-        </div>
+      <div class="row mb-3" [hidden]="hidden">
+        <label class="form-label" for="field_id">ID</label>
+        <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+      </div>
 
-        <input type="text" placeholder="NIT" class="form-control" name="nit" id="field_nit" data-cy="nit" formControlName="nit" />
+      <input type="text" class="form-control" placeholder="Nit" name="nit" id="field_nit" data-cy="nit" formControlName="nit" />
+
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Regimen"
+        name="regimen"
+        id="field_regimen"
+        data-cy="regimen"
+        formControlName="regimen"
+      />
+
+      <div class="sub-card pos" [hidden]="posHidden">
+        <h1>Facturación Pos</h1>
+        <input
+          placeholder="Prefijo Factura POS"
+          type="text"
+          class="form-control"
+          name="prefijoPOS"
+          id="field_prefijoPOS"
+          data-cy="prefijoPOS"
+          formControlName="prefijoPOS"
+        />
+
+        <input
+          type="text"
+          placeholder="Resolucion Factura Pos"
+          class="form-control"
+          name="resolucionPos"
+          id="field_resolucionPos"
+          data-cy="resolucionPos"
+          formControlName="resolucionPos"
+        />
+
+        <input
+          placeholder="Numero de factura Pos Inicial"
+          type="number"
+          class="form-control"
+          name="prefijoPosInicial"
+          id="field_prefijoPosInicial"
+          data-cy="prefijoPosInicial"
+          formControlName="prefijoPosInicial"
+        />
 
         <input
           type="number"
-          placeholder="Regimen"
+          placeholder="Numero de factura Pos Final"
           class="form-control"
-          name="regimen"
-          id="field_regimen"
-          data-cy="regimen"
-          formControlName="regimen"
+          name="prefijoPosFinal"
+          id="field_prefijoPosFinal"
+          data-cy="prefijoPosFinal"
+          formControlName="prefijoPosFinal"
+        />
+      </div>
+
+      <div class="sub-card FE" [hidden]="feHidden">
+        <h1>Facturación electronica</h1>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Prefijo Factura Electronica"
+          name="prefijoFE"
+          id="field_prefijoFE"
+          data-cy="prefijoFE"
+          formControlName="prefijoFE"
         />
 
-        <div class="row mb-3" [hidden]="hidden">
-          <label class="form-label" for="field_prefijo">Prefijo</label>
-          <input type="number" class="form-control" name="prefijo" id="field_prefijo" data-cy="prefijo" formControlName="prefijo" />
+        <input
+          type="text"
+          placeholder="Resolucion Factura Electronica"
+          class="form-control"
+          name="resolucionFacElec"
+          id="field_resolucionFacElec"
+          data-cy="resolucionFacElec"
+          formControlName="resolucionFacElec"
+        />
+
+        <input
+          type="number"
+          placeholder="Numero Factura Electronica Inicial"
+          class="form-control"
+          name="prefijoFacElecInicial"
+          id="field_prefijoFacElecInicial"
+          data-cy="prefijoFacElecInicial"
+          formControlName="prefijoFacElecInicial"
+        />
+
+        <input
+          placeholder="Numero Factura Electronica Final"
+          type="number"
+          class="form-control"
+          name="prefijoFacElecFinal"
+          id="field_prefijoFacElecFinal"
+          data-cy="prefijoFacElecFinal"
+          formControlName="prefijoFacElecFinal"
+        />
+      </div>
+
+      <div class="sub-card nom" [hidden]="nomHidden">
+        <h1>Nomina Electronica</h1>
+        <input
+          type="text"
+          placeholder="Prefijo Nómina Electronica"
+          class="form-control"
+          name="prefijoNOM"
+          id="field_prefijoNOM"
+          data-cy="prefijoNOM"
+          formControlName="prefijoNOM"
+        />
+
+        <input
+          placeholder="Resolucion Nómina Electronica"
+          type="text"
+          class="form-control"
+          name="resolucionNomElec"
+          id="field_resolucionNomElec"
+          data-cy="resolucionNomElec"
+          formControlName="resolucionNomElec"
+        />
+
+        <input
+          placeholder="Numero Nómina Electronica Inicial"
+          type="number"
+          class="form-control"
+          name="prefijoNomElecInicial"
+          id="field_prefijoNomElecInicial"
+          data-cy="prefijoNomElecInicial"
+          formControlName="prefijoNomElecInicial"
+        />
+
+        <input
+          placeholder="Numero Nómina Electronica Final"
+          type="number"
+          class="form-control"
+          name="prefijoNomElecFinal"
+          id="field_prefijoNomElecFinal"
+          data-cy="prefijoNomElecFinal"
+          formControlName="prefijoNomElecFinal"
+        />
+      </div>
+
+      <div class="row mb-3" [hidden]="hidden">
+        <label class="form-label" for="field_estado">Estado</label>
+        <input type="number" class="form-control" name="estado" id="field_estado" data-cy="estado" formControlName="estado" />
+      </div>
+
+      <div class="row mb-3" [hidden]="hidden">
+        <label class="form-label" for="field_fechaRegistro">Fecha Registro</label>
+        <div class="d-flex">
+          <input
+            id="field_fechaRegistro"
+            data-cy="fechaRegistro"
+            type="datetime-local"
+            class="form-control"
+            name="fechaRegistro"
+            formControlName="fechaRegistro"
+            placeholder="YYYY-MM-DD HH:mm"
+          />
         </div>
+      </div>
 
-        <div class="pos" [hidden]="poshidden">
-          <div class="row mb-3">
-            <label class="form-label" for="field_resolucionPos">Resolucion Pos</label>
-            <input
-              type="text"
-              class="form-control"
-              name="resolucionPos"
-              id="field_resolucionPos"
-              data-cy="resolucionPos"
-              formControlName="resolucionPos"
-            />
-          </div>
+      <div class="row mb-3" [hidden]="hidden">
+        <label for="field_empresaIds">Empresa Id</label>
+        <select class="form-control" id="field_empresaIds" data-cy="empresaId" multiple name="empresaIds" formControlName="empresaIds">
+          <option
+            [ngValue]="getSelectedEmpresa(empresaOption, editForm.get('empresaIds')!.value)"
+            *ngFor="let empresaOption of empresasSharedCollection; trackBy: trackEmpresaById"
+          >
+            {{ empresaOption.id }}
+          </option>
+        </select>
+      </div>
 
-          <div class="row mb-3">
-            <label class="form-label" for="field_prefijoPosInicial">Prefijo Pos Inicial</label>
-            <input
-              type="number"
-              class="form-control"
-              name="prefijoPosInicial"
-              id="field_prefijoPosInicial"
-              data-cy="prefijoPosInicial"
-              formControlName="prefijoPosInicial"
-            />
-          </div>
+      <div class="row mb-3" [hidden]="hidden">
+        <label for="field_sucursals">Sucursal</label>
+        <select class="form-control" id="field_sucursals" data-cy="sucursal" multiple name="sucursals" formControlName="sucursals">
+          <option
+            [ngValue]="getSelectedSucursal(sucursalOption, editForm.get('sucursals')!.value)"
+            *ngFor="let sucursalOption of sucursalsSharedCollection; trackBy: trackSucursalById"
+          >
+            {{ sucursalOption.id }}
+          </option>
+        </select>
+      </div>
 
-          <div class="row mb-3">
-            <label class="form-label" for="field_prefijoPosFinal">Prefijo Pos Final</label>
-            <input
-              type="number"
-              class="form-control"
-              name="prefijoPosFinal"
-              id="field_prefijoPosFinal"
-              data-cy="prefijoPosFinal"
-              formControlName="prefijoPosFinal"
-            />
-          </div>
-        </div>
-
-        <div class="fe" [hidden]="fehidden">
-          <div class="row mb-3">
-            <label class="form-label" for="field_resolucionFacElec">Resolucion Fac Elec</label>
-            <input
-              type="text"
-              class="form-control"
-              name="resolucionFacElec"
-              id="field_resolucionFacElec"
-              data-cy="resolucionFacElec"
-              formControlName="resolucionFacElec"
-            />
-          </div>
-
-          <div class="row mb-3">
-            <label class="form-label" for="field_prefijoFacElecInicial">Prefijo Fac Elec Inicial</label>
-            <input
-              type="number"
-              class="form-control"
-              name="prefijoFacElecInicial"
-              id="field_prefijoFacElecInicial"
-              data-cy="prefijoFacElecInicial"
-              formControlName="prefijoFacElecInicial"
-            />
-          </div>
-
-          <div class="row mb-3">
-            <label class="form-label" for="field_prefijoFacElecFinal">Prefijo Fac Elec Final</label>
-            <input
-              type="number"
-              class="form-control"
-              name="prefijoFacElecFinal"
-              id="field_prefijoFacElecFinal"
-              data-cy="prefijoFacElecFinal"
-              formControlName="prefijoFacElecFinal"
-            />
-          </div>
-
-          <div class="row mb-3">
-            <label class="form-label" for="field_resolucionNomElec">Resolucion Nom Elec</label>
-            <input
-              type="text"
-              class="form-control"
-              name="resolucionNomElec"
-              id="field_resolucionNomElec"
-              data-cy="resolucionNomElec"
-              formControlName="resolucionNomElec"
-            />
-          </div>
-        </div>
-
-        <div class="row mb-3" [hidden]="hidden">
-          <label class="form-label" for="field_estado">Estado</label>
-          <input type="number" class="form-control" name="estado" id="field_estado" data-cy="estado" formControlName="estado" />
-        </div>
-
-        <div class="row mb-3" [hidden]="hidden">
-          <label class="form-label" for="field_fechaRegistro">Fecha Registro</label>
-          <div class="d-flex">
-            <input
-              id="field_fechaRegistro"
-              data-cy="fechaRegistro"
-              type="datetime-local"
-              class="form-control"
-              name="fechaRegistro"
-              formControlName="fechaRegistro"
-              placeholder="YYYY-MM-DD HH:mm"
-            />
-          </div>
-        </div>
-
-        <div class="row mb-3" [hidden]="hidden">
-          <label for="field_empresaIds">Empresa Id</label>
-          <select class="form-control" id="field_empresaIds" data-cy="empresaId" multiple name="empresaIds" formControlName="empresaIds">
-            <option
-              [ngValue]="getSelectedEmpresa(empresaOption, editForm.get('empresaIds')!.value)"
-              *ngFor="let empresaOption of empresasSharedCollection; trackBy: trackEmpresaById"
-            >
-              {{ empresaOption.id }}
-            </option>
-          </select>
-        </div>
-
-        <div class="row mb-3" [hidden]="hidden">
-          <label for="field_sucursals">Sucursal</label>
-          <select class="form-control" id="field_sucursals" data-cy="sucursal" multiple name="sucursals" formControlName="sucursals">
-            <option
-              [ngValue]="getSelectedSucursal(sucursalOption, editForm.get('sucursals')!.value)"
-              *ngFor="let sucursalOption of sucursalsSharedCollection; trackBy: trackSucursalById"
-            >
-              {{ sucursalOption.id }}
-            </option>
-          </select>
-        </div>
-
-        <div class="row mb-3" [hidden]="hidden">
-          <label class="form-label" for="field_usuario">Usuario</label>
-          <select class="form-control" id="field_usuario" data-cy="usuario" name="usuario" formControlName="usuario">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="usuarioOption.id === editForm.get('usuario')!.value?.id ? editForm.get('usuario')!.value : usuarioOption"
-              *ngFor="let usuarioOption of usuariosSharedCollection; trackBy: trackUsuarioById"
-            >
-              {{ usuarioOption.id }}
-            </option>
-          </select>
-        </div>
+      <div class="row mb-3" [hidden]="hidden">
+        <label class="form-label" for="field_usuario">Usuario</label>
+        <select class="form-control" id="field_usuario" data-cy="usuario" name="usuario" formControlName="usuario">
+          <option [ngValue]="null"></option>
+          <option
+            [ngValue]="usuarioOption.id === editForm.get('usuario')!.value?.id ? editForm.get('usuario')!.value : usuarioOption"
+            *ngFor="let usuarioOption of usuariosSharedCollection; trackBy: trackUsuarioById"
+          >
+            {{ usuarioOption.id }}
+          </option>
+        </select>
       </div>
 
       <div>

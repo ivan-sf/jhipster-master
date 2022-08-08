@@ -35,7 +35,9 @@
           <th scope="col" jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="nit"><span>Nit</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="regimen"><span>Regimen</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="prefijo"><span>Prefijo</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="prefijoFE"><span>Prefijo FE</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="prefijoPOS"><span>Prefijo POS</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="prefijoNOM"><span>Prefijo NOM</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="resolucionPos"><span>Resolucion Pos</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="prefijoPosInicial"><span>Prefijo Pos Inicial</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="prefijoPosFinal"><span>Prefijo Pos Final</span> <fa-icon icon="sort"></fa-icon></th>
@@ -43,6 +45,8 @@
           <th scope="col" jhiSortBy="prefijoFacElecInicial"><span>Prefijo Fac Elec Inicial</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="prefijoFacElecFinal"><span>Prefijo Fac Elec Final</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="resolucionNomElec"><span>Resolucion Nom Elec</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="prefijoNomElecInicial"><span>Prefijo Nom Elec Inicial</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="prefijoNomElecFinal"><span>Prefijo Nom Elec Final</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="estado"><span>Estado</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="fechaRegistro"><span>Fecha Registro</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="usuario.id"><span>Usuario</span> <fa-icon icon="sort"></fa-icon></th>
@@ -56,7 +60,9 @@
           </td>
           <td>{{ infoLegal.nit }}</td>
           <td>{{ infoLegal.regimen }}</td>
-          <td>{{ infoLegal.prefijo }}</td>
+          <td>{{ infoLegal.prefijoFE }}</td>
+          <td>{{ infoLegal.prefijoPOS }}</td>
+          <td>{{ infoLegal.prefijoNOM }}</td>
           <td>{{ infoLegal.resolucionPos }}</td>
           <td>{{ infoLegal.prefijoPosInicial }}</td>
           <td>{{ infoLegal.prefijoPosFinal }}</td>
@@ -64,6 +70,8 @@
           <td>{{ infoLegal.prefijoFacElecInicial }}</td>
           <td>{{ infoLegal.prefijoFacElecFinal }}</td>
           <td>{{ infoLegal.resolucionNomElec }}</td>
+          <td>{{ infoLegal.prefijoNomElecInicial }}</td>
+          <td>{{ infoLegal.prefijoNomElecFinal }}</td>
           <td>{{ infoLegal.estado }}</td>
           <td>{{ infoLegal.fechaRegistro | formatMediumDatetime }}</td>
           <td>

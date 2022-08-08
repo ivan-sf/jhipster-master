@@ -26,8 +26,10 @@ describe('InfoLegal Service', () => {
     elemDefault = {
       id: 0,
       nit: 'AAAAAAA',
-      regimen: 0,
-      prefijo: 0,
+      regimen: 'AAAAAAA',
+      prefijoFE: 'AAAAAAA',
+      prefijoPOS: 'AAAAAAA',
+      prefijoNOM: 'AAAAAAA',
       resolucionPos: 'AAAAAAA',
       prefijoPosInicial: 0,
       prefijoPosFinal: 0,
@@ -35,6 +37,8 @@ describe('InfoLegal Service', () => {
       prefijoFacElecInicial: 0,
       prefijoFacElecFinal: 0,
       resolucionNomElec: 'AAAAAAA',
+      prefijoNomElecInicial: 0,
+      prefijoNomElecFinal: 0,
       estado: 0,
       fechaRegistro: currentDate,
     };
@@ -84,8 +88,10 @@ describe('InfoLegal Service', () => {
         {
           id: 1,
           nit: 'BBBBBB',
-          regimen: 1,
-          prefijo: 1,
+          regimen: 'BBBBBB',
+          prefijoFE: 'BBBBBB',
+          prefijoPOS: 'BBBBBB',
+          prefijoNOM: 'BBBBBB',
           resolucionPos: 'BBBBBB',
           prefijoPosInicial: 1,
           prefijoPosFinal: 1,
@@ -93,6 +99,8 @@ describe('InfoLegal Service', () => {
           prefijoFacElecInicial: 1,
           prefijoFacElecFinal: 1,
           resolucionNomElec: 'BBBBBB',
+          prefijoNomElecInicial: 1,
+          prefijoNomElecFinal: 1,
           estado: 1,
           fechaRegistro: currentDate.format(DATE_TIME_FORMAT),
         },
@@ -116,10 +124,14 @@ describe('InfoLegal Service', () => {
     it('should partial update a InfoLegal', () => {
       const patchObject = Object.assign(
         {
-          resolucionPos: 'BBBBBB',
-          prefijoPosInicial: 1,
-          prefijoFacElecInicial: 1,
-          prefijoFacElecFinal: 1,
+          prefijoPOS: 'BBBBBB',
+          prefijoNOM: 'BBBBBB',
+          prefijoPosFinal: 1,
+          resolucionFacElec: 'BBBBBB',
+          resolucionNomElec: 'BBBBBB',
+          prefijoNomElecInicial: 1,
+          prefijoNomElecFinal: 1,
+          estado: 1,
           fechaRegistro: currentDate.format(DATE_TIME_FORMAT),
         },
         new InfoLegal()
@@ -146,8 +158,10 @@ describe('InfoLegal Service', () => {
         {
           id: 1,
           nit: 'BBBBBB',
-          regimen: 1,
-          prefijo: 1,
+          regimen: 'BBBBBB',
+          prefijoFE: 'BBBBBB',
+          prefijoPOS: 'BBBBBB',
+          prefijoNOM: 'BBBBBB',
           resolucionPos: 'BBBBBB',
           prefijoPosInicial: 1,
           prefijoPosFinal: 1,
@@ -155,6 +169,8 @@ describe('InfoLegal Service', () => {
           prefijoFacElecInicial: 1,
           prefijoFacElecFinal: 1,
           resolucionNomElec: 'BBBBBB',
+          prefijoNomElecInicial: 1,
+          prefijoNomElecFinal: 1,
           estado: 1,
           fechaRegistro: currentDate.format(DATE_TIME_FORMAT),
         },
@@ -213,7 +229,7 @@ describe('InfoLegal Service', () => {
       });
 
       it('should add only unique InfoLegal to an array', () => {
-        const infoLegalArray: IInfoLegal[] = [{ id: 123 }, { id: 456 }, { id: 73189 }];
+        const infoLegalArray: IInfoLegal[] = [{ id: 123 }, { id: 456 }, { id: 40717 }];
         const infoLegalCollection: IInfoLegal[] = [{ id: 123 }];
         expectedResult = service.addInfoLegalToCollectionIfMissing(infoLegalCollection, ...infoLegalArray);
         expect(expectedResult).toHaveLength(3);

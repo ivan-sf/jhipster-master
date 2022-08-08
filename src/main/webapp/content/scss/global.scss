@@ -303,6 +303,11 @@ button {
       button:hover {
         filter: grayscale(0.5);
       }
+      .sub-card {
+        h1 {
+          font-size: 20pt;
+        }
+      }
     }
   }
 }

@@ -26,7 +26,16 @@ public class InfoLegal implements Serializable {
     private String nit;
 
     @Column(name = "regimen")
-    private Integer regimen;
+    private String regimen;
+
+    @Column(name = "prefijo_fe")
+    private String prefijoFE;
+
+    @Column(name = "prefijo_pos")
+    private String prefijoPOS;
+
+    @Column(name = "prefijo_nom")
+    private String prefijoNOM;
 
     @Column(name = "resolucion_pos")
     private String resolucionPos;
@@ -40,11 +49,20 @@ public class InfoLegal implements Serializable {
     @Column(name = "resolucion_fac_elec")
     private String resolucionFacElec;
 
+    @Column(name = "prefijo_fac_elec_inicial")
+    private Integer prefijoFacElecInicial;
+
     @Column(name = "prefijo_fac_elec_final")
     private Integer prefijoFacElecFinal;
 
     @Column(name = "resolucion_nom_elec")
     private String resolucionNomElec;
+
+    @Column(name = "prefijo_nom_elec_inicial")
+    private Integer prefijoNomElecInicial;
+
+    @Column(name = "prefijo_nom_elec_final")
+    private Integer prefijoNomElecFinal;
 
     @Column(name = "estado")
     private Integer estado;
@@ -105,17 +123,56 @@ public class InfoLegal implements Serializable {
         this.nit = nit;
     }
 
-    public Integer getRegimen() {
+    public String getRegimen() {
         return this.regimen;
     }
 
-    public InfoLegal regimen(Integer regimen) {
+    public InfoLegal regimen(String regimen) {
         this.setRegimen(regimen);
         return this;
     }
 
-    public void setRegimen(Integer regimen) {
+    public void setRegimen(String regimen) {
         this.regimen = regimen;
+    }
+
+    public String getPrefijoFE() {
+        return this.prefijoFE;
+    }
+
+    public InfoLegal prefijoFE(String prefijoFE) {
+        this.setPrefijoFE(prefijoFE);
+        return this;
+    }
+
+    public void setPrefijoFE(String prefijoFE) {
+        this.prefijoFE = prefijoFE;
+    }
+
+    public String getPrefijoPOS() {
+        return this.prefijoPOS;
+    }
+
+    public InfoLegal prefijoPOS(String prefijoPOS) {
+        this.setPrefijoPOS(prefijoPOS);
+        return this;
+    }
+
+    public void setPrefijoPOS(String prefijoPOS) {
+        this.prefijoPOS = prefijoPOS;
+    }
+
+    public String getPrefijoNOM() {
+        return this.prefijoNOM;
+    }
+
+    public InfoLegal prefijoNOM(String prefijoNOM) {
+        this.setPrefijoNOM(prefijoNOM);
+        return this;
+    }
+
+    public void setPrefijoNOM(String prefijoNOM) {
+        this.prefijoNOM = prefijoNOM;
     }
 
     public String getResolucionPos() {
@@ -170,6 +227,19 @@ public class InfoLegal implements Serializable {
         this.resolucionFacElec = resolucionFacElec;
     }
 
+    public Integer getPrefijoFacElecInicial() {
+        return this.prefijoFacElecInicial;
+    }
+
+    public InfoLegal prefijoFacElecInicial(Integer prefijoFacElecInicial) {
+        this.setPrefijoFacElecInicial(prefijoFacElecInicial);
+        return this;
+    }
+
+    public void setPrefijoFacElecInicial(Integer prefijoFacElecInicial) {
+        this.prefijoFacElecInicial = prefijoFacElecInicial;
+    }
+
     public Integer getPrefijoFacElecFinal() {
         return this.prefijoFacElecFinal;
     }
@@ -194,6 +264,32 @@ public class InfoLegal implements Serializable {
 
     public void setResolucionNomElec(String resolucionNomElec) {
         this.resolucionNomElec = resolucionNomElec;
+    }
+
+    public Integer getPrefijoNomElecInicial() {
+        return this.prefijoNomElecInicial;
+    }
+
+    public InfoLegal prefijoNomElecInicial(Integer prefijoNomElecInicial) {
+        this.setPrefijoNomElecInicial(prefijoNomElecInicial);
+        return this;
+    }
+
+    public void setPrefijoNomElecInicial(Integer prefijoNomElecInicial) {
+        this.prefijoNomElecInicial = prefijoNomElecInicial;
+    }
+
+    public Integer getPrefijoNomElecFinal() {
+        return this.prefijoNomElecFinal;
+    }
+
+    public InfoLegal prefijoNomElecFinal(Integer prefijoNomElecFinal) {
+        this.setPrefijoNomElecFinal(prefijoNomElecFinal);
+        return this;
+    }
+
+    public void setPrefijoNomElecFinal(Integer prefijoNomElecFinal) {
+        this.prefijoNomElecFinal = prefijoNomElecFinal;
     }
 
     public Integer getEstado() {
@@ -310,13 +406,19 @@ public class InfoLegal implements Serializable {
         return "InfoLegal{" +
             "id=" + getId() +
             ", nit='" + getNit() + "'" +
-            ", regimen=" + getRegimen() +
+            ", regimen='" + getRegimen() + "'" +
+            ", prefijoFE='" + getPrefijoFE() + "'" +
+            ", prefijoPOS='" + getPrefijoPOS() + "'" +
+            ", prefijoNOM='" + getPrefijoNOM() + "'" +
             ", resolucionPos='" + getResolucionPos() + "'" +
             ", prefijoPosInicial=" + getPrefijoPosInicial() +
             ", prefijoPosFinal=" + getPrefijoPosFinal() +
             ", resolucionFacElec='" + getResolucionFacElec() + "'" +
+            ", prefijoFacElecInicial=" + getPrefijoFacElecInicial() +
             ", prefijoFacElecFinal=" + getPrefijoFacElecFinal() +
             ", resolucionNomElec='" + getResolucionNomElec() + "'" +
+            ", prefijoNomElecInicial=" + getPrefijoNomElecInicial() +
+            ", prefijoNomElecFinal=" + getPrefijoNomElecFinal() +
             ", estado=" + getEstado() +
             ", fechaRegistro='" + getFechaRegistro() + "'" +
             "}";

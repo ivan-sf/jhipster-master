@@ -89,7 +89,16 @@ public class InfoLegalQueryService extends QueryService<InfoLegal> {
                 specification = specification.and(buildStringSpecification(criteria.getNit(), InfoLegal_.nit));
             }
             if (criteria.getRegimen() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getRegimen(), InfoLegal_.regimen));
+                specification = specification.and(buildStringSpecification(criteria.getRegimen(), InfoLegal_.regimen));
+            }
+            if (criteria.getPrefijoFE() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getPrefijoFE(), InfoLegal_.prefijoFE));
+            }
+            if (criteria.getPrefijoPOS() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getPrefijoPOS(), InfoLegal_.prefijoPOS));
+            }
+            if (criteria.getPrefijoNOM() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getPrefijoNOM(), InfoLegal_.prefijoNOM));
             }
             if (criteria.getResolucionPos() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getResolucionPos(), InfoLegal_.resolucionPos));
@@ -103,12 +112,24 @@ public class InfoLegalQueryService extends QueryService<InfoLegal> {
             if (criteria.getResolucionFacElec() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getResolucionFacElec(), InfoLegal_.resolucionFacElec));
             }
+            if (criteria.getPrefijoFacElecInicial() != null) {
+                specification =
+                    specification.and(buildRangeSpecification(criteria.getPrefijoFacElecInicial(), InfoLegal_.prefijoFacElecInicial));
+            }
             if (criteria.getPrefijoFacElecFinal() != null) {
                 specification =
                     specification.and(buildRangeSpecification(criteria.getPrefijoFacElecFinal(), InfoLegal_.prefijoFacElecFinal));
             }
             if (criteria.getResolucionNomElec() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getResolucionNomElec(), InfoLegal_.resolucionNomElec));
+            }
+            if (criteria.getPrefijoNomElecInicial() != null) {
+                specification =
+                    specification.and(buildRangeSpecification(criteria.getPrefijoNomElecInicial(), InfoLegal_.prefijoNomElecInicial));
+            }
+            if (criteria.getPrefijoNomElecFinal() != null) {
+                specification =
+                    specification.and(buildRangeSpecification(criteria.getPrefijoNomElecFinal(), InfoLegal_.prefijoNomElecFinal));
             }
             if (criteria.getEstado() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getEstado(), InfoLegal_.estado));

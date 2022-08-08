@@ -45,6 +45,15 @@ public class InfoLegalServiceImpl implements InfoLegalService {
                 if (infoLegal.getRegimen() != null) {
                     existingInfoLegal.setRegimen(infoLegal.getRegimen());
                 }
+                if (infoLegal.getPrefijoFE() != null) {
+                    existingInfoLegal.setPrefijoFE(infoLegal.getPrefijoFE());
+                }
+                if (infoLegal.getPrefijoPOS() != null) {
+                    existingInfoLegal.setPrefijoPOS(infoLegal.getPrefijoPOS());
+                }
+                if (infoLegal.getPrefijoNOM() != null) {
+                    existingInfoLegal.setPrefijoNOM(infoLegal.getPrefijoNOM());
+                }
                 if (infoLegal.getResolucionPos() != null) {
                     existingInfoLegal.setResolucionPos(infoLegal.getResolucionPos());
                 }
@@ -57,11 +66,20 @@ public class InfoLegalServiceImpl implements InfoLegalService {
                 if (infoLegal.getResolucionFacElec() != null) {
                     existingInfoLegal.setResolucionFacElec(infoLegal.getResolucionFacElec());
                 }
+                if (infoLegal.getPrefijoFacElecInicial() != null) {
+                    existingInfoLegal.setPrefijoFacElecInicial(infoLegal.getPrefijoFacElecInicial());
+                }
                 if (infoLegal.getPrefijoFacElecFinal() != null) {
                     existingInfoLegal.setPrefijoFacElecFinal(infoLegal.getPrefijoFacElecFinal());
                 }
                 if (infoLegal.getResolucionNomElec() != null) {
                     existingInfoLegal.setResolucionNomElec(infoLegal.getResolucionNomElec());
+                }
+                if (infoLegal.getPrefijoNomElecInicial() != null) {
+                    existingInfoLegal.setPrefijoNomElecInicial(infoLegal.getPrefijoNomElecInicial());
+                }
+                if (infoLegal.getPrefijoNomElecFinal() != null) {
+                    existingInfoLegal.setPrefijoNomElecFinal(infoLegal.getPrefijoNomElecFinal());
                 }
                 if (infoLegal.getEstado() != null) {
                     existingInfoLegal.setEstado(infoLegal.getEstado());
