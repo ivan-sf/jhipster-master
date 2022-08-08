@@ -38,6 +38,9 @@
       "TipoUsuario"
     ],
     "entitySuffix": "",
+    "herokuAppName": "appprueba-666",
+    "herokuDeployType": "git",
+    "herokuJavaVersion": "14",
     "jhiPrefix": "jhi",
     "jhipsterVersion": "7.7.0",
     "jwtSecretKey": "MWRlMmNmMmRkYjUyMjM0Zjg3ZmExODMyYzY3NzZkNGViYjZhNmYzMjYzMjEyMmFmMWU4YzQyNjJmZTJkOTE0Y2UzMWFmOWU5NTBkNWEwYjM3MTJlYTc3M2YzMGU0MTJkYjJhZjY3ODgxYWFlN2MxNWU5ZjQwMWRkYjJkMDJkNTA=",
