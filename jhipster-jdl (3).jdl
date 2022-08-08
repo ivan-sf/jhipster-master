@@ -11,10 +11,10 @@ entity Empresa {
 
 entity InfoLegal {
 	nit String
-    regimen string
-    prefijoFE string
-    prefijoPOS string
-    prefijoNOM string
+    regimen String
+    prefijoFE String
+    prefijoPOS String
+    prefijoNOM String
 	resolucionPos String
     prefijoPosInicial Integer
     prefijoPosFinal Integer
@@ -22,6 +22,8 @@ entity InfoLegal {
     prefijoFacElecInicial Integer
     prefijoFacElecFinal Integer
     resolucionNomElec String
+	prefijoNomElecInicial Integer
+    prefijoNomElecFinal Integer
 	estado Integer
     fechaRegistro Instant
 }
@@ -81,9 +83,6 @@ entity ComprobanteContable {
 	name String
 }
 
-entity ComprobanteContable {
-	name String
-}
 
 entity TipoComprobanteContable {
 	name String
